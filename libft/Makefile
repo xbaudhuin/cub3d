@@ -33,9 +33,9 @@ COLOUR_END=\033[0m
 
 HEADER			=	-I ./include
 
-HEADER_FILES	=	libft/include/ft_printf.h \
-					libft/include/get_next_line.h \
-					libft/include/libft.h \
+HEADER_FILES	=	include/ft_printf.h \
+					include/get_next_line.h \
+					include/libft.h \
 
 SRCS_IS_BOOL	=	is_bool/ft_isalnum.c \
 					is_bool/ft_isalpha.c \
@@ -121,11 +121,11 @@ OBJS			=	$(addprefix ${OBJ_PATH}, ${SRCS_IS_BOOL:.c=.o}) \
 
 
 ${NAME}:		${OBJS} ${HEADER_FILES}
-			@${AR} ${CLFAGS} ${NAME} ${OBJS}
+			${AR} ${CLFAGS} ${NAME} ${OBJS}
 
 ${OBJ_PATH}%.o:	${SRC_PATH}%.c
-			@mkdir -p $(dir $@)
-			@${CC} ${CFLAGS} ${HEADER} -c $< -o $@
+			mkdir -p $(dir $@)
+			${CC} ${CFLAGS} ${HEADER} -c $< -o $@
 
 all:		${NAME}
 
