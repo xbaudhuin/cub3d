@@ -119,15 +119,14 @@ OBJS			=	$(addprefix ${OBJ_PATH}, ${SRCS_IS_BOOL:.c=.o}) \
 					$(addprefix ${OBJ_PATH}, ${SRCS_GNL:.c=.o}) \
 					$(addprefix ${OBJ_PATH}, ${SRCS_PRINTF:.c=.o}) \
 
+all:		${NAME}
 
 ${NAME}:		${OBJS} ${HEADER_FILES}
 			${AR} ${CLFAGS} ${NAME} ${OBJS}
 
 ${OBJ_PATH}%.o:	${SRC_PATH}%.c
-			mkdir -p $(dir $@)
-			${CC} ${CFLAGS} ${HEADER} -c $< -o $@
-
-all:		${NAME}
+			@mkdir -p $(dir $@)
+			@${CC} ${CFLAGS} ${HEADER} -c $< -o $@
 
 clean:
 			@${RM} ${OBJ_PATH}

@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 15:03:50 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/03/19 15:09:25 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/03/21 19:39:50 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,23 @@
 # include "X11/keysym.h"
 # include "X11/keysymdef.h"
 # include <unistd.h>
+# include <fcntl.h>
 # include <X11/X.h>
+
+# define RESET  "\x1B[0m"
+# define RED "\x1B[31m"
+# define GRN  "\x1B[32m"
+# define YEL  "\x1B[33m"
+# define BLU  "\x1B[37m"
+# define MAG  "\x1B[35m"
+# define CYN  "\x1B[36m"
+# define WHT  "\x1B[37m"
+
+# define SUCCESS 0
+# define FAILURE 1
+
+# define FALSE 0
+# define TRUE 1
 
 # define WIDTH 1920.0
 # define HEIGHT 1080.0
