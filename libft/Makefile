@@ -26,10 +26,15 @@ ifeq ($(DEBUG), 4)
 	CFLAGS += -fsanitize=address
 endif
 
-COLOUR_GREEN=\033[0;32m
-COLOUR_RED=\033[0;31m
-COLOUR_BLUE=\033[0;34m
-COLOUR_END=\033[0m
+GREEN			=	\033[0;32m
+RED				=	\033[0;31m
+BLUE			=	\033[0;34m
+YELLOW    		=	\033[;33m
+BWHITE    		=	\033[1;37m
+RESET			=	\033[0m
+ITALIC			=	\e[3m
+BOLD			=	\e[1m
+NEW				=	\r\033[K
 
 HEADER			=	-I ./include
 
@@ -122,11 +127,13 @@ OBJS			=	$(addprefix ${OBJ_PATH}, ${SRCS_IS_BOOL:.c=.o}) \
 all:		${NAME}
 
 ${NAME}:		${OBJS} ${HEADER_FILES}
-			${AR} ${CLFAGS} ${NAME} ${OBJS}
+			@${AR} ${CLFAGS} ${NAME} ${OBJS}
+			@printf "${NEW}${YELLOW}$@ ${GREEN}${BOLD}Compiled\n${RESET}${GREEN}compiled with:${RESET} ${CC} ${CFLAGS}\n"
 
 ${OBJ_PATH}%.o:	${SRC_PATH}%.c
 			@mkdir -p $(dir $@)
 			@${CC} ${CFLAGS} ${HEADER} -c $< -o $@
+			@printf "${NEW}${YELLOW} ${NAME} ${GREEN}Building: ${RESET}${CC} ${CFLAGS} ${ITALIC}${BOLD}$<${RESET}"
 
 clean:
 			@${RM} ${OBJ_PATH}

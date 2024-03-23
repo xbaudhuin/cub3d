@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 15:03:50 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/03/21 19:39:50 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/03/23 15:28:08 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,14 @@
 # include "X11/keysymdef.h"
 # include <unistd.h>
 # include <fcntl.h>
+# include <stdio.h>
 # include <X11/X.h>
 
 # define RESET  "\x1B[0m"
 # define RED "\x1B[31m"
 # define GRN  "\x1B[32m"
 # define YEL  "\x1B[33m"
-# define BLU  "\x1B[37m"
+# define BLU  "\x1B[34m"
 # define MAG  "\x1B[35m"
 # define CYN  "\x1B[36m"
 # define WHT  "\x1B[37m"
@@ -40,5 +41,21 @@
 
 # define WIDTH 1920.0
 # define HEIGHT 1080.0
+
+typedef struct s_texture
+{
+	char	*NO;
+	char	*SO;
+	char	*WE;
+	char	*EA;
+	int		color_floor;
+	int		color_ceiling;
+}			t_texture;
+
+typedef struct s_data
+{
+	t_texture	*texture;
+	char		**map;
+}				t_data;
 
 #endif

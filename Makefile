@@ -43,10 +43,15 @@ HEADER_FILES	=	include/cub3d.h \
 					libft/include/get_next_line.h \
 					libft/include/libft.h \
 
-COLOUR_GREEN=\033[0;32m
-COLOUR_RED=\033[0;31m
-COLOUR_BLUE=\033[0;34m
-COLOUR_END=\033[0m
+GREEN			=	\033[0;32m
+RED				=	\033[0;31m
+BLUE			=	\033[0;34m
+YELLOW    		=	\033[;33m
+BWHITE    		=	\033[1;37m
+RESET			=	\033[0m
+ITALIC			=	\e[3m
+BOLD			=	\e[1m
+NEW				=	\r\033[K
 
 SRC_PATH		=	src/
 
@@ -58,7 +63,7 @@ RM				=	rm -rf
 
 AR				=	ar rcs
 
-SRCS_MAIN		=	main.c \
+SRCS_MAIN		=	parsing/parse_map.c \
 
 OBJS			=	$(addprefix ${OBJ_PATH}, ${SRCS_MAIN:.c=.o}) \
 
@@ -74,7 +79,7 @@ bonus:			${BONUS}
 
 ${NAME}:		${MLX} ${LIBFT} ${OBJS} ${TXT} ${HEADER_FILES}
 		@${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${HEADER} ${MATH_FLAG} ${MLX_FLAG} ${LIBFT} ${MLX}
-		@echo "${COLOUR_GREEN}${NAME} Compiled${COLOUR_END}"
+		@printf "${NEW}${YELLOW}${NAME}${RESET}${GREEN}${BOLD} Compiled\n${RESET}${GREEN}compiled with:${RESET} ${CC} ${CFLAGS}\n"
 
 ${BONUS}:		${MLX} ${LIBFT} ${OBJS} ${TXT} ${HEADER_FILES}
 		@${CC} ${CFLAGS} -o ${BONUS} ${OBJS} ${HEADER} ${MATH_FLAG} ${MLX_FLAG} ${LIBFT} ${MLX}
@@ -83,17 +88,17 @@ ${BONUS}:		${MLX} ${LIBFT} ${OBJS} ${TXT} ${HEADER_FILES}
 ${OBJ_PATH}%.o:	${SRC_PATH}%.c
 		@mkdir -p $(dir $@)
 		@${CC} ${CFLAGS} ${HEADER} -c $< -o $@
+		@printf "${NEW}${YELLOW} ${NAME} ${GREEN}Building: ${RESET}${CC} ${CFLAGS} ${ITALIC}${BOLD}$<${RESET}"
 
 ${LIBFT}:
 		@make -C ${LIBFT_PATH} DEBUG=$(DEBUG) --no-print-directory
 		@cp ${LIBFT_PATH}${LIBFT} .
-		@echo "$(COLOUR_GREEN)Libft Compiled${COLOUR_END}"
 
 ${MLX}:
 		${RM} ${MLX_PATH}
 		git clone https://github.com/42Paris/minilibx-linux
-		make -C ${MLX_PATH}
-		cp ${MLX_PATH}${MLX} .
+		@make -C ${MLX_PATH} --no-print-directory
+		@cp ${MLX_PATH}${MLX} .
 		@echo "$(COLOUR_GREEN)MLX compiled${COLOUR_END}"
 
 ${TXT}:
@@ -101,12 +106,12 @@ ${TXT}:
 		@echo "-I../libft/include\n-I../include/" > src/compile_flags.txt
 
 clean:
-		make -C ${LIBFT_PATH} clean --no-print-directory
-		make -C ${MLX_PATH} clean --no-print-directory
+		@make -C ${LIBFT_PATH} clean --no-print-directory
+		@make -C ${MLX_PATH} clean --no-print-directory
 		${RM}  ${OBJ_PATH}
 
 fclean:		clean
-		make -C ${LIBFT_PATH} fclean --no-print-directory
+		@make -C ${LIBFT_PATH} fclean --no-print-directory
 		${RM} ${MLX_PATH}
 		${RM} ${NAME} ${NAME_TEST} ${BONUS} ${LIBFT} ${MLX} ${SRC_PATH}${TXT} ${SRC_PATH}bonus/${TXT} ${TXT}
 
