@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:12:32 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/03/23 19:22:55 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/03/23 19:41:49 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	ft_atoi_color(const char *line, int *error)
 	if (*error == TRUE || color > 255 || color < 0)
 	{
 		ft_fprintf(STDERR_FILENO, RED"Error\n"RESET
-			"Error during parsing: '%s' doesnt fit inside a char\n", line);
+			"Error during parsing: %sis an invalid RGB color\n", line);
 		*error = TRUE;
 	}
 	return (color);
@@ -79,14 +79,14 @@ static int	get_color_from_file(char *line, int *error)
 		if ((line[i] != ',' && line[i] != '\n') || count > 2)
 		{
 			ft_fprintf(STDERR_FILENO, RED"Error\n"RESET
-				"error during parsing: %s", &line[i]);
+				"error during parsing: %s", line);
 			*error = TRUE;
 			break ;
 		}
 		count++;
 		i++;
 	}
-	if (count != 3)
+	if (*error == FALSE && count != 3)
 	{
 		ft_fprintf(STDERR_FILENO, RED"Error\n"RESET
 			"error during parsing: %s", line);
@@ -148,7 +148,10 @@ static int	check_current_line(char *line, unsigned int *i, t_texture *texture)
 	else if (ft_strncmp(line, "\n", 2) == 0)
 		return (TRUE);
 	else
+	{
+		ft_fprintf(STDERR_FILENO, RED"Error\n"RESET"invalid line: %s", line);
 		return (FALSE);
+	}
 	*i += 1;
 	if (error == TRUE)
 		return (FALSE);
@@ -198,8 +201,9 @@ t_data	*open_map(char *filename)
 	t_texture	*texture;
 
 	data = NULL;
-	if (check_filename(ft_strrchr(filename, '.'), filename) == FALSE)
-		return (ft_fprintf(STDERR_FILENO, RED"Error: "RESET
+	if (filename == NULL
+		|| check_filename(ft_strrchr(filename, '.'), filename) == FALSE)
+		return (ft_fprintf(STDERR_FILENO, RED"Error\n"RESET
 				"invalid map extension: %s\n", filename), NULL);
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
