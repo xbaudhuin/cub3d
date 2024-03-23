@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:12:32 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/03/23 18:26:38 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/03/23 19:22:55 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 static int	check_filename(const char *str, const char *filename)
 {
 	if (str == NULL || str == filename)
+		return (FALSE);
+	if (filename[str - filename - 1] == '/')
 		return (FALSE);
 	if (ft_strncmp(str, ".cub", 5) != 0)
 		return (FALSE);
@@ -198,10 +200,10 @@ t_data	*open_map(char *filename)
 	data = NULL;
 	if (check_filename(ft_strrchr(filename, '.'), filename) == FALSE)
 		return (ft_fprintf(STDERR_FILENO, RED"Error: "RESET
-				"invalid map extension: %s", filename), NULL);
+				"invalid map extension: %s\n", filename), NULL);
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		return (perror(RED"open_map: "), NULL);
+		return (perror(RED"open_map: "RESET""), NULL);
 	texture = get_texture(fd);
 	print_texture(texture);
 	free_texture(texture);
