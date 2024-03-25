@@ -36,7 +36,7 @@ TXT				=	compile_flags.txt
 
 MLX_PATH		=	minilibx-linux/
 
-HEADER			=	-I./include -I./libft/include
+HEADER			=	-I./include -I./libft/include -I./${MLX_PATH}
 
 HEADER_FILES	=	include/cub3d.h \
 					libft/include/ft_printf.h \
@@ -69,6 +69,9 @@ OBJS			=	$(addprefix ${OBJ_PATH}, ${SRCS_MAIN:.c=.o}) \
 
 LIBFT_D			=	$(addprefix ${LIBFT_PATH}, ${LIBFT})
 
+SRCS_TEST		=	test_leo.c \
+
+OBJS_TEST		=	$(addprefix ${OBJ_PATH}, ${SRCS_TEST:.c=.o}) \
 ################################################################################
 #                                 RULES                                        #
 ################################################################################
@@ -80,6 +83,10 @@ bonus:			${BONUS}
 ${NAME}:		${MLX} ${LIBFT} ${OBJS} ${TXT} ${HEADER_FILES}
 		@${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${HEADER} ${MATH_FLAG} ${MLX_FLAG} ${LIBFT} ${MLX}
 		@printf "${NEW}${YELLOW}${NAME}${RESET}${GREEN}${BOLD} Compiled\n${RESET}${GREEN}compiled with:${RESET} ${CC} ${CFLAGS}\n"
+
+test.exe:		${MLX} ${LIBFT} ${OBJS_TEST} ${TXT} ${HEADER_FILES}
+		@${CC} ${CFLAGS} -o test.exe ${OBJS_TEST} ${HEADER} ${MATH_FLAG} ${MLX_FLAG} ${LIBFT} ${MLX}
+		@echo "${lsCOLOUR_GREEN}test.exe Compiled${COLOUR_END}"
 
 ${BONUS}:		${MLX} ${LIBFT} ${OBJS} ${TXT} ${HEADER_FILES}
 		@${CC} ${CFLAGS} -o ${BONUS} ${OBJS} ${HEADER} ${MATH_FLAG} ${MLX_FLAG} ${LIBFT} ${MLX}
