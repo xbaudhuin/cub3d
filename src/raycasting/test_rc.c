@@ -1,24 +1,9 @@
-# include "libft.h"
-# include "mlx.h"
-# include <sys/stat.h>
-# include <fcntl.h>
-# include <errno.h>
-# include <stdio.h>
-# include <string.h>
-# include <math.h>
-# include <X11/X.h>
-# include <X11/keysym.h>
-# include <time.h>
+#include "cub3d.h"
 
 #define mapWidth 24
 #define mapHeight 24
-#define screenWidth 640
-#define screenHeight 480
 
-#define UP_ARROW 119
-#define DOWN_ARROW 115
-#define LEFT_ARROW 97
-#define RIGTH_ARROW 100
+
 
 int world_map[mapWidth][mapHeight]=
 {
@@ -48,7 +33,7 @@ int world_map[mapWidth][mapHeight]=
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 };
 
-typedef struct s_data
+typedef struct s_data2
 {
 	void	*mlx;
 	void	*win;
@@ -83,14 +68,14 @@ typedef struct s_data
 	double	old_dir_x;
 	double	old_plane_x;
 
-}	t_data;
+}	t_data2;
 
-t_data	get_init_data(void)
+t_data2	get_init_data(void)
 {
-	t_data	data;
+	t_data2	data;
 
 	ft_bzero(&data, sizeof(data));
-	data.pos_x = 22;
+	data.pos_x = 12;
 	data.pos_y = 12;
 	data.dir_x = -1;
 	data.dir_y = 0;
@@ -99,13 +84,13 @@ t_data	get_init_data(void)
 	data.mlx = mlx_init();
 	if (data.mlx != NULL)
 	{
-		data.win = mlx_new_window(data.mlx, screenWidth,
-			screenHeight, "raycasting_test");
+		data.win = mlx_new_window(data.mlx, WIDTH,
+			HEIGHT, "raycasting_test");
 	}
 	return (data);
 }
 
-int	end_process(t_data *data)
+int	end_process(t_data2 *data)
 {
 	mlx_destroy_window(data->mlx, data->win);
 	mlx_destroy_display(data->mlx);
@@ -114,7 +99,7 @@ int	end_process(t_data *data)
 	return (0);
 }
 
-void	calculate_delta(t_data *data)
+void	calculate_delta(t_data2 *data)
 {
 	if (data->ray_dir_x == 0)
 	{
@@ -134,7 +119,7 @@ void	calculate_delta(t_data *data)
 	}
 }
 
-void	calculate_step(t_data *data)
+void	calculate_step(t_data2 *data)
 {
 	if (data->ray_dir_x < 0)
 	{
@@ -158,7 +143,7 @@ void	calculate_step(t_data *data)
 	}
 }
 
-void	do_dda(t_data *data)
+void	do_dda(t_data2 *data)
 {
 	data->hit = 0;
 	while (data->hit == 0)
@@ -182,30 +167,14 @@ void	do_dda(t_data *data)
 	}
 }
 
-void draw_line(void *mlx, void *win, int beginX, int beginY, int endX, int endY, int color)
+void	draw_pov(t_data2 *data)
 {
-	double deltaX = endX - beginX; // 10
-	double deltaY = endY - beginY; // 0
-	double pixelX = beginX;
-	double pixelY = beginY;
-	int pixels = sqrt((deltaX * deltaX) + (deltaY * deltaY));
+	t_img img;
 
-	deltaX /= pixels; // 1
-	deltaY /= pixels; // 0
-	while (pixels)
+	img = get_new_img(data->mlx, WIDTH, HEIGHT);
+	for (int x = 0; x < WIDTH; x++)
 	{
-		mlx_pixel_put(mlx, win, pixelX, pixelY, color);
-		pixelX += deltaX;
-		pixelY += deltaY;
-		--pixels;
-	}
-}
-
-void	draw_pov(t_data *data)
-{
-	for (int x = 0; x < screenWidth; x++)
-	{
-		data->camera_x = 2 * x / (double)screenWidth - 1;
+		data->camera_x = 2 * x / (double)WIDTH - 1;
 		data->ray_dir_x = data->dir_x + data->plane_x * data->camera_x;
 		data->ray_dir_y = data->dir_x + data->plane_y * data->camera_x;
 		data->map_x = (int)data->pos_x;
@@ -221,13 +190,13 @@ void	draw_pov(t_data *data)
 		{
 			data->perp_wall_dist = data->side_dist_y - data->delta_dist_y;
 		}
-		data->line_heigth = (int)(screenHeight / data->perp_wall_dist);
-		data->draw_start = -data->line_heigth / 2 + screenHeight / 2;
+		data->line_heigth = (int)(HEIGHT / data->perp_wall_dist);
+		data->draw_start = -data->line_heigth / 2 + HEIGHT / 2;
 		if (data->draw_start < 0)
 			data->draw_start = 0;
-		data->draw_end = data->line_heigth / 2 + screenHeight / 2;
-		if (data->draw_end > screenHeight)
-			data->draw_end = screenHeight - 1;
+		data->draw_end = data->line_heigth / 2 + HEIGHT / 2;
+		if (data->draw_end > HEIGHT)
+			data->draw_end = HEIGHT - 1;
 		int color;
 		switch(world_map[data->map_x][data->map_y])
 		{
@@ -237,24 +206,25 @@ void	draw_pov(t_data *data)
 			case 4:  color = 0xFFFFFF;  break; //white
 			default: color = 0xFFFF00; break; //yellow
 		} 
-		draw_line(data->mlx, data->win, x, data->draw_start, x, data->draw_end, color);
+		draw_line_on_img(img, x, data->draw_start, x, data->draw_end, color);
 	}
+	mlx_put_image_to_window(data->mlx, data->win, img.mlx_img, 0, 0);
+	mlx_destroy_image(data->mlx, img.mlx_img);
 }
 
-void	play(t_data *data)
+void	play(t_data2 *data)
 {
 	draw_pov(data);
 	data->old_time = data->time;
 	data->time = clock();
 	data->frame_time = (data->time - data->old_time) / 1000.0;
-	printf("%f\n", 1.0 / data->frame_time);
 	data->move_speed = data->frame_time * 5.0;
 	data->rot_speed = data->frame_time * 3.0;
 }
 
-int	ft_move(int keysym, t_data *data)
+int	ft_move(int keysym, t_data2 *data)
 {
-	if (keysym == 65307)
+	if (keysym == ESCAPE)
 		end_process(data);
 	else if (keysym == UP_ARROW)
 	{
@@ -294,7 +264,7 @@ int	ft_move(int keysym, t_data *data)
 
 int	main()
 {
-	t_data	data;
+	t_data2	data;
 
 	data = get_init_data();
 	if (data.mlx == NULL || data.win == NULL)

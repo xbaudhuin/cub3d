@@ -17,6 +17,8 @@
 # include "ft_printf.h"
 # include "get_next_line.h"
 # include <math.h>
+# include "mlx.h"
+# include <time.h>
 # include "X11/keysym.h"
 # include "X11/keysymdef.h"
 # include <unistd.h>
@@ -35,6 +37,12 @@
 
 # define SUCCESS 0
 # define FAILURE 1
+
+# define ESCAPE 65307
+# define UP_ARROW 119
+# define DOWN_ARROW 115
+# define LEFT_ARROW 97
+# define RIGTH_ARROW 100
 
 # define FALSE 0
 # define TRUE 1
@@ -57,5 +65,23 @@ typedef struct s_data
 	t_texture	*texture;
 	char		**map;
 }				t_data;
+
+typedef struct s_img
+{
+	void	*mlx_img;
+	int		*address;
+	int		width;
+	int		height;
+	int		line_size;
+	int		bpp;
+	int		endiant;
+}t_img;
+
+void	put_pixel_on_img(t_img img, int x, int y, int color);
+t_img	get_new_img(void *mlx, int width, int height);
+void	draw_line_on_img(t_img img, int start_x, int start_y, int end_x,
+	int end_y, int color);
+
+
 
 #endif

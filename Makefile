@@ -69,7 +69,10 @@ OBJS			=	$(addprefix ${OBJ_PATH}, ${SRCS_MAIN:.c=.o}) \
 
 LIBFT_D			=	$(addprefix ${LIBFT_PATH}, ${LIBFT})
 
-SRCS_TEST		=	test_leo.c \
+SRCS_TEST		=	raycasting/test_rc.c \
+					draw/put_pixel_on_img.c \
+					draw/draw_line_on_img.c \
+					img/get_new_img.c \
 
 OBJS_TEST		=	$(addprefix ${OBJ_PATH}, ${SRCS_TEST:.c=.o}) \
 ################################################################################
