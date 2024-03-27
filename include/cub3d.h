@@ -47,8 +47,8 @@
 # define FALSE 0
 # define TRUE 1
 
-# define WIDTH 1920.0
-# define HEIGHT 1080.0
+# define WIDTH 1920
+# define HEIGHT 1080
 
 typedef struct s_texture
 {
@@ -81,6 +81,8 @@ void	put_pixel_on_img(t_img img, int x, int y, int color);
 t_img	get_new_img(void *mlx, int width, int height);
 void	draw_line_on_img(t_img img, int start_x, int start_y, int end_x,
 	int end_y, int color);
+void	draw_ceiling(t_img img, int color);
+void	draw_floor(t_img img, int color);
 
 
 

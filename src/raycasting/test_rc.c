@@ -75,9 +75,9 @@ t_data2	get_init_data(void)
 	t_data2	data;
 
 	ft_bzero(&data, sizeof(data));
-	data.pos_x = 12;
-	data.pos_y = 12;
-	data.dir_x = -1;
+	data.pos_x = 2;
+	data.pos_y = 2;
+	data.dir_x = 1;
 	data.dir_y = 0;
 	data.plane_x = 0;
 	data.plane_y = 0.66;
@@ -103,7 +103,7 @@ void	calculate_delta(t_data2 *data)
 {
 	if (data->ray_dir_x == 0)
 	{
-		data->delta_dist_x = 1e30;
+		data->delta_dist_x = 1000000000000000000000000000000.0;
 	}
 	else
 	{
@@ -111,7 +111,7 @@ void	calculate_delta(t_data2 *data)
 	}
 	if (data->ray_dir_y == 0)
 	{
-		data->delta_dist_y = 1e30;
+		data->delta_dist_y = 1000000000000000000000000000000.0;
 	}
 	else
 	{
@@ -158,7 +158,7 @@ void	do_dda(t_data2 *data)
 		{
 			data->side_dist_y += data->delta_dist_y;
 			data->map_y += data->step_y;
-			data->side = 0;
+			data->side = 1;
 		}
 		if (world_map[data->map_x][data->map_y] > 0)
 		{
@@ -172,9 +172,11 @@ void	draw_pov(t_data2 *data)
 	t_img img;
 
 	img = get_new_img(data->mlx, WIDTH, HEIGHT);
+	draw_ceiling(img, 0xa2d2df);
+	draw_floor(img, 0x4b5320);
 	for (int x = 0; x < WIDTH; x++)
 	{
-		data->camera_x = 2 * x / (double)WIDTH - 1;
+		data->camera_x = (2 * x / ((double)WIDTH)) - 1;
 		data->ray_dir_x = data->dir_x + data->plane_x * data->camera_x;
 		data->ray_dir_y = data->dir_x + data->plane_y * data->camera_x;
 		data->map_x = (int)data->pos_x;
@@ -191,10 +193,10 @@ void	draw_pov(t_data2 *data)
 			data->perp_wall_dist = data->side_dist_y - data->delta_dist_y;
 		}
 		data->line_heigth = (int)(HEIGHT / data->perp_wall_dist);
-		data->draw_start = -data->line_heigth / 2 + HEIGHT / 2;
+		data->draw_start = -(data->line_heigth / 2) + (HEIGHT / 2);
 		if (data->draw_start < 0)
 			data->draw_start = 0;
-		data->draw_end = data->line_heigth / 2 + HEIGHT / 2;
+		data->draw_end = (data->line_heigth / 2) + (HEIGHT / 2);
 		if (data->draw_end > HEIGHT)
 			data->draw_end = HEIGHT - 1;
 		int color;
@@ -218,8 +220,8 @@ void	play(t_data2 *data)
 	data->old_time = data->time;
 	data->time = clock();
 	data->frame_time = (data->time - data->old_time) / 1000.0;
-	data->move_speed = data->frame_time * 5.0;
-	data->rot_speed = data->frame_time * 3.0;
+	data->move_speed = 1 * 0.5;
+	data->rot_speed = 1 * 0.5;
 }
 
 int	ft_move(int keysym, t_data2 *data)
@@ -228,14 +230,14 @@ int	ft_move(int keysym, t_data2 *data)
 		end_process(data);
 	else if (keysym == UP_ARROW)
 	{
-		if (world_map[(int)(data->pos_x + data->dir_x * data->move_speed)][(int)data->pos_y] == 0)
+		if (world_map[(int)(data->pos_x + data->dir_x * data->move_speed)][(int)(data->pos_y)] == 0)
 			data->pos_x += data->dir_x * data->move_speed;
 		if (world_map[(int)(data->pos_x)][(int)(data->pos_y + data->dir_y * data->move_speed)] == 0)
 			data->pos_y += data->dir_y * data->move_speed;
 	}
 	else if (keysym == DOWN_ARROW)
 	{
-		if (world_map[(int)(data->pos_x - data->dir_x * data->move_speed)][(int)data->pos_y] == 0)
+		if (world_map[(int)(data->pos_x - data->dir_x * data->move_speed)][(int)(data->pos_y)] == 0)
 			data->pos_x -= data->dir_x * data->move_speed;
 		if (world_map[(int)(data->pos_x)][(int)(data->pos_y - data->dir_y * data->move_speed)] == 0)
 			data->pos_y -= data->dir_y * data->move_speed;		
@@ -246,7 +248,7 @@ int	ft_move(int keysym, t_data2 *data)
 		data->dir_x = data->dir_x * cos(-data->rot_speed) - data->dir_y * sin(-data->rot_speed);
 		data->dir_y = data->old_dir_x * sin(-data->rot_speed) + data->dir_y * cos(-data->rot_speed);
 		data->old_plane_x = data->plane_x;
-		data->plane_x = data->plane_x * cos(-data->rot_speed) - data->plane_y * cos(-data->rot_speed);
+		data->plane_x = data->plane_x * cos(-data->rot_speed) - data->plane_y * sin(-data->rot_speed);
 		data->plane_y = data->old_plane_x * sin(-data->rot_speed) + data->plane_y * cos(-data->rot_speed);
 	}
 	else if (keysym == LEFT_ARROW)
@@ -255,7 +257,7 @@ int	ft_move(int keysym, t_data2 *data)
 		data->dir_x = data->dir_x * cos(data->rot_speed) - data->dir_y * sin(data->rot_speed);
 		data->dir_y = data->old_dir_x * sin(data->rot_speed) + data->dir_y * cos(data->rot_speed);
 		data->old_plane_x = data->plane_x;
-		data->plane_x = data->plane_x * cos(data->rot_speed) - data->plane_y * cos(data->rot_speed);
+		data->plane_x = data->plane_x * cos(data->rot_speed) - data->plane_y * sin(data->rot_speed);
 		data->plane_y = data->old_plane_x * sin(data->rot_speed) + data->plane_y * cos(data->rot_speed);		
 	}
 	play(data);
