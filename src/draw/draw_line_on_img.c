@@ -36,3 +36,5 @@ void	draw_line_on_img(t_img img, int start_x, int start_y, int end_x,
 		--pixels;
 	}
 }
+
+mlx_xpm_file_to_image()

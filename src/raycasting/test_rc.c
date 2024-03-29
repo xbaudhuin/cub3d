@@ -220,8 +220,8 @@ void	play(t_data2 *data)
 	data->old_time = data->time;
 	data->time = clock();
 	data->frame_time = (data->time - data->old_time) / 1000.0;
-	data->move_speed = 1 * 0.5;
-	data->rot_speed = 1 * 0.5;
+	data->move_speed = 1 * 0.2;
+	data->rot_speed = 1 * 0.2;
 }
 
 int	ft_move(int keysym, t_data2 *data)
