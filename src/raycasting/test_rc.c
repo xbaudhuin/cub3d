@@ -178,7 +178,7 @@ void	draw_pov(t_data2 *data)
 	{
 		data->camera_x = (2 * x / ((double)WIDTH)) - 1;
 		data->ray_dir_x = data->dir_x + data->plane_x * data->camera_x;
-		data->ray_dir_y = data->dir_x + data->plane_y * data->camera_x;
+		data->ray_dir_y = data->dir_y + data->plane_y * data->camera_x;
 		data->map_x = (int)data->pos_x;
 		data->map_y = (int)data->pos_y;
 		calculate_delta(data);
@@ -228,21 +228,35 @@ int	ft_move(int keysym, t_data2 *data)
 {
 	if (keysym == ESCAPE)
 		end_process(data);
-	else if (keysym == UP_ARROW)
+	else if (keysym == W_KEY)
 	{
 		if (world_map[(int)(data->pos_x + data->dir_x * data->move_speed)][(int)(data->pos_y)] == 0)
 			data->pos_x += data->dir_x * data->move_speed;
 		if (world_map[(int)(data->pos_x)][(int)(data->pos_y + data->dir_y * data->move_speed)] == 0)
 			data->pos_y += data->dir_y * data->move_speed;
 	}
-	else if (keysym == DOWN_ARROW)
+	else if (keysym == S_KEY)
 	{
 		if (world_map[(int)(data->pos_x - data->dir_x * data->move_speed)][(int)(data->pos_y)] == 0)
 			data->pos_x -= data->dir_x * data->move_speed;
 		if (world_map[(int)(data->pos_x)][(int)(data->pos_y - data->dir_y * data->move_speed)] == 0)
 			data->pos_y -= data->dir_y * data->move_speed;		
 	}
-	else if (keysym == RIGTH_ARROW)
+	else if (keysym == A_KEY)
+	{
+		if (world_map[(int)(data->pos_x - data->dir_x * data->move_speed)][(int)(data->pos_y)] == 0)
+			data->pos_x -= data->dir_x * data->move_speed;
+		if (world_map[(int)(data->pos_x)][(int)(data->pos_y + data->dir_y * data->move_speed)] == 0)
+			data->pos_y += data->dir_y * data->move_speed;			
+	}
+	else if (keysym == D_KEY)
+	{
+		if (world_map[(int)(data->pos_x + data->dir_x * data->move_speed)][(int)(data->pos_y)] == 0)
+			data->pos_x += data->dir_x * data->move_speed;
+		if (world_map[(int)(data->pos_x)][(int)(data->pos_y - data->dir_y * data->move_speed)] == 0)
+			data->pos_y -= data->dir_y * data->move_speed;			
+	}
+	else if (keysym == LEFT_ARROW)
 	{
 		data->old_dir_x = data->dir_x;
 		data->dir_x = data->dir_x * cos(-data->rot_speed) - data->dir_y * sin(-data->rot_speed);
@@ -251,7 +265,7 @@ int	ft_move(int keysym, t_data2 *data)
 		data->plane_x = data->plane_x * cos(-data->rot_speed) - data->plane_y * sin(-data->rot_speed);
 		data->plane_y = data->old_plane_x * sin(-data->rot_speed) + data->plane_y * cos(-data->rot_speed);
 	}
-	else if (keysym == LEFT_ARROW)
+	else if (keysym == RIGTH_ARROW)
 	{
 		data->old_dir_x = data->dir_x;
 		data->dir_x = data->dir_x * cos(data->rot_speed) - data->dir_y * sin(data->rot_speed);

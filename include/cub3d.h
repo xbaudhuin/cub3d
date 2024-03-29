@@ -39,10 +39,12 @@
 # define FAILURE 1
 
 # define ESCAPE 65307
-# define UP_ARROW 119
-# define DOWN_ARROW 115
-# define LEFT_ARROW 97
-# define RIGTH_ARROW 100
+# define W_KEY 119
+# define S_KEY 115
+# define A_KEY 97
+# define D_KEY 100
+# define LEFT_ARROW 65361
+# define RIGTH_ARROW 65363
 
 # define FALSE 0
 # define TRUE 1
