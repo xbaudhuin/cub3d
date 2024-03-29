@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:08:09 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/03/23 15:29:58 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/03/29 17:55:08 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	is_white_space(const char c)
 {
 	if (c >= 9 && c <= 13)
 		return (TRUE);
-	else if ( c == 32)
+	else if (c == 32)
 		return (TRUE);
 	return (FALSE);
 }

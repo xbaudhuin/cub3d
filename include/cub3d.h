@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 15:03:50 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/03/23 15:28:08 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/03/29 16:46:22 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB3D_H
 
 # include "libft.h"
+# include "vector.h"
 # include "ft_printf.h"
 # include "get_next_line.h"
 # include <math.h>
@@ -57,5 +58,6 @@ typedef struct s_data
 	t_texture	*texture;
 	char		**map;
 }				t_data;
+
 
 #endif
