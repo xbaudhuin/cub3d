@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:12:32 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/01 17:59:56 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/01 18:48:58 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,64 +38,64 @@ static unsigned int	skip_spaces(const char *line)
 	return (i);
 }
 
-static int	ft_atoi_color(const char *line, int *error)
+static int	atoi_color(const char *line, int *error)
 {
 	int	color;
 
 	color = ft_atoi(line, error);
 	if (*error == TRUE || color > 255 || color < 0)
-	{
-		ft_fprintf(STDERR_FILENO, RED"Error\n"RESET
-			"Error during parsing: %sis an invalid RGB color\n", line);
 		*error = TRUE;
-	}
 	return (color);
 }
 
-static int	combine_rgb_color(int rgb_color, int color, int bit_shift)
+static int	shift_color(int rgb_color, int color, int bit_shift)
 {
 	return ((rgb_color << bit_shift) | color);
 }
 
-static int	get_color_from_file(const char *line, int *error)
+static int	print_error(const char *line)
+{
+	ft_fprintf(STDERR_FILENO, RED"Error\n"RESET
+		"Invalid RGB color: %s", line);
+	return (TRUE);
+}
+
+static int	skip_space_digit(const char *line)
 {
 	unsigned int	i;
-	int				rgb_color;
-	int				bit_shift;
+
+	i = 0;
+	while (ft_isdigit(line[i]) == TRUE)
+		i++;
+	i += skip_spaces(&line[i]);
+	return (i);
+}
+
+static int	get_color_from_file(const char *line, int *error, int bit_shift)
+{
+	unsigned int	i;
+	int				rgb;
 	int				count;
 
-	bit_shift = 0;
-	rgb_color = 0;
+	rgb = 0;
 	count = 0;
 	i = 0;
 	while (line[i] != '\0' && line[i] != '\n')
 	{
 		i += skip_spaces(&line[i]);
-		rgb_color = combine_rgb_color(
-				rgb_color, ft_atoi_color(&line[i], error), bit_shift);
+		rgb = shift_color(rgb, atoi_color(&line[i], error), bit_shift);
 		if (*error == TRUE)
 			break ;
 		bit_shift = 8;
-		while (ft_isdigit(line[i]) == TRUE)
-			i++;
-		i += skip_spaces(&line[i]);
+		i += skip_space_digit(&line[i]);
 		if ((line[i] != ',' && line[i] != '\n') || count > 2)
-		{
-			ft_fprintf(STDERR_FILENO, RED"Error\n"RESET
-				"error during parsing: %s", line);
-			*error = TRUE;
 			break ;
-		}
 		count++;
 		i++;
 	}
-	if (*error == FALSE && count != 3)
-	{
-		ft_fprintf(STDERR_FILENO, RED"Error\n"RESET
-			"error during parsing: %s", line);
-		*error = TRUE;
-	}
-	return (rgb_color);
+	if (*error == TRUE || count != 3)
+		*error = print_error(line);
+	return (rgb);
 }
 
 static char	*ft_strdup_texture(const char *line, int *error)
@@ -105,7 +105,7 @@ static char	*ft_strdup_texture(const char *line, int *error)
 	dup = ft_strtrim(line, " \n");
 	if (dup == NULL)
 	{
-		perror(RED"Error\n"RESET"error in ft_strdup_texture");
+		perror(RED"Error\n"RESET);
 		*error = TRUE;
 		return (NULL);
 	}
@@ -159,13 +159,13 @@ static int	check_line_color(
 	{
 		if (check_double(i, 1, "floor color already assigned") == FALSE)
 			return (FALSE);
-		texture->color_floor = get_color_from_file(&line[2], error);
+		texture->color_floor = get_color_from_file(&line[2], error, 0);
 	}
 	else if (ft_strncmp(line, "C ", 2) == 0)
 	{
 		if (check_double(i, 2, "ceiling color already assigned") == FALSE)
 			return (FALSE);
-		texture->color_ceiling = get_color_from_file(&line[2], error);
+		texture->color_ceiling = get_color_from_file(&line[2], error, 0);
 	}
 	return (TRUE);
 }
@@ -294,6 +294,8 @@ t_data	*open_map(char *filename)
 		return (perror(RED"open_map: "RESET""), NULL);
 	data->texture = get_texture(fd);
 	print_texture(data->texture);
+	if (data->texture == NULL)
+		return (close(fd), NULL);
 	data->map = parse_map(fd);
 	print_map(data->map);
 	free_data(data);
