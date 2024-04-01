@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 16:35:30 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/03/29 17:56:58 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/01 14:42:22 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,5 @@ void	free_vector(t_vector *vector)
 	}
 	free(vector->array);
 	vector->array = NULL;
+	free(vector);
 }

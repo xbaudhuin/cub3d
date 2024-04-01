@@ -64,6 +64,7 @@ RM				=	rm -rf
 AR				=	ar rcs
 
 SRCS_MAIN		=	parsing/parse_map.c \
+					parsing/texture_parsing.c \
 
 OBJS			=	$(addprefix ${OBJ_PATH}, ${SRCS_MAIN:.c=.o}) \
 
@@ -89,6 +90,8 @@ ${OBJ_PATH}%.o:	${SRC_PATH}%.c
 		@mkdir -p $(dir $@)
 		@${CC} ${CFLAGS} ${HEADER} -c $< -o $@
 		@printf "${NEW}${YELLOW} ${NAME} ${GREEN}Building: ${RESET}${CC} ${CFLAGS} ${ITALIC}${BOLD}$<${RESET}"
+
+txt:			${TXT}
 
 ${LIBFT}:
 		@make -C ${LIBFT_PATH} DEBUG=$(DEBUG) --no-print-directory

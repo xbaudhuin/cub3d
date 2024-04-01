@@ -6,13 +6,14 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:12:32 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/03/25 18:27:01 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/01 17:59:56 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "ft_printf.h"
 #include "libft.h"
+#include "vector.h"
 #include <stdio.h>
 #include <unistd.h>
 
@@ -66,9 +67,10 @@ static int	get_color_from_file(const char *line, int *error)
 	bit_shift = 0;
 	rgb_color = 0;
 	count = 0;
-	i = skip_spaces(line);
+	i = 0;
 	while (line[i] != '\0' && line[i] != '\n')
 	{
+		i += skip_spaces(&line[i]);
 		rgb_color = combine_rgb_color(
 				rgb_color, ft_atoi_color(&line[i], error), bit_shift);
 		if (*error == TRUE)
@@ -76,6 +78,7 @@ static int	get_color_from_file(const char *line, int *error)
 		bit_shift = 8;
 		while (ft_isdigit(line[i]) == TRUE)
 			i++;
+		i += skip_spaces(&line[i]);
 		if ((line[i] != ',' && line[i] != '\n') || count > 2)
 		{
 			ft_fprintf(STDERR_FILENO, RED"Error\n"RESET
@@ -98,18 +101,14 @@ static int	get_color_from_file(const char *line, int *error)
 static char	*ft_strdup_texture(const char *line, int *error)
 {
 	char			*dup;
-	unsigned int	len;
 
-	len = ft_strlen(line) - 1;
-	dup = malloc(sizeof(*dup) * (len + 1));
+	dup = ft_strtrim(line, " \n");
 	if (dup == NULL)
 	{
 		perror(RED"Error\n"RESET"error in ft_strdup_texture");
 		*error = TRUE;
 		return (NULL);
 	}
-	ft_memmove(dup, line, len);
-	dup[len] = '\0';
 	return (dup);
 }
 
@@ -126,6 +125,19 @@ static void	free_texture(t_texture *texture)
 	if (texture->SO != NULL)
 		free(texture->SO);
 	free(texture);
+}
+
+static void	free_data(t_data *data)
+{
+	if (data == NULL)
+		return ;
+	if (data->texture != NULL)
+		free_texture(data->texture);
+	data->texture = NULL;
+	if (data->map != NULL)
+		free_vector(data->map);
+	data->map = NULL;
+	free(data);
 }
 
 static int	check_double(
@@ -247,13 +259,32 @@ static	void	print_texture(t_texture *texture)
 	ft_printf(BLU"texture->color_floor ="RESET" %d\n", texture->color_floor);
 }
 
+static void	print_map(t_vector *vector)
+{
+	unsigned int	i;
+
+	i = 0;
+	if (vector == NULL)
+	{
+		ft_printf(RED"NO MAP\n"RESET);
+		return ;
+	}
+	ft_printf(YEL"\n\n\nMAP\n\n\n"RESET);
+	while (i < (unsigned int)vector_current_size(vector))
+	{
+		ft_printf("%s", vector_get(vector, i));
+		i++;
+	}
+}
+
 t_data	*open_map(char *filename)
 {
 	int			fd;
 	t_data		*data;
-	t_texture	*texture;
 
-	data = NULL;
+	data = ft_calloc(sizeof(*data), 1);
+	if (data == NULL)
+		return (NULL);
 	if (filename == NULL
 		|| check_filename(ft_strrchr(filename, '.'), filename) == FALSE)
 		return (ft_fprintf(STDERR_FILENO, RED"Error\n"RESET
@@ -261,9 +292,11 @@ t_data	*open_map(char *filename)
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		return (perror(RED"open_map: "RESET""), NULL);
-	texture = get_texture(fd);
-	print_texture(texture);
-	free_texture(texture);
+	data->texture = get_texture(fd);
+	print_texture(data->texture);
+	data->map = parse_map(fd);
+	print_map(data->map);
+	free_data(data);
 	close(fd);
 	return (data);
 }

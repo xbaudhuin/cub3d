@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 15:03:50 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/03/29 16:46:22 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/01 13:30:39 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,16 @@
 # define WIDTH 1920.0
 # define HEIGHT 1080.0
 
+enum	e_parsing_error
+{
+	UNCLOSED_MAP = 2,
+	INVALID_PLAYER = 3,
+	INVALID_TEXTURE = 4,
+	INVALID_COLOR = 5,
+	INVALID_LINE = 6,
+	INVALID_CHAR = 7,
+};
+
 typedef struct s_texture
 {
 	char	*NO;
@@ -56,8 +66,9 @@ typedef struct s_texture
 typedef struct s_data
 {
 	t_texture	*texture;
-	char		**map;
+	t_vector	*map;
 }				t_data;
 
 
+t_vector	*parse_map(int fd);
 #endif
