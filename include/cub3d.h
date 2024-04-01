@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 15:03:50 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/03/23 15:28:08 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/01 18:51:05 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB3D_H
 
 # include "libft.h"
+# include "vector.h"
 # include "ft_printf.h"
 # include "get_next_line.h"
 # include <math.h>
@@ -52,6 +53,16 @@
 # define WIDTH 1920
 # define HEIGHT 1080
 
+enum	e_parsing_error
+{
+	UNCLOSED_MAP = 2,
+	INVALID_PLAYER = 3,
+	INVALID_TEXTURE = 4,
+	INVALID_COLOR = 5,
+	INVALID_LINE = 6,
+	INVALID_CHAR = 7,
+};
+
 typedef struct s_texture
 {
 	char	*NO;
@@ -65,7 +76,7 @@ typedef struct s_texture
 typedef struct s_data
 {
 	t_texture	*texture;
-	char		**map;
+	t_vector	*map;
 }				t_data;
 
 typedef struct s_img
@@ -86,6 +97,6 @@ void	draw_line_on_img(t_img img, int start_x, int start_y, int end_x,
 void	draw_ceiling(t_img img, int color);
 void	draw_floor(t_img img, int color);
 
-
+t_vector	*parse_map(int fd);
 
 #endif
