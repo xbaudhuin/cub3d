@@ -120,7 +120,6 @@ typedef struct s_data_exec
 	double	perp_wall_dist;
 	int		step_x;
 	int		step_y;
-	int		hit;
 	int		side;
 	int		line_heigth;
 	int		draw_start;
@@ -137,6 +136,7 @@ void	move(int keysim, t_data_exec *data);
 int		read_key(int keysym, t_data_exec *data);
 void	draw_pov(t_data_exec *data);
 void	rotate(int keysim, t_data_exec *data);
+void	do_dda(t_data_exec *data);
 int		end_process(t_data_exec *data);
 
 t_vector	*parse_map(int fd);

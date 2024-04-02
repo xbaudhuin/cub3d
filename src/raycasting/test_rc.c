@@ -77,8 +77,6 @@ void	calculate_delta(t_data_exec *data)
 	}
 }
 
-
-
 void	calculate_step(t_data_exec *data)
 {
 	if (data->ray_dir_x < 0)
@@ -100,30 +98,6 @@ void	calculate_step(t_data_exec *data)
 	{
 		data->step_y = 1;
 		data->side_dist_y = (data->map_y + 1.0 - data->pos_y) * data->delta_dist_y;
-	}
-}
-
-void	do_dda(t_data_exec *data)
-{
-	data->hit = 0;
-	while (data->hit == 0)
-	{
-		if (data->side_dist_x < data->side_dist_y)
-		{
-			data->side_dist_x += data->delta_dist_x;
-			data->map_x += data->step_x;
-			data->side = 0;
-		}
-		else
-		{
-			data->side_dist_y += data->delta_dist_y;
-			data->map_y += data->step_y;
-			data->side = 1;
-		}
-		if (world_map[data->map_x][data->map_y] > 0)
-		{
-			data->hit = 1;
-		}
 	}
 }
 
@@ -162,10 +136,10 @@ void	draw_pov(t_data_exec *data)
 		int color;
 		switch(world_map[data->map_x][data->map_y])
 		{
-			case 1:  color = 0xFF0000;  break; //red
-			case 2:  color = 0x00FF00;  break; //green
+			case 1:  color = 0xFFFFFF;  break; //red
+			case 2:  color = 0xFF00FF;  break; //green
 			case 3:  color = 0x0000FF;   break; //blue
-			case 4:  color = 0xFFFFFF;  break; //white
+			case 4:  color = 0x00FFFF;  break; //white
 			default: color = 0xFFFF00; break; //yellow
 		} 
 		draw_line_on_img(img, x, data->draw_start, x, data->draw_end, color);
@@ -184,7 +158,7 @@ int	main()
 		exit(1);
 	}
 	draw_pov(&data);
-	mlx_hook(data.win, KeyRelease, KeyReleaseMask, &read_key, &data);
+	mlx_hook(data.win, KeyPress, KeyPressMask, &read_key, &data);
 	mlx_hook(data.win, DestroyNotify, StructureNotifyMask,
 		&end_process, &data);
 	mlx_loop(data.mlx);

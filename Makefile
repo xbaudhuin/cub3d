@@ -71,6 +71,7 @@ OBJS			=	$(addprefix ${OBJ_PATH}, ${SRCS_MAIN:.c=.o}) \
 LIBFT_D			=	$(addprefix ${LIBFT_PATH}, ${LIBFT})
 
 SRCS_TEST		=	raycasting/test_rc.c \
+					raycasting/do_dda.c \
 					draw/put_pixel_on_img.c \
 					draw/draw_line_on_img.c \
 					draw/draw_ceiling.c \
