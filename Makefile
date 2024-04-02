@@ -117,8 +117,8 @@ ${MLX}:
 		@echo "$(COLOUR_GREEN)MLX compiled${COLOUR_END}"
 
 ${TXT}:
-		@echo "-Ilibft/include\n-Iinclude/" > compile_flags.txt
-		@echo "-I../libft/include\n-I../include/" > src/compile_flags.txt
+		@echo "-Ilibft/include\n-Iinclude/\n-Iminilibx-linux/" > compile_flags.txt
+		@echo "-I../libft/include\n-I../include/\n-I../minilibx-linux" > src/compile_flags.txt
 
 clean:
 		@make -C ${LIBFT_PATH} clean --no-print-directory
