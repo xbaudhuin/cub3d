@@ -41,6 +41,7 @@ HEADER			=	-I ./include
 HEADER_FILES	=	include/ft_printf.h \
 					include/get_next_line.h \
 					include/libft.h \
+					include/vector.h \
 
 SRCS_IS_BOOL	=	is_bool/ft_isalnum.c \
 					is_bool/ft_isalpha.c \
@@ -110,6 +111,9 @@ SRCS_PRINTF		=	printf/ft_printf.c \
 					printf/printf_utils.c \
 					fprintf/ft_fprintf.c
 
+SRCS_VECTOR		=	vector/vector.c \
+					vector/vector_utils.c \
+
 RM				=	rm -rf
 
 CC				=	cc
@@ -123,6 +127,7 @@ OBJS			=	$(addprefix ${OBJ_PATH}, ${SRCS_IS_BOOL:.c=.o}) \
 					$(addprefix ${OBJ_PATH}, ${SRCS_LIST:.c=.o}) \
 					$(addprefix ${OBJ_PATH}, ${SRCS_GNL:.c=.o}) \
 					$(addprefix ${OBJ_PATH}, ${SRCS_PRINTF:.c=.o}) \
+					$(addprefix ${OBJ_PATH}, ${SRCS_VECTOR:.c=.o}) \
 
 all:		${NAME}
 
