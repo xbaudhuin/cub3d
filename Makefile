@@ -72,14 +72,20 @@ LIBFT_D			=	$(addprefix ${LIBFT_PATH}, ${LIBFT})
 
 SRCS_TEST		=	raycasting/test_rc.c \
 					raycasting/do_dda.c \
+					raycasting/calculate_delta.c \
+					raycasting/calculate_step.c \
+					raycasting/calculate_perp_wall_dist.c \
 					draw/put_pixel_on_img.c \
 					draw/draw_line_on_img.c \
 					draw/draw_ceiling.c \
 					draw/draw_floor.c \
+					draw/draw_pov.c \
+					draw/draw_wall_line.c \
 					img/get_new_img.c \
 					camera_movement/read_key.c \
 					camera_movement/move.c \
 					camera_movement/rotate.c \
+					end_process.c
 
 OBJS_TEST		=	$(addprefix ${OBJ_PATH}, ${SRCS_TEST:.c=.o}) \
 ################################################################################
