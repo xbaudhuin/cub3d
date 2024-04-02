@@ -1,11 +1,6 @@
 #include "cub3d.h"
 
-#define mapWidth 24
-#define mapHeight 24
-
-
-
-int world_map[mapWidth][mapHeight]=
+int world_map[MAP_HEIGHT][MAP_WIDTH]=
 {
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -33,46 +28,9 @@ int world_map[mapWidth][mapHeight]=
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 };
 
-typedef struct s_data2
+t_data_exec	get_init_data(void)
 {
-	void	*mlx;
-	void	*win;
-	double	pos_x;
-	double	pos_y;
-	double	dir_x;
-	double	dir_y;
-	double	plane_x;
-	double	plane_y;
-	double 	time;
-	double	old_time;
-	double	camera_x;
-	double	ray_dir_x;
-	double	ray_dir_y;
-	int		map_x;
-	int		map_y;
-	double	side_dist_x;
-	double	side_dist_y;
-	double	delta_dist_x;
-	double	delta_dist_y;
-	double	perp_wall_dist;
-	int		step_x;
-	int		step_y;
-	int		hit;
-	int		side;
-	int		line_heigth;
-	int		draw_start;
-	int		draw_end;
-	double	frame_time;
-	double	move_speed;
-	double	rot_speed;
-	double	old_dir_x;
-	double	old_plane_x;
-
-}	t_data2;
-
-t_data2	get_init_data(void)
-{
-	t_data2	data;
+	t_data_exec	data;
 
 	ft_bzero(&data, sizeof(data));
 	data.pos_x = 2;
@@ -90,7 +48,7 @@ t_data2	get_init_data(void)
 	return (data);
 }
 
-int	end_process(t_data2 *data)
+int	end_process(t_data_exec *data)
 {
 	mlx_destroy_window(data->mlx, data->win);
 	mlx_destroy_display(data->mlx);
@@ -99,7 +57,7 @@ int	end_process(t_data2 *data)
 	return (0);
 }
 
-void	calculate_delta(t_data2 *data)
+void	calculate_delta(t_data_exec *data)
 {
 	if (data->ray_dir_x == 0)
 	{
@@ -119,7 +77,9 @@ void	calculate_delta(t_data2 *data)
 	}
 }
 
-void	calculate_step(t_data2 *data)
+
+
+void	calculate_step(t_data_exec *data)
 {
 	if (data->ray_dir_x < 0)
 	{
@@ -143,7 +103,7 @@ void	calculate_step(t_data2 *data)
 	}
 }
 
-void	do_dda(t_data2 *data)
+void	do_dda(t_data_exec *data)
 {
 	data->hit = 0;
 	while (data->hit == 0)
@@ -167,7 +127,7 @@ void	do_dda(t_data2 *data)
 	}
 }
 
-void	draw_pov(t_data2 *data)
+void	draw_pov(t_data_exec *data)
 {
 	t_img img;
 
@@ -214,81 +174,17 @@ void	draw_pov(t_data2 *data)
 	mlx_destroy_image(data->mlx, img.mlx_img);
 }
 
-void	play(t_data2 *data)
-{
-	draw_pov(data);
-	data->old_time = data->time;
-	data->time = clock();
-	data->frame_time = (data->time - data->old_time) / 1000.0;
-	data->move_speed = 1 * 0.2;
-	data->rot_speed = 1 * 0.2;
-}
-
-int	ft_move(int keysym, t_data2 *data)
-{
-	if (keysym == ESCAPE)
-		end_process(data);
-	else if (keysym == W_KEY)
-	{
-		if (world_map[(int)(data->pos_x + data->dir_x * data->move_speed)][(int)(data->pos_y)] == 0)
-			data->pos_x += data->dir_x * data->move_speed;
-		if (world_map[(int)(data->pos_x)][(int)(data->pos_y + data->dir_y * data->move_speed)] == 0)
-			data->pos_y += data->dir_y * data->move_speed;
-	}
-	else if (keysym == S_KEY)
-	{
-		if (world_map[(int)(data->pos_x - data->dir_x * data->move_speed)][(int)(data->pos_y)] == 0)
-			data->pos_x -= data->dir_x * data->move_speed;
-		if (world_map[(int)(data->pos_x)][(int)(data->pos_y - data->dir_y * data->move_speed)] == 0)
-			data->pos_y -= data->dir_y * data->move_speed;		
-	}
-	else if (keysym == A_KEY)
-	{
-		if (world_map[(int)(data->pos_x - data->dir_x * data->move_speed)][(int)(data->pos_y)] == 0)
-			data->pos_x -= data->dir_x * data->move_speed;
-		if (world_map[(int)(data->pos_x)][(int)(data->pos_y + data->dir_y * data->move_speed)] == 0)
-			data->pos_y += data->dir_y * data->move_speed;			
-	}
-	else if (keysym == D_KEY)
-	{
-		if (world_map[(int)(data->pos_x + data->dir_x * data->move_speed)][(int)(data->pos_y)] == 0)
-			data->pos_x += data->dir_x * data->move_speed;
-		if (world_map[(int)(data->pos_x)][(int)(data->pos_y - data->dir_y * data->move_speed)] == 0)
-			data->pos_y -= data->dir_y * data->move_speed;			
-	}
-	else if (keysym == LEFT_ARROW)
-	{
-		data->old_dir_x = data->dir_x;
-		data->dir_x = data->dir_x * cos(-data->rot_speed) - data->dir_y * sin(-data->rot_speed);
-		data->dir_y = data->old_dir_x * sin(-data->rot_speed) + data->dir_y * cos(-data->rot_speed);
-		data->old_plane_x = data->plane_x;
-		data->plane_x = data->plane_x * cos(-data->rot_speed) - data->plane_y * sin(-data->rot_speed);
-		data->plane_y = data->old_plane_x * sin(-data->rot_speed) + data->plane_y * cos(-data->rot_speed);
-	}
-	else if (keysym == RIGTH_ARROW)
-	{
-		data->old_dir_x = data->dir_x;
-		data->dir_x = data->dir_x * cos(data->rot_speed) - data->dir_y * sin(data->rot_speed);
-		data->dir_y = data->old_dir_x * sin(data->rot_speed) + data->dir_y * cos(data->rot_speed);
-		data->old_plane_x = data->plane_x;
-		data->plane_x = data->plane_x * cos(data->rot_speed) - data->plane_y * sin(data->rot_speed);
-		data->plane_y = data->old_plane_x * sin(data->rot_speed) + data->plane_y * cos(data->rot_speed);		
-	}
-	play(data);
-	return (Success);
-}
-
 int	main()
 {
-	t_data2	data;
+	t_data_exec	data;
 
 	data = get_init_data();
 	if (data.mlx == NULL || data.win == NULL)
 	{
 		exit(1);
 	}
-	play(&data);
-	mlx_hook(data.win, KeyRelease, KeyReleaseMask, &ft_move, &data);
+	draw_pov(&data);
+	mlx_hook(data.win, KeyRelease, KeyReleaseMask, &read_key, &data);
 	mlx_hook(data.win, DestroyNotify, StructureNotifyMask,
 		&end_process, &data);
 	mlx_loop(data.mlx);

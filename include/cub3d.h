@@ -53,6 +53,12 @@
 # define WIDTH 1920
 # define HEIGHT 1080
 
+# define ROTATE_SPEED 0.2
+# define MOVE_SPEED 0.2
+
+# define MAP_WIDTH 24
+# define MAP_HEIGHT 24
+
 enum	e_parsing_error
 {
 	UNCLOSED_MAP = 2,
@@ -90,12 +96,48 @@ typedef struct s_img
 	int		endiant;
 }t_img;
 
+
+
+typedef struct s_data_exec
+{
+	void	*mlx;
+	void	*win;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+	double	camera_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	int		map_x;
+	int		map_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	perp_wall_dist;
+	int		step_x;
+	int		step_y;
+	int		hit;
+	int		side;
+	int		line_heigth;
+	int		draw_start;
+	int		draw_end;
+}t_data_exec;
+
 void	put_pixel_on_img(t_img img, int x, int y, int color);
 t_img	get_new_img(void *mlx, int width, int height);
 void	draw_line_on_img(t_img img, int start_x, int start_y, int end_x,
 	int end_y, int color);
 void	draw_ceiling(t_img img, int color);
 void	draw_floor(t_img img, int color);
+void	move(int keysim, t_data_exec *data);
+int		read_key(int keysym, t_data_exec *data);
+void	draw_pov(t_data_exec *data);
+void	rotate(int keysim, t_data_exec *data);
+int		end_process(t_data_exec *data);
 
 t_vector	*parse_map(int fd);
 

@@ -76,6 +76,9 @@ SRCS_TEST		=	raycasting/test_rc.c \
 					draw/draw_ceiling.c \
 					draw/draw_floor.c \
 					img/get_new_img.c \
+					camera_movement/read_key.c \
+					camera_movement/move.c \
+					camera_movement/rotate.c \
 
 OBJS_TEST		=	$(addprefix ${OBJ_PATH}, ${SRCS_TEST:.c=.o}) \
 ################################################################################
