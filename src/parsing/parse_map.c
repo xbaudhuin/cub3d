@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 18:28:32 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/01 17:59:29 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/02 17:26:34 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,10 +155,11 @@ static void	fill_vector(t_vector *vector, char *line, int fd)
 	}
 }
 
-t_vector	*parse_map(int fd)
+char	**parse_map(int fd)
 {
 	char		*line;
 	t_vector	*vector;
+	char		**array;
 
 	line = skip_empty_line(fd);
 	if (line == NULL)
@@ -175,5 +176,7 @@ t_vector	*parse_map(int fd)
 	fill_vector(vector, line, fd);
 	if (check_map(vector) == FAILURE)
 		return (free_vector(vector), NULL);
-	return (vector);
+	array = vector->array;
+	free(vector);
+	return (array);
 }

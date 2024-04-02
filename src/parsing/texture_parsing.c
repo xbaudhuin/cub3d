@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:12:32 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/01 18:48:58 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/02 17:35:13 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ static void	free_data(t_data *data)
 		free_texture(data->texture);
 	data->texture = NULL;
 	if (data->map != NULL)
-		free_vector(data->map);
+		free_split(data->map);
 	data->map = NULL;
 	free(data);
 }
@@ -259,20 +259,20 @@ static	void	print_texture(t_texture *texture)
 	ft_printf(BLU"texture->color_floor ="RESET" %d\n", texture->color_floor);
 }
 
-static void	print_map(t_vector *vector)
+static void	print_map(char **map)
 {
 	unsigned int	i;
 
 	i = 0;
-	if (vector == NULL)
+	if (map == NULL)
 	{
 		ft_printf(RED"NO MAP\n"RESET);
 		return ;
 	}
 	ft_printf(YEL"\n\n\nMAP\n\n\n"RESET);
-	while (i < (unsigned int)vector_current_size(vector))
+	while (map[i])
 	{
-		ft_printf("%s", vector_get(vector, i));
+		ft_printf("%s", map[i]);
 		i++;
 	}
 }
@@ -295,7 +295,7 @@ t_data	*open_map(char *filename)
 	data->texture = get_texture(fd);
 	print_texture(data->texture);
 	if (data->texture == NULL)
-		return (close(fd), NULL);
+		return (close(fd), free_data(data), NULL);
 	data->map = parse_map(fd);
 	print_map(data->map);
 	free_data(data);

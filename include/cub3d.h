@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 15:03:50 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/02 12:58:36 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/02 17:28:13 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ typedef struct s_texture
 typedef struct s_data
 {
 	t_texture	*texture;
-	t_vector	*map;
+	char		**map;
 }				t_data;
 
 typedef struct s_img
@@ -146,6 +146,6 @@ void	rotate(int keysim, t_data_exec *data);
 void	do_dda(t_data_exec *data);
 int		end_process(t_data_exec *data);
 
-t_vector	*parse_map(int fd);
+char	**parse_map(int fd);
 
 #endif

@@ -6,18 +6,19 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 14:09:11 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/03/29 17:37:43 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/02 17:25:26 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
+#include "libft.h"
 
 static char	**ft_realloc(t_vector *vector, size_t new_size)
 {
 	char	**new_array;
 	size_t	i;
 
-	new_array = malloc(sizeof(*new_array) * new_size);
+	new_array = ft_calloc(sizeof(*new_array), new_size);
 	if (new_array == NULL)
 		return (free_vector(vector), NULL);
 	i = 0;
