@@ -124,13 +124,9 @@ typedef struct s_data_exec
 	double	side_dist_y;
 	double	delta_dist_x;
 	double	delta_dist_y;
-	double	perp_wall_dist;
 	int		step_x;
 	int		step_y;
 	int		side;
-	int		line_heigth;
-	int		draw_start;
-	int		draw_end;
 }t_data_exec;
 
 void	put_pixel_on_img(t_img img, int x, int y, int color);
@@ -142,8 +138,13 @@ void	draw_floor(t_img img, int color);
 void	move(int keysim, t_data_exec *data);
 int		read_key(int keysym, t_data_exec *data);
 void	draw_pov(t_data_exec *data);
+void	draw_wall_line(t_img img, int x, double perp_wall_dist,
+			t_data_exec *data);
 void	rotate(int keysim, t_data_exec *data);
 void	do_dda(t_data_exec *data);
+void	calculate_delta(t_data_exec *data);
+void	calculate_step(t_data_exec *data);
+double	calculate_perp_wall_dist(t_data_exec *data);
 int		end_process(t_data_exec *data);
 
 char	**parse_map(int fd);

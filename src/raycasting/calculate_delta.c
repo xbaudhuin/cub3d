@@ -40,5 +40,4 @@ void	calculate_delta(t_data_exec *data)
 {
 	data->delta_dist_x = get_delta_x(data);
 	data->delta_dist_y = get_delta_y(data);
-
 }
