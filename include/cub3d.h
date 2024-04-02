@@ -85,6 +85,8 @@ typedef struct s_img
 	int		endiant;
 }t_img;
 
+
+
 typedef struct s_data_exec
 {
 	void	*mlx;
@@ -112,8 +114,6 @@ typedef struct s_data_exec
 	int		line_heigth;
 	int		draw_start;
 	int		draw_end;
-	double	old_dir_x;
-	double	old_plane_x;
 }t_data_exec;
 
 void	put_pixel_on_img(t_img img, int x, int y, int color);
@@ -125,6 +125,8 @@ void	draw_floor(t_img img, int color);
 void	move(int keysim, t_data_exec *data);
 int		read_key(int keysym, t_data_exec *data);
 void	draw_pov(t_data_exec *data);
+void	rotate(int keysim, t_data_exec *data);
+int		end_process(t_data_exec *data);
 
 
 

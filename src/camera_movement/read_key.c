@@ -37,6 +37,18 @@ static int	is_rotate(int keysym)
 	}
 }
 
+static int	is_escape(int keysim)
+{
+	if (keysim == ESCAPE)
+	{
+		return (TRUE);
+	}
+	else
+	{
+		return (FALSE);
+	}
+}
+
 int	read_key(int keysym, t_data_exec *data)
 {
 	if (is_movement(keysym) == TRUE)
@@ -45,7 +57,11 @@ int	read_key(int keysym, t_data_exec *data)
 	}
 	else if (is_rotate(keysym) == TRUE)
 	{
-		return (SUCCESS);
+		rotate(keysym, data);
+	}
+	else if (is_escape(keysym) == TRUE)
+	{
+		end_process(data);
 	}
 	draw_pov(data);
 	return (SUCCESS);

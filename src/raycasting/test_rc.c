@@ -77,6 +77,8 @@ void	calculate_delta(t_data_exec *data)
 	}
 }
 
+
+
 void	calculate_step(t_data_exec *data)
 {
 	if (data->ray_dir_x < 0)
@@ -172,65 +174,6 @@ void	draw_pov(t_data_exec *data)
 	mlx_destroy_image(data->mlx, img.mlx_img);
 }
 
-void	play(t_data_exec *data)
-{
-	draw_pov(data);
-}
-
-// int	read_key(int keysym, t_data_exec *data, int world_map[MAP_HEIGHT][MAP_WIDTH])
-// {
-// 	if (keysym == ESCAPE)
-// 		end_process(data);
-// 	else if (keysym == W_KEY)
-// 	{
-// 		if (world_map[(int)(data->pos_x + data->dir_x * MOVE_SPEED)][(int)(data->pos_y)] == 0)
-// 			data->pos_x += data->dir_x * MOVE_SPEED;
-// 		if (world_map[(int)(data->pos_x)][(int)(data->pos_y + data->dir_y * MOVE_SPEED)] == 0)
-// 			data->pos_y += data->dir_y * MOVE_SPEED;
-// 	}
-// 	else if (keysym == S_KEY)
-// 	{
-// 		if (world_map[(int)(data->pos_x - data->dir_x * MOVE_SPEED)][(int)(data->pos_y)] == 0)
-// 			data->pos_x -= data->dir_x * MOVE_SPEED;
-// 		if (world_map[(int)(data->pos_x)][(int)(data->pos_y - data->dir_y * MOVE_SPEED)] == 0)
-// 			data->pos_y -= data->dir_y * MOVE_SPEED;		
-// 	}
-// 	else if (keysym == A_KEY)
-// 	{
-// 		if (world_map[(int)(data->pos_x - data->dir_x * MOVE_SPEED)][(int)(data->pos_y)] == 0)
-// 			data->pos_x -= data->dir_x * MOVE_SPEED;
-// 		if (world_map[(int)(data->pos_x)][(int)(data->pos_y + data->dir_y * MOVE_SPEED)] == 0)
-// 			data->pos_y += data->dir_y * MOVE_SPEED;			
-// 	}
-// 	else if (keysym == D_KEY)
-// 	{
-// 		if (world_map[(int)(data->pos_x + data->dir_x * MOVE_SPEED)][(int)(data->pos_y)] == 0)
-// 			data->pos_x += data->dir_x * MOVE_SPEED;
-// 		if (world_map[(int)(data->pos_x)][(int)(data->pos_y - data->dir_y * MOVE_SPEED)] == 0)
-// 			data->pos_y -= data->dir_y * MOVE_SPEED;			
-// 	}
-// 	else if (keysym == LEFT_ARROW)
-// 	{
-// 		data->old_dir_x = data->dir_x;
-// 		data->dir_x = data->dir_x * cos(-ROTATE_SPEED) - data->dir_y * sin(-ROTATE_SPEED);
-// 		data->dir_y = data->old_dir_x * sin(-ROTATE_SPEED) + data->dir_y * cos(-ROTATE_SPEED);
-// 		data->old_plane_x = data->plane_x;
-// 		data->plane_x = data->plane_x * cos(-ROTATE_SPEED) - data->plane_y * sin(-ROTATE_SPEED);
-// 		data->plane_y = data->old_plane_x * sin(-ROTATE_SPEED) + data->plane_y * cos(-ROTATE_SPEED);
-// 	}
-// 	else if (keysym == RIGTH_ARROW)
-// 	{
-// 		data->old_dir_x = data->dir_x;
-// 		data->dir_x = data->dir_x * cos(ROTATE_SPEED) - data->dir_y * sin(ROTATE_SPEED);
-// 		data->dir_y = data->old_dir_x * sin(ROTATE_SPEED) + data->dir_y * cos(ROTATE_SPEED);
-// 		data->old_plane_x = data->plane_x;
-// 		data->plane_x = data->plane_x * cos(ROTATE_SPEED) - data->plane_y * sin(ROTATE_SPEED);
-// 		data->plane_y = data->old_plane_x * sin(ROTATE_SPEED) + data->plane_y * cos(ROTATE_SPEED);		
-// 	}
-// 	play(data);
-// 	return (SUCCESS);
-// }
-
 int	main()
 {
 	t_data_exec	data;
@@ -240,7 +183,7 @@ int	main()
 	{
 		exit(1);
 	}
-	play(&data);
+	draw_pov(&data);
 	mlx_hook(data.win, KeyRelease, KeyReleaseMask, &read_key, &data);
 	mlx_hook(data.win, DestroyNotify, StructureNotifyMask,
 		&end_process, &data);
