@@ -65,6 +65,14 @@ AR				=	ar rcs
 
 SRCS_MAIN		=	parsing/parse_map.c \
 					parsing/texture_parsing.c \
+					parsing/check_line.c \
+					parsing/check_map.c \
+					parsing/error.c \
+					parsing/free_parsing.c \
+					parsing/is_char.c \
+					parsing/parsing_get_color.c \
+					parsing/parsing_utils.c \
+					debug.c \
 
 OBJS			=	$(addprefix ${OBJ_PATH}, ${SRCS_MAIN:.c=.o}) \
 
