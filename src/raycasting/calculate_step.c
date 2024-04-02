@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	calculate_step(t_data_exec *data)
+static void	get_step_x(t_data_exec *data)
 {
 	if (data->ray_dir_x < 0)
 	{
@@ -24,6 +24,10 @@ void	calculate_step(t_data_exec *data)
 		data->step_x = 1;
 		data->side_dist_x = (data->map_x + 1.0 - data->pos_x) * data->delta_dist_x;
 	}
+}
+
+static void	get_step_y(t_data_exec *data)
+{
 	if (data->ray_dir_y < 0)
 	{
 		data->step_y = -1;
@@ -34,4 +38,10 @@ void	calculate_step(t_data_exec *data)
 		data->step_y = 1;
 		data->side_dist_y = (data->map_y + 1.0 - data->pos_y) * data->delta_dist_y;
 	}
+}
+
+void	calculate_step(t_data_exec *data)
+{
+	get_step_x(data);
+	get_step_y(data);
 }
