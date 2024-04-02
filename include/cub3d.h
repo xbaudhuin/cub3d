@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 15:03:50 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/01 18:51:05 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/02 12:58:36 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,13 @@ enum	e_parsing_error
 	INVALID_LINE = 6,
 	INVALID_CHAR = 7,
 };
+
+typedef struct s_xpm
+{
+	void	*img;
+	int		height;
+	int		width;
+}			t_xpm;
 
 typedef struct s_texture
 {
