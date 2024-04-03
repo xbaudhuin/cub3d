@@ -46,6 +46,7 @@ void	rotate(int keysim, t_data_exec *data)
 	}
 	else if (keysim == LEFT_ARROW)
 	{
+		printf("test");
 		rotate_left(data);
 	}
 }

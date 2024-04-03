@@ -35,4 +35,10 @@ void	draw_line_on_img(t_img img, int start_x, int start_y, int end_x,
 		pixel_y += delta_y;
 		--pixels;
 	}
+	// (void)end_x;
+	// while (start_y < end_y)
+	// {
+	// 	put_pixel_on_img(img, start_x, start_y, color);
+	// 	++start_y;
+	// }
 }

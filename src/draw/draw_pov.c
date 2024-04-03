@@ -21,6 +21,11 @@ void	draw_pov(t_data_exec *data)
 	int		x;
 
 	img = get_new_img(data->mlx, WIDTH, HEIGHT);
+	if (img.mlx_img == NULL || img.address == NULL)
+	{
+		ft_fprintf(2, "cub3d: get mlx immage: error\n");
+		end_process(data);
+	}
 	draw_ceiling(img, 0xa2d2df);
 	draw_floor(img, 0x4b5320);
 	x = 0;
