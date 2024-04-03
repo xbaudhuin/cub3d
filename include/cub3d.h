@@ -50,10 +50,13 @@
 # define FALSE 0
 # define TRUE 1
 
+# define X 1
+# define Y 2
+
 # define WIDTH 1920
 # define HEIGHT 1080
 
-# define ROTATE_SPEED 0.2
+# define ROTATE_SPEED 3.14 / 2
 # define MOVE_SPEED 0.2
 
 # define MAP_WIDTH 24
@@ -146,6 +149,7 @@ void	calculate_delta(t_data_exec *data);
 void	calculate_step(t_data_exec *data);
 double	calculate_perp_wall_dist(t_data_exec *data);
 int		end_process(t_data_exec *data);
+int		is_move_available(int move_axe, int	new_pos, t_data_exec *data);
 
 char	**parse_map(int fd);
 

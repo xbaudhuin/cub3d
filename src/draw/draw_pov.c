@@ -26,6 +26,9 @@ void	draw_pov(t_data_exec *data)
 		ft_fprintf(2, "cub3d: get mlx immage: error\n");
 		end_process(data);
 	}
+	printf("pos x %f\npos y %f\n", data->pos_x, data->pos_y);
+	printf("map x %d\nmap y %d\n", (int)data->pos_x, (int)data->pos_y);
+
 	draw_ceiling(img, 0xa2d2df);
 	draw_floor(img, 0x4b5320);
 	x = 0;

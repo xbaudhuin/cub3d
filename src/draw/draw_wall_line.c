@@ -26,7 +26,7 @@ static int	get_draw_start(int line_height)
 {
 	int draw_start;
 
-	draw_start = (-line_height / 2) + (HEIGHT / 2);
+	draw_start = (HEIGHT - line_height) / 2;
 	if (draw_start < 0)
 	{
 		draw_start = 0;
@@ -41,7 +41,7 @@ static int	get_draw_end(int line_height)
 	draw_end = (line_height / 2) + (HEIGHT / 2);
 	if (draw_end > HEIGHT)
 	{
-		draw_end = HEIGHT - 1;
+		draw_end = HEIGHT;
 	}
 	return (draw_end);
 }
@@ -64,6 +64,6 @@ void	draw_wall_line(t_img img, int x, double perp_wall_dist,
 		case 3:  color = 0x0000FF;   break; //blue
 		case 4:  color = 0x00FFFF;  break; //white
 		default: color = 0xFFFF00; break; //yellow
-	} 
+	}
 	draw_line_on_img(img, x, draw_start, x, draw_end, color);
 }

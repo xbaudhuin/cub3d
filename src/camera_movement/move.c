@@ -16,6 +16,11 @@ extern int world_map[MAP_HEIGHT][MAP_WIDTH];
 
 static void	move_forward(t_data_exec *data)
 {
+	int	x_move;
+	int	y_move;
+
+	x_move = (int)(data->pos_x + data->dir_x * MOVE_SPEED);
+	y_move = (int)(data->pos_y + data->dir_y * MOVE_SPEED);
 	if (world_map[(int)(data->pos_x
 			+ data->dir_x * MOVE_SPEED)][(int)(data->pos_y)] == 0)
 	{
@@ -26,6 +31,14 @@ static void	move_forward(t_data_exec *data)
 	{
 		data->pos_y += data->dir_y * MOVE_SPEED;
 	}
+	// if (is_move_available(X, x_move, data) == TRUE)
+	// {
+	// 	data->pos_x += data->dir_x * MOVE_SPEED;
+	// }
+	// if (is_move_available(Y, y_move, data) == TRUE)
+	// {
+	// 	data->pos_y += data->dir_y * MOVE_SPEED;
+	// }
 }
 
 static void	move_backward(t_data_exec *data)

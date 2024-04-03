@@ -33,8 +33,8 @@ t_data_exec	get_init_data(void)
 	t_data_exec	data;
 
 	ft_bzero(&data, sizeof(data));
-	data.pos_x = 2;
-	data.pos_y = 2;
+	data.pos_x = 12;
+	data.pos_y = 9;
 	data.dir_x = -1;
 	data.dir_y = 0;
 	data.plane_x = 0;
