@@ -93,6 +93,7 @@ SRCS_TEST		=	raycasting/test_rc.c \
 					camera_movement/read_key.c \
 					camera_movement/move.c \
 					camera_movement/rotate.c \
+					camera_movement/is_move_available.c \
 					end_process.c
 
 OBJS_TEST		=	$(addprefix ${OBJ_PATH}, ${SRCS_TEST:.c=.o}) \
@@ -116,7 +117,7 @@ ${BONUS}:		${MLX} ${LIBFT} ${OBJS} ${TXT} ${HEADER_FILES}
 		@${CC} ${CFLAGS} -o ${BONUS} ${OBJS} ${HEADER} ${MATH_FLAG} ${MLX_FLAG} ${LIBFT} ${MLX}
 		@echo "${COLOUR_GREEN}${BONUS} Compiled${COLOUR_END}"
 
-${OBJ_PATH}%.o:	${SRC_PATH}%.c
+${OBJ_PATH}%.o:	${SRC_PATH}%.c ${HEADER_FILES}
 		@mkdir -p $(dir $@)
 		@${CC} ${CFLAGS} ${HEADER} -c $< -o $@
 		@printf "${NEW}${YELLOW} ${NAME} ${GREEN}Building: ${RESET}${CC} ${CFLAGS} ${ITALIC}${BOLD}$<${RESET}"
