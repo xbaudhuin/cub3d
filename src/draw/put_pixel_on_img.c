@@ -14,5 +14,5 @@
 
 void	put_pixel_on_img(t_img img, int x, int y, int color)
 {
-	img.address[y * img.width + x ] = color;
+	img.address[y * img.width + x] = color;
 }
