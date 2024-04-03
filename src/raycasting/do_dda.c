@@ -12,8 +12,6 @@
 
 #include "cub3d.h"
 
-extern int world_map[MAP_HEIGHT][MAP_WIDTH];
-
 void	do_dda(t_data_exec *data)
 {
 	int	hit;
@@ -33,7 +31,7 @@ void	do_dda(t_data_exec *data)
 			data->map_y += data->step_y;
 			data->side = 1;
 		}
-		if (world_map[data->map_x][data->map_y] > 0)
+		if (data->parse_data->map[data->map_x][data->map_y] > '0')
 		{
 			hit = 1;
 		}

@@ -12,8 +12,6 @@
 
 #include "cub3d.h"
 
-extern int world_map[MAP_HEIGHT][MAP_WIDTH];
-
 int	double_sign(double n)
 {
 	if (n < 0)
@@ -30,14 +28,14 @@ int	is_move_available(int move_axe, int	new_pos, t_data_exec *data)
 {
 	if (move_axe == X)
 	{
-		if (world_map[new_pos][(int)(data->pos_y)] == 0 && world_map[new_pos + double_sign(data->dir_x)][(int)(data->pos_y)] == 0)
+		if (data->parse_data->map[new_pos][(int)(data->pos_y)] == 0 && data->parse_data->map[new_pos + double_sign(data->dir_x)][(int)(data->pos_y)] == 0)
 			return (TRUE);
 		else
 			return (FALSE);
 	}
 	else
 	{
-		if (world_map[(int)(data->pos_x)][new_pos] == 0 && world_map[(int)(data->pos_x)][new_pos + double_sign(data->dir_y)] == 0)
+		if (data->parse_data->map[(int)(data->pos_x)][new_pos] == 0 && data->parse_data->map[(int)(data->pos_x)][new_pos + double_sign(data->dir_y)] == 0)
 			return (TRUE);
 		else
 			return (FALSE);
