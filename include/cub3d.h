@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 15:03:50 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/02 18:36:25 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/03 19:12:07 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,14 @@ enum	e_parsing_error
 	INVALID_CHAR = 7,
 };
 
+enum	e_direction
+{
+	NORTH = 0,
+	EAST = 1,
+	SOUTH = 2,
+	WEST = 3,
+};
+
 typedef struct s_xpm
 {
 	void	*img;
@@ -94,6 +102,13 @@ typedef struct s_data
 	t_texture	*texture;
 	char		**map;
 }				t_data;
+
+typedef struct s_start_coord
+{
+	double	x;
+	double	y;
+	int		direction;
+}			t_start_coord;
 
 typedef struct s_img
 {
@@ -153,13 +168,14 @@ int		is_move_available(int move_axe, int	new_pos, t_data_exec *data);
 
 //PARSING
 
-t_data	*open_map(char *filename);
-int		get_color_from_file(const char *line, int *error, int bit_shift);
-void	print_data(t_data *data);
-char	**parse_map(int fd);
-int		check_map(t_vector *vector);
-int		check_current_line(const char *line,
-				unsigned int *i, t_texture *texture);
+t_data			*open_map(char *filename);
+int				get_color_from_file(const char *line, int *error, int bit_shift);
+void			print_data(t_data *data);
+char			**parse_map(int fd);
+int				check_map(t_vector *vector);
+t_start_coord	get_start_coord(char **map);
+int				check_current_line(const char *line,
+					unsigned int *i, t_texture *texture);
 
 //IS CHAR
 

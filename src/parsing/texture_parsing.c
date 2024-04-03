@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:12:32 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/02 18:42:10 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/03 19:16:53 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,6 @@ t_data	*open_map(char *filename)
 		return (close(fd), free_data(data), NULL);
 	data->map = parse_map(fd);
 	print_data(data);
-	free_data(data);
 	close(fd);
 	return (data);
-}
- int main(int ac, char **av)
-{
-	if (ac != 2)
-		return (ft_printf(RED"Error\n""only 1 argument(path to the map) is required\n"));
-	open_map(av[1]);
-	return (0);
 }

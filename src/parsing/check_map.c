@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 18:33:28 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/02 18:34:09 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/03 18:26:20 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	is_valid_line_map(t_vector *vector, int index, int *player_flag)
 
 	i = 0;
 	line = vector_get(vector, index);
-	while (line[i] != '\n')
+	while (line[i] != '\n' && line[i] != '\0')
 	{
 		if (line[i] == ' ' || line[i] == '1')
 			i++;
