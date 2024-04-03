@@ -72,14 +72,13 @@ t_data	*open_map(char *filename)
 		return (close(fd), free_data(data), NULL);
 	data->map = parse_map(fd);
 	print_data(data);
-	free_data(data);
 	close(fd);
 	return (data);
 }
- int main(int ac, char **av)
-{
-	if (ac != 2)
-		return (ft_printf(RED"Error\n""only 1 argument(path to the map) is required\n"));
-	open_map(av[1]);
-	return (0);
-}
+//  int main(int ac, char **av)
+// {
+// 	if (ac != 2)
+// 		return (ft_printf(RED"Error\n""only 1 argument(path to the map) is required\n"));
+// 	open_map(av[1]);
+// 	return (0);
+// }

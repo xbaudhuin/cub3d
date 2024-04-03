@@ -56,7 +56,7 @@
 # define WIDTH 1920
 # define HEIGHT 1080
 
-# define ROTATE_SPEED 3.14 / 2
+# define ROTATE_SPEED 3.14 / 8
 # define MOVE_SPEED 0.2
 
 # define MAP_WIDTH 24
@@ -110,6 +110,8 @@ typedef struct s_img
 
 typedef struct s_data_exec
 {
+
+	t_data	*parse_data;
 	void	*mlx;
 	void	*win;
 	double	pos_x;
@@ -118,7 +120,6 @@ typedef struct s_data_exec
 	double	dir_y;
 	double	plane_x;
 	double	plane_y;
-	double	camera_x;
 	double	ray_dir_x;
 	double	ray_dir_y;
 	int		map_x;
@@ -160,6 +161,7 @@ char	**parse_map(int fd);
 int		check_map(t_vector *vector);
 int		check_current_line(const char *line,
 				unsigned int *i, t_texture *texture);
+t_data	*open_map(char *filename);			
 
 //IS CHAR
 

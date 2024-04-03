@@ -73,6 +73,23 @@ SRCS_MAIN		=	parsing/parse_map.c \
 					parsing/parsing_get_color.c \
 					parsing/parsing_utils.c \
 					debug.c \
+					cub3d.c \
+					raycasting/do_dda.c \
+					raycasting/calculate_delta.c \
+					raycasting/calculate_step.c \
+					raycasting/calculate_perp_wall_dist.c \
+					draw/put_pixel_on_img.c \
+					draw/draw_line_on_img.c \
+					draw/draw_ceiling.c \
+					draw/draw_floor.c \
+					draw/draw_pov.c \
+					draw/draw_wall_line.c \
+					img/get_new_img.c \
+					camera_movement/read_key.c \
+					camera_movement/move.c \
+					camera_movement/rotate.c \
+					camera_movement/is_move_available.c \
+					end_process.c
 
 OBJS			=	$(addprefix ${OBJ_PATH}, ${SRCS_MAIN:.c=.o}) \
 
@@ -109,8 +126,8 @@ ${NAME}:		${MLX} ${LIBFT} ${OBJS} ${TXT} ${HEADER_FILES}
 		@${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${HEADER} ${MATH_FLAG} ${MLX_FLAG} ${LIBFT} ${MLX}
 		@printf "${NEW}${YELLOW}${NAME}${RESET}${GREEN}${BOLD} Compiled\n${RESET}${GREEN}compiled with:${RESET} ${CC} ${CFLAGS}\n"
 
-test.exe:		${MLX} ${LIBFT} ${OBJS_TEST} ${TXT} ${HEADER_FILES}
-		@${CC} ${CFLAGS} -o test.exe ${OBJS_TEST} ${HEADER} ${MATH_FLAG} ${MLX_FLAG} ${LIBFT} ${MLX}
+test.exe:		${MLX} ${LIBFT} ${OBJ} ${OBJS_TEST} ${TXT} ${HEADER_FILES}
+		@${CC} ${CFLAGS} -o test.exe ${OBJ} ${OBJS_TEST} ${HEADER} ${MATH_FLAG} ${MLX_FLAG} ${LIBFT} ${MLX}
 		@echo "${lsCOLOUR_GREEN}test.exe Compiled${COLOUR_END}"
 
 ${BONUS}:		${MLX} ${LIBFT} ${OBJS} ${TXT} ${HEADER_FILES}
