@@ -31,6 +31,7 @@ t_start_coord	get_start_coord(char **map)
 	unsigned int	y;
 
 	ft_bzero(&start, sizeof(start));
+	x = 0;
 	while (map[x] != NULL)
 	{
 		y = 0;
@@ -41,6 +42,7 @@ t_start_coord	get_start_coord(char **map)
 				start.x = (double)x;
 				start.y = (double)y;
 				start.direction = get_direction(map[x][y]);
+				map[x][y] = '0';
 				break ;
 			}
 			y++;

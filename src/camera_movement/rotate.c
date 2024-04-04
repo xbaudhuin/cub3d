@@ -33,6 +33,7 @@ static void	rotate_rigth(t_data_exec *data)
 {
 	double	old_dir_x;
 	double	old_plane_x;
+	
 	old_dir_x = data->dir_x;
 	data->dir_x = data->dir_x * cos(-ROTATE_SPEED)
 		- data->dir_y * sin(-ROTATE_SPEED);

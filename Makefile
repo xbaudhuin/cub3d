@@ -39,6 +39,7 @@ MLX_PATH		=	minilibx-linux/
 HEADER			=	-I./include -I./libft/include -I./${MLX_PATH}
 
 HEADER_FILES	=	include/cub3d.h \
+					include/structures.h \
 					libft/include/ft_printf.h \
 					libft/include/get_next_line.h \
 					libft/include/libft.h \
@@ -70,6 +71,7 @@ SRCS_MAIN		=	parsing/parse_map.c \
 					parsing/error.c \
 					parsing/free_parsing.c \
 					parsing/is_char.c \
+					parsing/start_coord.c \
 					parsing/parsing_get_color.c \
 					parsing/parsing_utils.c \
 					debug.c \
@@ -88,8 +90,8 @@ SRCS_MAIN		=	parsing/parse_map.c \
 					camera_movement/read_key.c \
 					camera_movement/move.c \
 					camera_movement/rotate.c \
-					camera_movement/is_move_available.c \
-					end_process.c
+					camera_movement/starting_rotate.c \
+					end_process.c \
 
 OBJS			=	$(addprefix ${OBJ_PATH}, ${SRCS_MAIN:.c=.o}) \
 

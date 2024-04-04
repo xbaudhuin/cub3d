@@ -31,7 +31,7 @@ void	do_dda(t_data_exec *data)
 			data->map_y += data->step_y;
 			data->side = 1;
 		}
-		if (data->parse_data->map[data->map_x][data->map_y] > '0')
+		if (data->file->map[data->map_x][data->map_y] > '0')
 		{
 			hit = 1;
 		}

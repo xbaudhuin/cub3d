@@ -36,8 +36,8 @@ void	draw_pov(t_data_exec *data)
 	img = get_new_img(data->mlx, WIDTH, HEIGHT);
 	if (img.mlx_img == NULL || img.address == NULL)
 		end_process(data);
-	draw_ceiling(img, 0xa2d2df);
-	draw_floor(img, 0x4b5320);
+	draw_ceiling(img, data->file->texture->color_ceiling);
+	draw_floor(img, data->file->texture->color_floor);
 	x = 0;
 	while (x < WIDTH)
 	{

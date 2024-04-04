@@ -2,11 +2,10 @@
 
 t_data_exec	get_init_data(char *path)
 {
-	t_data_exec	data;
+	t_data_exec		data;
+	t_start_coord	start;
 
 	ft_bzero(&data, sizeof(data));
-	data.pos_x = 2;
-	data.pos_y = 3;
 	data.dir_x = -1;
 	data.dir_y = 0;
 	data.plane_x = 0;
@@ -17,13 +16,16 @@ t_data_exec	get_init_data(char *path)
 		data.win = mlx_new_window(data.mlx, WIDTH,
 			HEIGHT, "raycasting_test");
 	}
-	data.parse_data = open_map(path);
-	if (data.parse_data == NULL ||  data.parse_data->map == NULL)
+	data.file = open_map(path);
+	if (data.file == NULL ||  data.file->map == NULL)
 	{
 		printf("map null\n");
 		exit(1);	
 	}
-	data.parse_data->map[1][1] = '0';
+	start = get_start_coord(data.file->map);
+	data.pos_x = start.x;
+	data.pos_y = start.y;
+	starting_rotate(&data, start.direction);
 	return (data);
 }
 

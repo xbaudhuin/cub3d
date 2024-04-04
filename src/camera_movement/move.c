@@ -19,12 +19,12 @@ static void	move_forward(t_data_exec *data)
 
 	x_move = (int)(data->pos_x + data->dir_x * MOVE_SPEED);
 	y_move = (int)(data->pos_y + data->dir_y * MOVE_SPEED);
-	if (data->parse_data->map[(int)(data->pos_x
+	if (data->file->map[(int)(data->pos_x
 			+ data->dir_x * MOVE_SPEED)][(int)(data->pos_y)] == '0')
 	{
 		data->pos_x += data->dir_x * MOVE_SPEED;
 	}
-	if (data->parse_data->map[(int)(data->pos_x)][(int)(data->pos_y
+	if (data->file->map[(int)(data->pos_x)][(int)(data->pos_y
 			+ data->dir_y * MOVE_SPEED)] == '0')
 	{
 		data->pos_y += data->dir_y * MOVE_SPEED;
@@ -41,12 +41,12 @@ static void	move_forward(t_data_exec *data)
 
 static void	move_backward(t_data_exec *data)
 {
-	if (data->parse_data->map[(int)(data->pos_x
+	if (data->file->map[(int)(data->pos_x
 			- data->dir_x * MOVE_SPEED)][(int)(data->pos_y)] == '0')
 	{
 		data->pos_x -= data->dir_x * MOVE_SPEED;
 	}
-	if (data->parse_data->map[(int)(data->pos_x)][(int)(data->pos_y
+	if (data->file->map[(int)(data->pos_x)][(int)(data->pos_y
 			- data->dir_y * MOVE_SPEED)] == '0')
 	{
 		data->pos_y -= data->dir_y * MOVE_SPEED;
@@ -55,12 +55,12 @@ static void	move_backward(t_data_exec *data)
 
 static void	move_left(t_data_exec *data)
 {
-	if (data->parse_data->map[(int)(data->pos_x
+	if (data->file->map[(int)(data->pos_x
 			- data->plane_x * MOVE_SPEED)][(int)(data->pos_y)] == '0')
 	{
 		data->pos_x -= data->plane_x * MOVE_SPEED;
 	}
-	if (data->parse_data->map[(int)(data->pos_x)][(int)(data->pos_y
+	if (data->file->map[(int)(data->pos_x)][(int)(data->pos_y
 			- data->plane_y * MOVE_SPEED)] == '0')
 	{
 		data->pos_y -= data->plane_y * MOVE_SPEED;
@@ -69,12 +69,12 @@ static void	move_left(t_data_exec *data)
 
 static void	move_rigth(t_data_exec *data)
 {
-	if (data->parse_data->map[(int)(data->pos_x
+	if (data->file->map[(int)(data->pos_x
 			+ data->plane_x * MOVE_SPEED)][(int)(data->pos_y)] == '0')
 	{
 		data->pos_x += data->plane_x * MOVE_SPEED;
 	}
-	if (data->parse_data->map[(int)(data->pos_x)][(int)(data->pos_y
+	if (data->file->map[(int)(data->pos_x)][(int)(data->pos_y
 			+ data->plane_y * MOVE_SPEED)] == '0')
 	{
 		data->pos_y += data->plane_y * MOVE_SPEED;

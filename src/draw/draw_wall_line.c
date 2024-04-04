@@ -55,7 +55,7 @@ void	draw_wall_line(t_img img, int x, double perp_wall_dist,
 	line_height = get_line_height(perp_wall_dist);
 	draw_start = get_draw_start(line_height);
 	draw_end = get_draw_end(line_height);
-	switch (data->parse_data->map[data->map_x][data->map_y])
+	switch (data->file->map[data->map_x][data->map_y])
 	{
 		case '1': color = 0xFFFFFF;  break;
 		case '2': color = 0xFF00FF;  break;
