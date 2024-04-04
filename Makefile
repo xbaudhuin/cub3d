@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ldoyen-- <ldoyen--@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/04/04 17:32:25 by ldoyen--          #+#    #+#              #
+#    Updated: 2024/04/04 17:32:25 by ldoyen--         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME			=	cub3d
 
 BONUS			=	cub3d_bonus
@@ -64,7 +76,29 @@ RM				=	rm -rf
 
 AR				=	ar rcs
 
-SRCS_MAIN		=	parsing/parse_map.c \
+SRCS_MAIN		=	debug.c \
+					cub3d.c \
+					img/get_new_img.c \
+					end_process.c \
+
+SRCS_DRAW		=	draw/put_pixel_on_img.c \
+					draw/draw_line_on_img.c \
+					draw/draw_ceiling.c \
+					draw/draw_floor.c \
+					draw/draw_pov.c \
+					draw/draw_wall_line.c \
+
+SRCS_RAYCASTING	=	raycasting/do_dda.c \
+					raycasting/calculate_delta.c \
+					raycasting/calculate_step.c \
+					raycasting/calculate_perp_wall_dist.c \
+
+SRCS_CAM_MOVE	=	camera_movement/read_key.c \
+					camera_movement/move.c \
+					camera_movement/rotate.c \
+					camera_movement/starting_rotate.c \
+
+SRCS_PARSING	=	parsing/parse_map.c \
 					parsing/texture_parsing.c \
 					parsing/check_line.c \
 					parsing/check_map.c \
@@ -74,48 +108,15 @@ SRCS_MAIN		=	parsing/parse_map.c \
 					parsing/start_coord.c \
 					parsing/parsing_get_color.c \
 					parsing/parsing_utils.c \
-					debug.c \
-					cub3d.c \
-					raycasting/do_dda.c \
-					raycasting/calculate_delta.c \
-					raycasting/calculate_step.c \
-					raycasting/calculate_perp_wall_dist.c \
-					draw/put_pixel_on_img.c \
-					draw/draw_line_on_img.c \
-					draw/draw_ceiling.c \
-					draw/draw_floor.c \
-					draw/draw_pov.c \
-					draw/draw_wall_line.c \
-					img/get_new_img.c \
-					camera_movement/read_key.c \
-					camera_movement/move.c \
-					camera_movement/rotate.c \
-					camera_movement/starting_rotate.c \
-					end_process.c \
 
 OBJS			=	$(addprefix ${OBJ_PATH}, ${SRCS_MAIN:.c=.o}) \
+						$(addprefix ${OBJ_PATH}, ${SRCS_DRAW:.c=.o}) \
+						$(addprefix ${OBJ_PATH}, ${SRCS_RAYCASTING:.c=.o}) \
+						$(addprefix ${OBJ_PATH}, ${SRCS_CAM_MOVE:.c=.o}) \
+						$(addprefix ${OBJ_PATH}, ${SRCS_PARSING:.c=.o}) \
 
 LIBFT_D			=	$(addprefix ${LIBFT_PATH}, ${LIBFT})
 
-SRCS_TEST		=	raycasting/test_rc.c \
-					raycasting/do_dda.c \
-					raycasting/calculate_delta.c \
-					raycasting/calculate_step.c \
-					raycasting/calculate_perp_wall_dist.c \
-					draw/put_pixel_on_img.c \
-					draw/draw_line_on_img.c \
-					draw/draw_ceiling.c \
-					draw/draw_floor.c \
-					draw/draw_pov.c \
-					draw/draw_wall_line.c \
-					img/get_new_img.c \
-					camera_movement/read_key.c \
-					camera_movement/move.c \
-					camera_movement/rotate.c \
-					camera_movement/is_move_available.c \
-					end_process.c
-
-OBJS_TEST		=	$(addprefix ${OBJ_PATH}, ${SRCS_TEST:.c=.o}) \
 ################################################################################
 #                                 RULES                                        #
 ################################################################################
@@ -127,10 +128,6 @@ bonus:			${BONUS}
 ${NAME}:		${MLX} ${LIBFT} ${OBJS} ${TXT} ${HEADER_FILES}
 		@${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${HEADER} ${MATH_FLAG} ${MLX_FLAG} ${LIBFT} ${MLX}
 		@printf "${NEW}${YELLOW}${NAME}${RESET}${GREEN}${BOLD} Compiled\n${RESET}${GREEN}compiled with:${RESET} ${CC} ${CFLAGS}\n"
-
-test.exe:		${MLX} ${LIBFT} ${OBJ} ${OBJS_TEST} ${TXT} ${HEADER_FILES}
-		@${CC} ${CFLAGS} -o test.exe ${OBJ} ${OBJS_TEST} ${HEADER} ${MATH_FLAG} ${MLX_FLAG} ${LIBFT} ${MLX}
-		@echo "${lsCOLOUR_GREEN}test.exe Compiled${COLOUR_END}"
 
 ${BONUS}:		${MLX} ${LIBFT} ${OBJS} ${TXT} ${HEADER_FILES}
 		@${CC} ${CFLAGS} -o ${BONUS} ${OBJS} ${HEADER} ${MATH_FLAG} ${MLX_FLAG} ${LIBFT} ${MLX}
@@ -171,5 +168,3 @@ fclean:		clean
 re:			fclean all
 
 .PHONY:		all fclean clean re libft
-
-

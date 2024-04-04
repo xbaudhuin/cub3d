@@ -1,6 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ldoyen-- <ldoyen--@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/04 17:40:10 by ldoyen--          #+#    #+#             */
+/*   Updated: 2024/04/04 17:40:11 by ldoyen--         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-t_data_exec	get_init_data(char *path)
+static void	check_nb_arg(int ac)
+{
+	if (ac != 2)
+	{
+		ft_fprintf(2, "cub3d: error: need one argument\n");
+		exit (1);
+	}
+}
+
+static t_data_exec	get_init_data(char *path)
 {
 	t_data_exec		data;
 	t_start_coord	start;
@@ -20,7 +41,7 @@ t_data_exec	get_init_data(char *path)
 	if (data.file == NULL ||  data.file->map == NULL)
 	{
 		printf("map null\n");
-		exit(1);	
+		end_process(&data);	
 	}
 	start = get_start_coord(data.file->map);
 	data.pos_x = start.x;
@@ -33,7 +54,7 @@ int	main(int ac, char **av)
 {
 	t_data_exec	data;
 
-	(void)ac;
+	check_nb_arg(ac);
 	data = get_init_data(av[1]);
 	if (data.mlx == NULL || data.win == NULL)
 	{

@@ -14,8 +14,14 @@
 
 int	end_process(t_data_exec *data)
 {
-	mlx_destroy_window(data->mlx, data->win);
-	mlx_destroy_display(data->mlx);
+	if (data->win != NULL && data->mlx != NULL)
+	{
+		mlx_destroy_window(data->mlx, data->win);
+	}
+	if (data->mlx != NULL)
+	{
+		mlx_destroy_display(data->mlx);
+	}
 	free(data->mlx);
 	free_data(data->file);
 	exit(0);

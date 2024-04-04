@@ -29,7 +29,6 @@
 # include <X11/X.h>
 # include "draw.h"
 # include "camera_movement.h"
-
 # include "raycasting.h"
 
 # define RESET  "\x1B[0m"
