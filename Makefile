@@ -92,6 +92,7 @@ SRCS_RAYCASTING	=	raycasting/do_dda.c \
 					raycasting/calculate_delta.c \
 					raycasting/calculate_step.c \
 					raycasting/calculate_perp_wall_dist.c \
+					raycasting/get_wall_pos.c \
 
 SRCS_CAM_MOVE	=	camera_movement/read_key.c \
 					camera_movement/move.c \
