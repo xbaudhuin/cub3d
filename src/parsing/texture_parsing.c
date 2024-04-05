@@ -43,6 +43,9 @@ static t_texture **init_texture(void)
 		texture[i] = ft_calloc(sizeof(t_texture), 1);
 		if (texture[i] == NULL)
 			return (free_texture(texture), NULL);
+		texture[i]->img = ft_calloc(sizeof(t_img), 1);
+		if (texture[i]->img == NULL)
+			return (free_texture(texture), NULL);
 		i++;
 	}
 	return (texture);

@@ -47,6 +47,7 @@ static t_data_exec	get_init_data(char *path)
 	data.pos_x = start.x;
 	data.pos_y = start.y;
 	starting_rotate(&data, start.direction);
+	data.file->texture = get_texture_img_from_xpm(data.file->texture, data.mlx);
 	return (data);
 }
 

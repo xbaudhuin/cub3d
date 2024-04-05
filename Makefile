@@ -92,7 +92,9 @@ SRCS_RAYCASTING	=	raycasting/do_dda.c \
 					raycasting/calculate_delta.c \
 					raycasting/calculate_step.c \
 					raycasting/calculate_perp_wall_dist.c \
-					raycasting/get_wall_pos.c \
+					raycasting/get_hit_pos.c \
+					raycasting/hit_dir.c \
+					raycasting/get_texture_x.c \
 
 SRCS_CAM_MOVE	=	camera_movement/read_key.c \
 					camera_movement/move.c \
@@ -109,6 +111,7 @@ SRCS_PARSING	=	parsing/parse_map.c \
 					parsing/start_coord.c \
 					parsing/parsing_get_color.c \
 					parsing/parsing_utils.c \
+					xpm/get_texture.c \
 
 OBJS			=	$(addprefix ${OBJ_PATH}, ${SRCS_MAIN:.c=.o}) \
 						$(addprefix ${OBJ_PATH}, ${SRCS_DRAW:.c=.o}) \

@@ -47,7 +47,7 @@ void	draw_pov(t_data_exec *data)
 		calculate_step(data);
 		do_dda(data);
 		perp_wall_dist = calculate_perp_wall_dist(data);
-		data->wall_pos = get_wall_pos(data, perp_wall_dist);
+		data->hit_pos = get_hit_pos(data, perp_wall_dist);
 		draw_wall_line(img, x, perp_wall_dist, data);
 		++x;
 	}

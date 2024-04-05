@@ -1,21 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_texture_x.c                                    :+:      :+:    :+:   */
+/*   hit_direction.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldoyen-- <ldoyen--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/05 14:49:38 by ldoyen--          #+#    #+#             */
-/*   Updated: 2024/04/05 14:49:39 by ldoyen--         ###   ########.fr       */
+/*   Created: 2024/04/05 15:09:20 by ldoyen--          #+#    #+#             */
+/*   Updated: 2024/04/05 15:09:20 by ldoyen--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	get_texture_x(t_data_exec *data)
+int	hit_dir(t_data_exec *data)
 {
-	int	texture_x;
-
-	texture_x = (int)(data->hit_pos * (double)data->file->texture[hit_dir(data)]->img->width);
-	return (texture_x);
+	if (data->side == 0)
+	{
+		if (data->ray_dir_x > 0)
+		{
+			return (NORTH);
+		}
+		else
+		{
+			return (SOUTH);
+		}
+	}
+	else
+	{
+		if (data->ray_dir_y > 0)
+		{
+			return (WEST);
+		}
+		else
+		{
+			return (EAST);
+		}
+	}
 }

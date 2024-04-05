@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_wall_pos.c                                     :+:      :+:    :+:   */
+/*   get_hit_pos.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldoyen-- <ldoyen--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,18 +12,18 @@
 
 #include "cub3d.h"
 
-double	get_wall_pos(t_data_exec *data, double perp_wall_dist)
+double	get_hit_pos(t_data_exec *data, double perp_wall_dist)
 {
-	double	wall_pos;
+	double	hit_pos;
 
 	if (data->side == 0)
 	{
-		wall_pos = data->pos_y + perp_wall_dist * data->ray_dir_y;
+		hit_pos = data->pos_y + perp_wall_dist * data->ray_dir_y;
 	}
 	else
 	{
-		wall_pos = data->pos_x + perp_wall_dist * data->ray_dir_x;
+		hit_pos = data->pos_x + perp_wall_dist * data->ray_dir_x;
 	}
-	wall_pos = wall_pos - floor(wall_pos);
-	return (wall_pos);
+	hit_pos = hit_pos - floor(hit_pos);
+	return (hit_pos);
 }

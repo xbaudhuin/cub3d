@@ -23,6 +23,8 @@ void	do_dda(t_data_exec *data);
 void	calculate_delta(t_data_exec *data);
 void	calculate_step(t_data_exec *data);
 double	calculate_perp_wall_dist(t_data_exec *data);
-double	get_wall_pos(t_data_exec *data, double perp_wall_dist);
+double	get_hit_pos(t_data_exec *data, double perp_wall_dist);
+int		hit_dir(t_data_exec *data);
+int		get_texture_x(t_data_exec *data);
 
 #endif

@@ -69,7 +69,7 @@ typedef struct s_data_exec
 	int		step_x;
 	int		step_y;
 	int		side;
-	double	wall_pos;
+	double	hit_pos;
 }t_data_exec;
 
 #endif

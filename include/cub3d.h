@@ -78,6 +78,7 @@ int		check_map(t_vector *vector);
 int		check_current_line(const char *line,
 				unsigned int *i, t_data **data);
 t_data	*open_map(char *filename);
+t_texture	**get_texture_img_from_xpm(t_texture **texture, void *mlx_ptr);
 
 //IS CHAR
 
