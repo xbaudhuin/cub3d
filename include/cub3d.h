@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 15:03:50 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/03 19:19:12 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/05 14:59:49 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ enum	e_direction
 	EAST = 1,
 	SOUTH = 2,
 	WEST = 3,
+	NB_TEXTURE = 4,
 };
 
 t_img	get_new_img(void *mlx, int width, int height);
@@ -75,8 +76,8 @@ void	print_data(t_data *data);
 char	**parse_map(int fd);
 int		check_map(t_vector *vector);
 int		check_current_line(const char *line,
-				unsigned int *i, t_texture *texture);
-t_data	*open_map(char *filename);			
+				unsigned int *i, t_data **data);
+t_data	*open_map(char *filename);
 
 //IS CHAR
 
@@ -94,6 +95,6 @@ t_start_coord	get_start_coord(char **map);
 //FREE FUNCTION
 
 void	free_data(t_data *data);
-void	free_texture(t_texture *texture);
+void	free_texture(t_texture **texture);
 
 #endif

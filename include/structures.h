@@ -6,33 +6,25 @@
 /*   By: ldoyen-- <ldoyen--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 15:16:56 by ldoyen--          #+#    #+#             */
-/*   Updated: 2024/04/04 15:16:57 by ldoyen--         ###   ########.fr       */
+/*   Updated: 2024/04/05 12:15:47 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
 
-typedef struct s_xpm
-{
-	void	*img;
-	int		height;
-	int		width;
-}			t_xpm;
-
 typedef struct s_texture
 {
-	char	*NO;
-	char	*SO;
-	char	*WE;
-	char	*EA;
-	int		color_floor;
-	int		color_ceiling;
+	char			*path;
+	struct s_img	*img;
+
 }			t_texture;
 
 typedef struct s_data
 {
-	t_texture	*texture;
+	t_texture	**texture;
+	int			color_floor;
+	int			color_ceiling;
 	char		**map;
 }				t_data;
 

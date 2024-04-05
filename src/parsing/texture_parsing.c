@@ -6,13 +6,14 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:12:32 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/03 19:18:48 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/05 13:59:44 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "ft_printf.h"
 #include "libft.h"
+#include "structures.h"
 #include "vector.h"
 #include <stdio.h>
 #include <unistd.h>
@@ -28,28 +29,49 @@ static int	check_filename(const char *str, const char *filename)
 	return (TRUE);
 }
 
-static t_texture	*get_texture(int fd)
+static t_texture **init_texture(void)
+{
+	unsigned int	i;
+	t_texture		**texture;
+
+	i = 0;
+	texture = ft_calloc(sizeof(t_texture *), NB_TEXTURE + 1);
+	if (texture == NULL)
+		return (NULL);
+	while (i < NB_TEXTURE)
+	{
+		texture[i] = ft_calloc(sizeof(t_texture), 1);
+		if (texture[i] == NULL)
+			return (free_texture(texture), NULL);
+		i++;
+	}
+	return (texture);
+}
+
+static void	get_texture(int fd, t_data **data)
 {
 	char			*line;
 	unsigned int	i;
-	t_texture		*texture;
 
 	i = 0;
-	texture = ft_calloc(sizeof(*texture), 1);
-	if (texture == NULL)
-		return (NULL);
+	(*data)->texture = init_texture();
+	if ((*data)->texture == NULL)
+		return ;
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
-		if (check_current_line(line, &i, texture) == FALSE)
-			return (free(line), free_texture(texture), NULL);
+		if (check_current_line(line, &i, data) == FALSE)
+		{
+			free_texture((*data)->texture);
+			(*data)->texture = NULL;
+			return (free(line));
+		}
 		free(line);
 		if (i == 63)
 			break ;
 	}
-	return (texture);
 }
 
 t_data	*open_map(char *filename)
@@ -67,7 +89,7 @@ t_data	*open_map(char *filename)
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		return (perror(RED"open_map: "RESET""), NULL);
-	data->texture = get_texture(fd);
+	get_texture(fd, &data);
 	if (data->texture == NULL)
 		return (close(fd), free_data(data), NULL);
 	data->map = parse_map(fd);
