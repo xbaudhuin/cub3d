@@ -6,7 +6,7 @@
 /*   By: ldoyen-- <ldoyen--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:49:30 by ldoyen--          #+#    #+#             */
-/*   Updated: 2024/04/02 15:49:31 by ldoyen--         ###   ########.fr       */
+/*   Updated: 2024/04/05 15:00:21 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	draw_pov(t_data_exec *data)
 	img = get_new_img(data->mlx, WIDTH, HEIGHT);
 	if (img.mlx_img == NULL || img.address == NULL)
 		end_process(data);
-	draw_ceiling(img, data->file->texture->color_ceiling);
-	draw_floor(img, data->file->texture->color_floor);
+	draw_ceiling(img, data->file->color_ceiling);
+	draw_floor(img, data->file->color_floor);
 	x = 0;
 	while (x < WIDTH)
 	{
