@@ -27,10 +27,23 @@ static void	update_ray_dir(t_data_exec *data, int x)
 	data->ray_dir_y = data->dir_y + data->plane_y * camera_x;
 }
 
+static void	draw_x_line(t_data_exec *data, int x, t_img img)
+{
+	double	perp_wall_dist;
+
+	update_ray_dir(data, x);
+	truncate_pos(data);
+	calculate_delta(data);
+	calculate_step(data);
+	do_dda(data);
+	perp_wall_dist = calculate_perp_wall_dist(data);
+	data->hit_pos = get_hit_pos(data, perp_wall_dist);
+	draw_wall_line(img, x, perp_wall_dist, data);
+}
+
 void	draw_pov(t_data_exec *data)
 {
 	t_img	img;
-	double	perp_wall_dist;
 	int		x;
 
 	img = get_new_img(data->mlx, WIDTH, HEIGHT);
@@ -41,14 +54,7 @@ void	draw_pov(t_data_exec *data)
 	x = 0;
 	while (x < WIDTH)
 	{
-		update_ray_dir(data, x);
-		truncate_pos(data);
-		calculate_delta(data);
-		calculate_step(data);
-		do_dda(data);
-		perp_wall_dist = calculate_perp_wall_dist(data);
-		data->hit_pos = get_hit_pos(data, perp_wall_dist);
-		draw_wall_line(img, x, perp_wall_dist, data);
+		draw_x_line(data, x, img);
 		++x;
 	}
 	mlx_put_image_to_window(data->mlx, data->win, img.mlx_img, 0, 0);

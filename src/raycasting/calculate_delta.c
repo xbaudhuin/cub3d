@@ -16,11 +16,11 @@ static double	get_delta_x(t_data_exec *data)
 {
 	if (data->ray_dir_x == 0)
 	{
-		return(1000000000000000000000000000000.0);
+		return (1000000000000000000000000000000.0);
 	}
 	else
 	{
-		return(fabs(1 / data->ray_dir_x));
+		return (fabs(1 / data->ray_dir_x));
 	}
 }
 
@@ -28,11 +28,11 @@ static double	get_delta_y(t_data_exec *data)
 {
 	if (data->ray_dir_y == 0)
 	{
-		return(1000000000000000000000000000000.0);
+		return (1000000000000000000000000000000.0);
 	}
 	else
 	{
-		return(fabs(1 / data->ray_dir_y));
+		return (fabs(1 / data->ray_dir_y));
 	}
 }
 

@@ -13,8 +13,6 @@
 #ifndef DRAW_H
 # define DRAW_H
 
-void	draw_line_on_img(t_img img, int start_x, int start_y, int end_x,
-			int end_y, int color);
 void	draw_ceiling(t_img img, int color);
 void	draw_floor(t_img img, int color);
 void	put_pixel_on_img(t_img img, int x, int y, int color);

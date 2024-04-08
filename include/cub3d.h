@@ -65,25 +65,25 @@ enum	e_direction
 	NB_TEXTURE = 4,
 };
 
-t_img	get_new_img(void *mlx, int width, int height);
-int		end_process(t_data_exec *data);
+t_img			get_new_img(void *mlx, int width, int height);
+int				end_process(t_data_exec *data);
 
 //PARSING
 
-t_data	*open_map(char *filename);
-int		get_color_from_file(const char *line, int *error, int bit_shift);
-void	print_data(t_data *data);
-char	**parse_map(int fd);
-int		check_map(t_vector *vector);
-int		check_current_line(const char *line,
-				unsigned int *i, t_data **data);
-t_data	*open_map(char *filename);
-t_texture	**get_texture_img_from_xpm(t_texture **texture, void *mlx_ptr);
+t_data			*open_map(char *filename);
+int				get_color_from_file(const char *line, int *error, int bit_shift);
+void			print_data(t_data *data);
+char			**parse_map(int fd);
+int				check_map(t_vector *vector);
+int				check_current_line(const char *line,
+					unsigned int *i, t_data **data);
+t_data			*open_map(char *filename);
+t_texture		**get_texture_img_from_xpm(t_texture **texture, void *mlx_ptr);
 
 //IS CHAR
 
-int	is_player_char(const char c);
-int	is_map_char(const char c);
+int				is_player_char(const char c);
+int				is_map_char(const char c);
 // PARSING_UTILS
 
 unsigned int	skip_spaces(const char *line);
@@ -95,7 +95,7 @@ char			*skip_empty_line(int fd);
 t_start_coord	get_start_coord(char **map);
 //FREE FUNCTION
 
-void	free_data(t_data *data);
-void	free_texture(t_texture **texture);
+void			free_data(t_data *data);
+void			free_texture(t_texture **texture);
 
 #endif

@@ -19,10 +19,10 @@ t_img	get_new_img(void *mlx, int width, int height)
 	new_img.mlx_img = mlx_new_image(mlx, width, height);
 	if (new_img.mlx_img == NULL)
 	{
-		return new_img;
+		return (new_img);
 	}
 	new_img.address = (int *)mlx_get_data_addr(new_img.mlx_img, &new_img.bpp,
-		&new_img.line_size, &new_img.endiant);
+			&new_img.line_size, &new_img.endiant);
 	new_img.width = width;
 	new_img.height = height;
 	return (new_img);
