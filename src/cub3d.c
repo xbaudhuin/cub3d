@@ -45,8 +45,8 @@ static t_data_exec	get_init_data(char *path)
 		end_process(&data);
 	}
 	start = get_start_coord(data.file->map);
-	data.pos_x = start.x;
-	data.pos_y = start.y;
+	data.pos_x = start.x + 0.5;
+	data.pos_y = start.y + 0.5;
 	starting_rotate(&data, start.direction);
 	return (data);
 }
