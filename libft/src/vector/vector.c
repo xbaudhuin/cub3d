@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 14:09:11 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/02 17:25:26 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/08 14:03:29 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	vector_resize(t_vector *vector, int size)
 
 void	vector_add(t_vector *vector, char *str)
 {
-	if (vector->current_size == vector->size_max)
+	if (vector->current_size == vector->size_max - 1)
 		vector_resize(vector, vector->size_max * 2);
 	vector->array[vector->current_size] = str;
 	vector->current_size += 1;

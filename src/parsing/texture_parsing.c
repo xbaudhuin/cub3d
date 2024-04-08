@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:12:32 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/05 13:59:44 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/08 14:13:55 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,16 @@ static t_texture **init_texture(void)
 	{
 		texture[i] = ft_calloc(sizeof(t_texture), 1);
 		if (texture[i] == NULL)
-			return (free_texture(texture), NULL);
+			return (free_texture(texture, NULL), NULL);
 		texture[i]->img = ft_calloc(sizeof(t_img), 1);
 		if (texture[i]->img == NULL)
-			return (free_texture(texture), NULL);
+			return (free_texture(texture, NULL), NULL);
 		i++;
 	}
 	return (texture);
 }
 
-static void	get_texture(int fd, t_data **data)
+static void	get_texture(int fd, t_data **data, void *mlx_ptr)
 {
 	char			*line;
 	unsigned int	i;
@@ -59,7 +59,10 @@ static void	get_texture(int fd, t_data **data)
 	i = 0;
 	(*data)->texture = init_texture();
 	if ((*data)->texture == NULL)
+	{
+		perror(RED"In init_texture"RESET);
 		return ;
+	}
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -67,7 +70,7 @@ static void	get_texture(int fd, t_data **data)
 			break ;
 		if (check_current_line(line, &i, data) == FALSE)
 		{
-			free_texture((*data)->texture);
+			free_texture((*data)->texture, NULL);
 			(*data)->texture = NULL;
 			return (free(line));
 		}
@@ -75,27 +78,30 @@ static void	get_texture(int fd, t_data **data)
 		if (i == 63)
 			break ;
 	}
+	(*data)->texture = get_texture_img_from_xpm((*data)->texture, mlx_ptr);
 }
 
-t_data	*open_map(char *filename)
+t_data	*open_map(char *filename, void *mlx_ptr)
 {
 	int			fd;
 	t_data		*data;
 
 	data = ft_calloc(sizeof(*data), 1);
 	if (data == NULL)
-		return (NULL);
+		return (perror(RED"In open_map"RESET), NULL);
 	if (filename == NULL
 		|| check_filename(ft_strrchr(filename, '.'), filename) == FALSE)
 		return (ft_fprintf(STDERR_FILENO, RED"Error\n"RESET
 				"invalid map extension: %s\n", filename), NULL);
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		return (perror(RED"open_map: "RESET""), NULL);
-	get_texture(fd, &data);
+		return (perror(RED"open_map"RESET), close(fd), NULL);
+	get_texture(fd, &data, mlx_ptr);
 	if (data->texture == NULL)
-		return (close(fd), free_data(data), NULL);
+		return (close(fd), free_data(data, mlx_ptr), NULL);
 	data->map = parse_map(fd);
+	if (data->map == NULL)
+		return (free_data(data, mlx_ptr), close(fd), NULL);
 	print_data(data);
 	close(fd);
 	return (data);

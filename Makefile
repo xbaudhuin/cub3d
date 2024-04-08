@@ -6,7 +6,7 @@
 #    By: ldoyen-- <ldoyen--@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/04 17:32:25 by ldoyen--          #+#    #+#              #
-#    Updated: 2024/04/04 17:32:25 by ldoyen--         ###   ########.fr        #
+#    Updated: 2024/04/08 11:33:27 by xabaudhu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,7 +72,7 @@ OBJ_PATH		=	obj/
 
 CC				=	cc
 
-RM				=	rm -rf
+RM				=	rm -f -r
 
 AR				=	ar rcs
 
@@ -158,14 +158,13 @@ ${TXT}:
 		@echo "-Ilibft/include\n-Iinclude/\n-Iminilibx-linux/" > compile_flags.txt
 		@echo "-I../libft/include\n-I../include/\n-I../minilibx-linux" > src/compile_flags.txt
 
-clean:
+clean:	
 		@make -C ${LIBFT_PATH} clean --no-print-directory
-		@make -C ${MLX_PATH} clean --no-print-directory
+		${RM} ${MLX_PATH}
 		${RM}  ${OBJ_PATH}
 
 fclean:		clean
 		@make -C ${LIBFT_PATH} fclean --no-print-directory
-		${RM} ${MLX_PATH}
 		${RM} ${NAME} ${NAME_TEST} ${BONUS} ${LIBFT} ${MLX} ${SRC_PATH}${TXT} ${SRC_PATH}bonus/${TXT} ${TXT}
 
 re:			fclean all

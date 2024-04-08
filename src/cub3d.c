@@ -6,7 +6,7 @@
 /*   By: ldoyen-- <ldoyen--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 17:40:10 by ldoyen--          #+#    #+#             */
-/*   Updated: 2024/04/04 17:40:11 by ldoyen--         ###   ########.fr       */
+/*   Updated: 2024/04/08 14:03:58 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,15 @@ static t_data_exec	get_init_data(char *path)
 		data.win = mlx_new_window(data.mlx, WIDTH,
 			HEIGHT, "raycasting_test");
 	}
-	data.file = open_map(path);
+	data.file = open_map(path, data.mlx);
 	if (data.file == NULL)
 	{
-		end_process(&data);	
+		end_process(&data);
 	}
 	start = get_start_coord(data.file->map);
 	data.pos_x = start.x;
 	data.pos_y = start.y;
 	starting_rotate(&data, start.direction);
-	data.file->texture = get_texture_img_from_xpm(data.file->texture, data.mlx);
 	return (data);
 }
 
