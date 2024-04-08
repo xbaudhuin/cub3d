@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 18:22:13 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/08 12:20:48 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/08 17:09:05 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,10 @@ int	get_color_from_file(const char *line, int *error, int bit_shift)
 	{
 		i += skip_spaces(&line[i]);
 		rgb = shift_color(rgb, atoi_color(&line[i], error), bit_shift);
-		if (*error == TRUE)
-			break ;
 		bit_shift = 8;
 		i += skip_space_digit(&line[i]);
-		if ((line[i] != ',' && line[i] != '\n') || count > 2)
+		if ((line[i] != ',' && line[i] != '\n') || count > 2
+			|| (count == 2 && line[i] != '\n'))
 		{
 			*error = TRUE;
 			break ;

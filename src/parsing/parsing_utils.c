@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 18:05:05 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/02 18:32:38 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/08 16:27:25 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ unsigned int	skip_space_digit(const char *line)
 	return (i);
 }
 
- int	atoi_color(const char *line, int *error)
+int	atoi_color(const char *line, int *error)
 {
 	int	color;
 

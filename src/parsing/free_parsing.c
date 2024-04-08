@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 18:00:49 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/08 13:38:50 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/08 16:26:39 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	free_texture(t_texture **texture, void *mlx_ptr)
 	unsigned int	i;
 
 	i = 0;
-	//(void)mlx_ptr;
 	if (texture == NULL)
 		return ;
 	while (i < NB_TEXTURE)

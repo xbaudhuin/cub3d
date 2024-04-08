@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:12:32 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/08 14:13:55 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/08 17:10:27 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	check_filename(const char *str, const char *filename)
 	return (TRUE);
 }
 
-static t_texture **init_texture(void)
+static t_texture	**init_texture(void)
 {
 	unsigned int	i;
 	t_texture		**texture;
@@ -51,7 +51,7 @@ static t_texture **init_texture(void)
 	return (texture);
 }
 
-static void	get_texture(int fd, t_data **data, void *mlx_ptr)
+static void	get_texture(int fd, t_data **data)
 {
 	char			*line;
 	unsigned int	i;
@@ -78,7 +78,6 @@ static void	get_texture(int fd, t_data **data, void *mlx_ptr)
 		if (i == 63)
 			break ;
 	}
-	(*data)->texture = get_texture_img_from_xpm((*data)->texture, mlx_ptr);
 }
 
 t_data	*open_map(char *filename, void *mlx_ptr)
@@ -96,13 +95,15 @@ t_data	*open_map(char *filename, void *mlx_ptr)
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		return (perror(RED"open_map"RESET), close(fd), free(data), NULL);
-	get_texture(fd, &data, mlx_ptr);
+	get_texture(fd, &data);
+	if (data->texture == NULL)
+		return (close(fd), free_data(data, mlx_ptr), NULL);
+	data->texture = get_texture_img_from_xpm(data->texture, mlx_ptr);
 	if (data->texture == NULL)
 		return (close(fd), free_data(data, mlx_ptr), NULL);
 	data->map = parse_map(fd);
 	if (data->map == NULL)
 		return (free_data(data, mlx_ptr), close(fd), NULL);
-	print_data(data);
 	close(fd);
 	return (data);
 }
