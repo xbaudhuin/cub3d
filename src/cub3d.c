@@ -38,15 +38,15 @@ static t_data_exec	get_init_data(char *path)
 			HEIGHT, "raycasting_test");
 	}
 	data.file = open_map(path);
-	if (data.file == NULL ||  data.file->map == NULL)
+	if (data.file == NULL)
 	{
-		printf("map null\n");
 		end_process(&data);	
 	}
 	start = get_start_coord(data.file->map);
 	data.pos_x = start.x;
 	data.pos_y = start.y;
 	starting_rotate(&data, start.direction);
+	data.file->texture = get_texture_img_from_xpm(data.file->texture, data.mlx);
 	return (data);
 }
 

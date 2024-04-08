@@ -29,14 +29,6 @@ static void	move_forward(t_data_exec *data)
 	{
 		data->pos_y += data->dir_y * MOVE_SPEED;
 	}
-	// if (is_move_available(X, x_move, data) == TRUE)
-	// {
-	// 	data->pos_x += data->dir_x * MOVE_SPEED;
-	// }
-	// if (is_move_available(Y, y_move, data) == TRUE)
-	// {
-	// 	data->pos_y += data->dir_y * MOVE_SPEED;
-	// }
 }
 
 static void	move_backward(t_data_exec *data)

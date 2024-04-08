@@ -51,17 +51,22 @@ void	draw_wall_line(t_img img, int x, double perp_wall_dist,
 	int	draw_start;
 	int	draw_end;
 	int	color;
+	int	texture_x;
 
 	line_height = get_line_height(perp_wall_dist);
 	draw_start = get_draw_start(line_height);
 	draw_end = get_draw_end(line_height);
-	switch (data->file->map[data->map_x][data->map_y])
+
+	texture_x = get_texture_x(data);
+	double step = 1.0 * data->file->texture[hit_dir(data)]->img->height / line_height;
+	double tex_pos = (draw_start - HEIGHT / 2 + line_height / 2) * step;
+	int y = draw_start;
+	while (y < draw_end)
 	{
-		case '1': color = 0xFFFFFF;  break;
-		case '2': color = 0xFF00FF;  break;
-		case '3': color = 0x0000FF;   break;
-		case '4': color = 0x00FFFF;  break;
-		default: color = 0xFFFF00; break;
+		int tex_y = (int)tex_pos & (data->file->texture[hit_dir(data)]->img->height - 1);
+		tex_pos += step;
+		color = data->file->texture[hit_dir(data)]->img->address[data->file->texture[hit_dir(data)]->img->height * tex_y + texture_x];
+		put_pixel_on_img(img, x, y, color);
+		++y;
 	}
-	draw_line_on_img(img, x, draw_start, x, draw_end, color);
 }
