@@ -92,10 +92,10 @@ t_data	*open_map(char *filename, void *mlx_ptr)
 	if (filename == NULL
 		|| check_filename(ft_strrchr(filename, '.'), filename) == FALSE)
 		return (ft_fprintf(STDERR_FILENO, RED"Error\n"RESET
-				"invalid map extension: %s\n", filename), NULL);
+				"invalid map extension: %s\n", filename), free(data), NULL);
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		return (perror(RED"open_map"RESET), close(fd), NULL);
+		return (perror(RED"open_map"RESET), close(fd), free(data), NULL);
 	get_texture(fd, &data, mlx_ptr);
 	if (data->texture == NULL)
 		return (close(fd), free_data(data, mlx_ptr), NULL);
