@@ -69,14 +69,4 @@ void	draw_wall_line(t_img img, int x, double perp_wall_dist,
 		put_pixel_on_img(img, x, y, color);
 		++y;
 	}
-
-	// switch (data->file->map[data->map_x][data->map_y])
-	// {
-	// 	case '1': color = 0xFFFFFF;  break;
-	// 	case '2': color = 0xFF00FF;  break;
-	// 	case '3': color = 0x0000FF;   break;
-	// 	case '4': color = 0x00FFFF;  break;
-	// 	default: color = 0xFFFF00; break;
-	// }
-	// draw_line_on_img(img, x, draw_start, x, draw_end, color);
 }

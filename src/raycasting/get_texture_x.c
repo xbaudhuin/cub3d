@@ -14,8 +14,10 @@
 
 int	get_texture_x(t_data_exec *data)
 {
-	int	texture_x;
+	int		texture_x;
+	int		texture_width;
 
-	texture_x = (int)(data->hit_pos * (double)data->file->texture[hit_dir(data)]->img->width);
+	texture_width = data->file->texture[hit_dir(data)]->img->width;
+	texture_x = (int)(data->hit_pos * (double)texture_width);
 	return (texture_x);
 }
