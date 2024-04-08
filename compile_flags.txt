@@ -1,0 +1,4 @@
+-Ilibft/include
+-Iinclude/
+-Iminilibx-linux/
+-Wall -Werror -Wextra

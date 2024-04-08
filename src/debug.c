@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 17:56:41 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/08 12:16:03 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/08 14:39:27 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static void	print_map(char **map)
 static	void	print_texture(t_texture **texture)
 {
 	unsigned int	i;
+
 	if (texture == NULL)
 		return ;
 	i = 0;
