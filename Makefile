@@ -6,7 +6,7 @@
 #    By: ldoyen-- <ldoyen--@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/04 17:32:25 by ldoyen--          #+#    #+#              #
-#    Updated: 2024/04/08 16:20:05 by xabaudhu         ###   ########.fr        #
+#    Updated: 2024/04/08 17:20:19 by xabaudhu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,10 @@ MLX_PATH		=	minilibx-linux/
 HEADER			=	-I./include -I./libft/include -I./${MLX_PATH}
 
 HEADER_FILES	=	include/cub3d.h \
+					include/camera_movement.h \
+					include/draw.h \
+					include/raycasting.h \
+					include/parsing.h \
 					include/structures.h \
 					libft/include/ft_printf.h \
 					libft/include/get_next_line.h \

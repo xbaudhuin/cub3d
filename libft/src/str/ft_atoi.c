@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:08:09 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/03/29 17:55:08 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/08 17:17:59 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,10 @@ static int	get_res(const char *nptr, int *error)
 
 	i = 0;
 	res = 0;
+	while (nptr[i] == '0')
+		i++;
+	nptr += i;
+	i = 0;
 	while (nptr[i] != '\0' && ft_isdigit(nptr[i]) == TRUE)
 	{
 		if (i > 10)

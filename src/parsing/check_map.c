@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 18:33:28 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/08 15:27:47 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/08 17:24:16 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	is_valid_line_map(t_vector *vector, int index, int *player_flag)
 				if (*player_flag > 1)
 					return (INVALID_PLAYER);
 			}
-			if (is_closed(vector, line, i, index) == FALSE)
+			if (is_closed(vector, line, i, index) != TRUE)
 				return (UNCLOSED_MAP);
 			i++;
 		}
