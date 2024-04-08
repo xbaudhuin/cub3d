@@ -22,7 +22,8 @@ static void	get_step_x(t_data_exec *data)
 	else
 	{
 		data->step_x = 1;
-		data->side_dist_x = (data->map_x + 1.0 - data->pos_x) * data->delta_dist_x;
+		data->side_dist_x = (data->map_x + 1.0 - data->pos_x)
+			* data->delta_dist_x;
 	}
 }
 
@@ -36,7 +37,8 @@ static void	get_step_y(t_data_exec *data)
 	else
 	{
 		data->step_y = 1;
-		data->side_dist_y = (data->map_y + 1.0 - data->pos_y) * data->delta_dist_y;
+		data->side_dist_y = (data->map_y + 1.0 - data->pos_y)
+			* data->delta_dist_y;
 	}
 }
 

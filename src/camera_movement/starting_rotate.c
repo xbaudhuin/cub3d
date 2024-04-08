@@ -32,7 +32,6 @@ static double	rotate_value(int orientation)
 	}
 }
 
-
 void	starting_rotate(t_data_exec *data, int orientation)
 {
 	double	old_dir_x;
@@ -49,5 +48,5 @@ void	starting_rotate(t_data_exec *data, int orientation)
 	data->plane_x = data->plane_x * cos(-start_rotate_value)
 		- data->plane_y * sin(-start_rotate_value);
 	data->plane_y = old_plane_x * sin(-start_rotate_value)
-		+ data->plane_y * cos(-start_rotate_value);	
+		+ data->plane_y * cos(-start_rotate_value);
 }

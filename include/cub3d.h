@@ -65,8 +65,8 @@ enum	e_direction
 	NB_TEXTURE = 4,
 };
 
-t_img	get_new_img(void *mlx, int width, int height);
-int		end_process(t_data_exec *data);
+t_img			get_new_img(void *mlx, int width, int height);
+int				end_process(t_data_exec *data);
 
 //PARSING
 
@@ -81,8 +81,8 @@ t_texture	**get_texture_img_from_xpm(t_texture **texture, void *mlx_ptr);
 
 //IS CHAR
 
-int	is_player_char(const char c);
-int	is_map_char(const char c);
+int				is_player_char(const char c);
+int				is_map_char(const char c);
 // PARSING_UTILS
 
 unsigned int	skip_spaces(const char *line);

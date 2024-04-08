@@ -37,6 +37,8 @@ static t_data_exec	get_init_data(char *path)
 		data.win = mlx_new_window(data.mlx, WIDTH,
 			HEIGHT, "raycasting_test");
 	}
+	if (data.mlx == NULL || data.win == NULL)
+		end_process(&data);
 	data.file = open_map(path, data.mlx);
 	if (data.file == NULL)
 	{

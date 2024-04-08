@@ -46,9 +46,25 @@ typedef struct s_img
 	int		endiant;
 }t_img;
 
+typedef struct s_draw_line
+{
+	int	height;
+	int	start;
+	int	end;
+	int	color;
+}	t_draw_line;
+
+typedef struct s_draw_texture
+{
+	double		step;
+	double		pos;
+	int			y;
+	int			x;
+	int			height;
+}t_draw_texture;
+
 typedef struct s_data_exec
 {
-
 	t_data	*file;
 	void	*mlx;
 	void	*win;

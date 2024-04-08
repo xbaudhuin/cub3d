@@ -47,26 +47,25 @@ static int	get_draw_end(int line_height)
 void	draw_wall_line(t_img img, int x, double perp_wall_dist,
 			t_data_exec *data)
 {
-	int	line_height;
-	int	draw_start;
-	int	draw_end;
-	int	color;
-	int	texture_x;
+	t_draw_line		line;
+	t_draw_texture	txt;
+	int				y;
 
-	line_height = get_line_height(perp_wall_dist);
-	draw_start = get_draw_start(line_height);
-	draw_end = get_draw_end(line_height);
-
-	texture_x = get_texture_x(data);
-	double step = 1.0 * data->file->texture[hit_dir(data)]->img->height / line_height;
-	double tex_pos = (draw_start - HEIGHT / 2 + line_height / 2) * step;
-	int y = draw_start;
-	while (y < draw_end)
+	line.height = get_line_height(perp_wall_dist);
+	line.start = get_draw_start(line.height);
+	line.end = get_draw_end(line.height);
+	txt.height = data->file->texture[hit_dir(data)]->img->height;
+	txt.x = get_texture_x(data);
+	txt.step = 1.0 * txt.height / line.height;
+	txt.pos = (line.start - HEIGHT / 2 + line.height / 2) * txt.step;
+	y = line.start;
+	while (y < line.end)
 	{
-		int tex_y = (int)tex_pos & (data->file->texture[hit_dir(data)]->img->height - 1);
-		tex_pos += step;
-		color = data->file->texture[hit_dir(data)]->img->address[data->file->texture[hit_dir(data)]->img->height * tex_y + texture_x];
-		put_pixel_on_img(img, x, y, color);
+		txt.y = (int)txt.pos & (txt.height - 1);
+		txt.pos += txt.step;
+		line.color = data->file->texture[hit_dir(data)]
+			->img->address[txt.height * txt.y + txt.x];
+		put_pixel_on_img(img, x, y, line.color);
 		++y;
 	}
 }

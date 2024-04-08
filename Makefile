@@ -82,7 +82,6 @@ SRCS_MAIN		=	debug.c \
 					end_process.c \
 
 SRCS_DRAW		=	draw/put_pixel_on_img.c \
-					draw/draw_line_on_img.c \
 					draw/draw_ceiling.c \
 					draw/draw_floor.c \
 					draw/draw_pov.c \
