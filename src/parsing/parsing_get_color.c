@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 18:22:13 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/02 18:23:17 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/08 12:20:48 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ int	get_color_from_file(const char *line, int *error, int bit_shift)
 		bit_shift = 8;
 		i += skip_space_digit(&line[i]);
 		if ((line[i] != ',' && line[i] != '\n') || count > 2)
+		{
+			*error = TRUE;
 			break ;
+		}
 		count++;
 		i++;
 	}
