@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 18:33:28 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/03 18:26:20 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/08 15:27:47 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@ static int	is_closed(
 	previous_line = vector_get(vector, index - 1);
 	next_line = vector_get(vector, index + 1);
 	if (previous_line == NULL || next_line == NULL)
-		printf(RED"\nprevious_line == NULL || next_line == NULL\n");
+		return (FALSE);
 	len_previous = ft_strlen(previous_line);
 	len_next = ft_strlen(next_line);
-	if (i >= len_previous || i >= len_next)
+	if (i >= len_previous || i >= len_next || i == 0)
 		return (FALSE);
 	if (is_map_char(line[i - 1]) == FALSE)
-		printf(RED"\nis_map_char(line[i - 1]): (%c)\n"RESET, line[i - 1]);
+		return (FALSE);
 	if (is_map_char(line[i + 1]) == FALSE)
-		printf(RED"\nis_map_char(line[i + 1]): (%c)\n"RESET, line[i + 1]);
+		return (FALSE);
 	if (is_map_char(previous_line[i]) == FALSE)
 		return (FALSE);
 	if (is_map_char(next_line[i]) == FALSE)
