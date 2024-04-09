@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 14:09:11 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/08 14:03:29 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/09 12:24:42 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	vector_del_one(t_vector *vector, size_t index)
 	size_t	i;
 
 	i = index;
-	if (index < 0 || index >= vector->current_size)
+	if (index >= (vector->current_size - 1))
 		return ;
 	free(vector->array[index]);
 	vector->array[index] = NULL;
