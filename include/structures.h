@@ -26,14 +26,14 @@ typedef struct s_data
 	int			color_floor;
 	int			color_ceiling;
 	char		**map;
-}				t_data;
+}			t_data;
 
 typedef struct s_start_coord
 {
 	double	x;
 	double	y;
 	int		direction;
-}			t_start_coord;
+}		t_start_coord;
 
 typedef struct s_img
 {
@@ -44,7 +44,7 @@ typedef struct s_img
 	int		line_size;
 	int		bpp;
 	int		endiant;
-}t_img;
+}		t_img;
 
 typedef struct s_draw_line
 {
@@ -52,7 +52,7 @@ typedef struct s_draw_line
 	int	start;
 	int	end;
 	int	color;
-}	t_draw_line;
+}		t_draw_line;
 
 typedef struct s_draw_texture
 {
@@ -61,7 +61,7 @@ typedef struct s_draw_texture
 	int			y;
 	int			x;
 	int			height;
-}t_draw_texture;
+}		t_draw_texture;
 
 typedef struct s_data_exec
 {
@@ -86,6 +86,6 @@ typedef struct s_data_exec
 	int		step_y;
 	int		side;
 	double	hit_pos;
-}t_data_exec;
+}	t_data_exec;
 
 #endif
