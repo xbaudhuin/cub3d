@@ -160,7 +160,11 @@ ${OBJ_PATH}%.o:	${SRC_PATH}%.c ${HEADER_FILES}
 
 txt:			${TXT}
 
-compile:		${LIBFT} ${OBJS}
+mlx_clone:
+		git clone https://github.com/42Paris/minilibx-linux
+		@make -C ${MLX_PATH} --no-print-directory
+
+compile:	mlx_clone ${LIBFT} ${OBJS}
 		@printf "\n"
 
 ${LIBFT}:
