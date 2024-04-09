@@ -6,7 +6,7 @@
 /*   By: ldoyen-- <ldoyen--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 15:16:56 by ldoyen--          #+#    #+#             */
-/*   Updated: 2024/04/05 12:15:47 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/09 14:41:53 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,6 @@ typedef struct s_data_exec
 	int		side;
 	double	hit_pos;
 	int		old_mouse_x;
-}t_data_exec;
+}				t_data_exec;
 
 #endif

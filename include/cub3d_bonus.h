@@ -6,12 +6,12 @@
 /*   By: ldoyen-- <ldoyen--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:49:15 by ldoyen--          #+#    #+#             */
-/*   Updated: 2024/04/09 10:49:16 by ldoyen--         ###   ########.fr       */
+/*   Updated: 2024/04/09 14:41:16 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUBD_BONUS_H
-# define CUBD_BONUS_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
 # include "cub3d.h"
 

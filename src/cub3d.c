@@ -6,7 +6,7 @@
 /*   By: ldoyen-- <ldoyen--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 17:40:10 by ldoyen--          #+#    #+#             */
-/*   Updated: 2024/04/09 12:00:48 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/09 14:42:27 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	init_value(t_data_exec *data)
 	{
 		data->win = mlx_new_window(data->mlx, WIDTH,
 				HEIGHT, "cub3d");
-	}	
+	}
 }
 
 static t_data_exec	get_init_data(char *path)
