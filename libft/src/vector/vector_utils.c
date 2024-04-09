@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 16:35:30 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/01 14:42:22 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/09 13:20:30 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	vector_current_size(t_vector *vector)
 
 void	vector_set(t_vector *vector, size_t index, char *str)
 {
-	if (index >= 0 && index < vector->current_size)
+	if (index < (vector->current_size - 1))
 	{
 		free(vector->array[index]);
 		vector->array[index] = str;
@@ -47,7 +47,7 @@ void	vector_set(t_vector *vector, size_t index, char *str)
 
 char	*vector_get(t_vector *vector, size_t index)
 {
-	if (index >= 0 && index < vector->current_size)
+	if (index < (vector->current_size - 1))
 		return (vector->array[index]);
 	return (NULL);
 }
