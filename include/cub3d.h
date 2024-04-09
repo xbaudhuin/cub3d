@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 15:03:50 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/08 17:21:34 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/09 11:58:58 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,5 @@ enum	e_direction
 
 t_img			get_new_img(void *mlx, int width, int height);
 int				end_process(t_data_exec *data);
-
-//PARSING
-
 
 #endif
