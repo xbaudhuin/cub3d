@@ -147,6 +147,9 @@ ${OBJ_PATH}%.o:	${SRC_PATH}%.c ${HEADER_FILES}
 
 txt:			${TXT}
 
+compile:		${LIBFT} ${OBJS}
+		@printf "\n"
+
 ${LIBFT}:
 		@make -C ${LIBFT_PATH} DEBUG=$(DEBUG) --no-print-directory
 		@cp ${LIBFT_PATH}${LIBFT} .
@@ -173,4 +176,4 @@ fclean:		clean
 
 re:			fclean all
 
-.PHONY:		all fclean clean re libft
+.PHONY:		all fclean clean re libft txt compile bonus
