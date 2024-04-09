@@ -162,7 +162,6 @@ txt:			${TXT}
 
 mlx_clone:
 		git clone https://github.com/42Paris/minilibx-linux
-		@make -C ${MLX_PATH} --no-print-directory
 
 compile:	mlx_clone ${LIBFT} ${OBJS}
 		@printf "\n"
