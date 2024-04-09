@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldoyen-- <ldoyen--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 17:40:10 by ldoyen--          #+#    #+#             */
-/*   Updated: 2024/04/09 12:00:48 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/09 13:57:30 by ldoyen--         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static void	check_nb_arg(int ac)
 {
@@ -27,6 +27,7 @@ static void	init_value(t_data_exec *data)
 	data->dir_y = 0;
 	data->plane_x = 0;
 	data->plane_y = 0.66;
+	data->old_mouse_x = WIDTH / 2;
 	data->mlx = mlx_init();
 	if (data->mlx != NULL)
 	{
@@ -49,7 +50,9 @@ static t_data_exec	get_init_data(char *path)
 	}
 	data.file = open_map(path, data.mlx);
 	if (data.file == NULL)
+	{
 		end_process(&data);
+	}
 	start = get_start_coord(data.file->map);
 	data.pos_x = start.x + 0.5;
 	data.pos_y = start.y + 0.5;
@@ -68,6 +71,9 @@ int	main(int ac, char **av)
 		exit(1);
 	}
 	draw_pov(&data);
+	mlx_mouse_move(data.mlx, data.win, WIDTH * 0.5,
+		HEIGHT * 0.5);
+	mlx_hook(data.win, MotionNotify, PointerMotionMask, &mouse_rotate, &data);
 	mlx_hook(data.win, KeyPress, KeyPressMask, &read_key, &data);
 	mlx_hook(data.win, DestroyNotify, StructureNotifyMask,
 		&end_process, &data);

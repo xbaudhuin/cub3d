@@ -25,7 +25,7 @@
 # define M_PI_2   1.57079632679489661923
 # define M_PI_4   0.78539816339744830962
 
-# define ROTATE_SPEED 0.39269908169
+# define ROTATE_SPEED 0.05
 # define MOVE_SPEED 0.2
 
 void	move(int keysim, t_data_exec *data);
