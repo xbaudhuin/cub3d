@@ -48,7 +48,10 @@ void	draw_pov(t_data_exec *data)
 
 	img = get_new_img(data->mlx, WIDTH, HEIGHT);
 	if (img.mlx_img == NULL || img.address == NULL)
+	{
+		ft_fprintf(2, "cub3d: get new image: error\n");
 		end_process(data);
+	}
 	draw_ceiling(img, data->file->color_ceiling);
 	draw_floor(img, data->file->color_floor);
 	x = 0;

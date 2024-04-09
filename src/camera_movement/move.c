@@ -14,11 +14,6 @@
 
 static void	move_forward(t_data_exec *data)
 {
-	int	x_move;
-	int	y_move;
-
-	x_move = (int)(data->pos_x + data->dir_x * MOVE_SPEED);
-	y_move = (int)(data->pos_y + data->dir_y * MOVE_SPEED);
 	if (data->file->map[(int)(data->pos_x
 			+ data->dir_x * MOVE_SPEED)][(int)(data->pos_y)] == '0')
 	{

@@ -116,11 +116,24 @@ SRCS_PARSING	=	parsing/parse_map.c \
 					parsing/parsing_utils.c \
 					xpm/get_texture.c \
 
-OBJS			=	$(addprefix ${OBJ_PATH}, ${SRCS_MAIN:.c=.o}) \
-						$(addprefix ${OBJ_PATH}, ${SRCS_DRAW:.c=.o}) \
+SRCS_BONUS		=	camera_movement/mouse_rotate_bonus.c \
+					cub3d_bonus.c \
+					img/get_new_img.c \
+					end_process.c \
+
+OBJS			=	$(addprefix ${OBJ_PATH}, ${SRCS_DRAW:.c=.o}) \
 						$(addprefix ${OBJ_PATH}, ${SRCS_RAYCASTING:.c=.o}) \
 						$(addprefix ${OBJ_PATH}, ${SRCS_CAM_MOVE:.c=.o}) \
 						$(addprefix ${OBJ_PATH}, ${SRCS_PARSING:.c=.o}) \
+						$(addprefix ${OBJ_PATH}, ${SRCS_MAIN:.c=.o}) \
+
+OBJS_BONUS		=	$(addprefix ${OBJ_PATH}, ${SRCS_BONUS:.c=.o}) \
+					$(addprefix ${OBJ_PATH}, ${SRCS_DRAW:.c=.o}) \
+					$(addprefix ${OBJ_PATH}, ${SRCS_RAYCASTING:.c=.o}) \
+					$(addprefix ${OBJ_PATH}, ${SRCS_CAM_MOVE:.c=.o}) \
+					$(addprefix ${OBJ_PATH}, ${SRCS_PARSING:.c=.o}) \
+
+
 
 LIBFT_D			=	$(addprefix ${LIBFT_PATH}, ${LIBFT})
 
@@ -136,8 +149,8 @@ ${NAME}:		${MLX} ${LIBFT} ${OBJS} ${TXT} ${HEADER_FILES}
 		@${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${HEADER} ${MATH_FLAG} ${MLX_FLAG} ${LIBFT} ${MLX}
 		@printf "${NEW}${YELLOW}${NAME}${RESET}${GREEN}${BOLD} Compiled\n${RESET}${GREEN}compiled with:${RESET} ${CC} ${CFLAGS}\n"
 
-${BONUS}:		${MLX} ${LIBFT} ${OBJS} ${TXT} ${HEADER_FILES}
-		@${CC} ${CFLAGS} -o ${BONUS} ${OBJS} ${HEADER} ${MATH_FLAG} ${MLX_FLAG} ${LIBFT} ${MLX}
+${BONUS}:		${MLX} ${LIBFT} ${OBJS_BONUS} ${TXT} ${HEADER_FILES}
+		@${CC} ${CFLAGS} -o ${BONUS} ${OBJS_BONUS} ${HEADER} ${MATH_FLAG} ${MLX_FLAG} ${LIBFT} ${MLX}
 		@echo "${COLOUR_GREEN}${BONUS} Compiled${COLOUR_END}"
 
 ${OBJ_PATH}%.o:	${SRC_PATH}%.c ${HEADER_FILES}

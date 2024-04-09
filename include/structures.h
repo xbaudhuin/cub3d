@@ -86,6 +86,7 @@ typedef struct s_data_exec
 	int		step_y;
 	int		side;
 	double	hit_pos;
+	int		old_mouse_x;
 }t_data_exec;
 
 #endif
