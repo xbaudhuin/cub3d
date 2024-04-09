@@ -6,7 +6,7 @@
 /*   By: ldoyen-- <ldoyen--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 16:32:19 by ldoyen--          #+#    #+#             */
-/*   Updated: 2024/03/29 16:32:20 by ldoyen--         ###   ########.fr       */
+/*   Updated: 2024/04/09 13:27:58 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 
 static void	move_forward(t_data_exec *data)
 {
-	int	x_move;
-	int	y_move;
-
-	x_move = (int)(data->pos_x + data->dir_x * MOVE_SPEED);
-	y_move = (int)(data->pos_y + data->dir_y * MOVE_SPEED);
 	if (data->file->map[(int)(data->pos_x
 			+ data->dir_x * MOVE_SPEED)][(int)(data->pos_y)] == '0')
 	{
