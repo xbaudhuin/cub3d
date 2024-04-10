@@ -80,46 +80,78 @@ RM				=	rm -f -r
 
 AR				=	ar rcs
 
-SRCS_MAIN		=	debug.c \
-					cub3d.c \
-					img/get_new_img.c \
-					end_process.c \
+SRCS_MAIN		=		debug.c \
+						cub3d.c \
+						img/get_new_img.c \
+						end_process.c \
 
-SRCS_DRAW		=	draw/put_pixel_on_img.c \
-					draw/draw_ceiling.c \
-					draw/draw_floor.c \
-					draw/draw_pov.c \
-					draw/draw_wall_line.c \
+SRCS_DRAW		=		draw/put_pixel_on_img.c \
+						draw/draw_ceiling.c \
+						draw/draw_floor.c \
+						draw/draw_pov.c \
+						draw/draw_wall_line.c \
 
-SRCS_RAYCASTING	=	raycasting/do_dda.c \
-					raycasting/calculate_delta.c \
-					raycasting/calculate_step.c \
-					raycasting/calculate_perp_wall_dist.c \
-					raycasting/get_hit_pos.c \
-					raycasting/hit_dir.c \
-					raycasting/get_texture_x.c \
+SRCS_RAYCASTING	=		raycasting/do_dda.c \
+						raycasting/calculate_delta.c \
+						raycasting/calculate_step.c \
+						raycasting/calculate_perp_wall_dist.c \
+						raycasting/get_hit_pos.c \
+						raycasting/hit_dir.c \
+						raycasting/get_texture_x.c \
 
-SRCS_CAM_MOVE	=	camera_movement/read_key.c \
-					camera_movement/move.c \
-					camera_movement/rotate.c \
-					camera_movement/starting_rotate.c \
+SRCS_CAM_MOVE	=		camera_movement/read_key.c \
+						camera_movement/move.c \
+						camera_movement/rotate.c \
+						camera_movement/starting_rotate.c \
 
-SRCS_PARSING	=	parsing/parse_map.c \
-					parsing/texture_parsing.c \
-					parsing/check_line.c \
-					parsing/check_map.c \
-					parsing/error.c \
-					parsing/free_parsing.c \
-					parsing/is_char.c \
-					parsing/start_coord.c \
-					parsing/parsing_get_color.c \
-					parsing/parsing_utils.c \
-					xpm/get_texture.c \
+SRCS_PARSING	=		parsing/parse_map.c \
+						parsing/texture_parsing.c \
+						parsing/check_line.c \
+						parsing/check_map.c \
+						parsing/error.c \
+						parsing/free_parsing.c \
+						parsing/is_char.c \
+						parsing/start_coord.c \
+						parsing/parsing_get_color.c \
+						parsing/parsing_utils.c \
+						xpm/get_texture.c \
 
-SRCS_BONUS		=	camera_movement/mouse_rotate_bonus.c \
-					cub3d_bonus.c \
-					img/get_new_img.c \
-					end_process.c \
+SRCS_MAIN_BONUS			=	debug.c \
+							cub3d_bonus.c \
+							img/get_new_img.c \
+							end_process.c \
+
+SRCS_DRAW_BONUS			=	draw/put_pixel_on_img.c \
+							draw/draw_ceiling.c \
+							draw/draw_floor.c \
+							draw/draw_pov.c \
+							draw/draw_wall_line.c \
+
+SRCS_RAYCASTING_BONUS	=	raycasting/do_dda.c \
+							raycasting/calculate_delta.c \
+							raycasting/calculate_step.c \
+							raycasting/calculate_perp_wall_dist.c \
+							raycasting/get_hit_pos.c \
+							raycasting/hit_dir.c \
+							raycasting/get_texture_x.c \
+
+SRCS_CAM_MOVE_BONUS		=	camera_movement/read_key.c \
+							camera_movement/move.c \
+							camera_movement/rotate.c \
+							camera_movement/starting_rotate.c \
+							camera_movement/mouse_rotate_bonus.c \
+
+SRCS_PARSING_BONUS		=	parsing/parse_map.c \
+							parsing/texture_parsing.c \
+							parsing/check_line.c \
+							parsing/check_map.c \
+							parsing/error.c \
+							parsing/free_parsing.c \
+							parsing/is_char.c \
+							parsing/start_coord.c \
+							parsing/parsing_get_color.c \
+							parsing/parsing_utils.c \
+							xpm/get_texture.c \
 
 OBJS			=	$(addprefix ${OBJ_PATH}, ${SRCS_DRAW:.c=.o}) \
 						$(addprefix ${OBJ_PATH}, ${SRCS_RAYCASTING:.c=.o}) \
@@ -127,11 +159,11 @@ OBJS			=	$(addprefix ${OBJ_PATH}, ${SRCS_DRAW:.c=.o}) \
 						$(addprefix ${OBJ_PATH}, ${SRCS_PARSING:.c=.o}) \
 						$(addprefix ${OBJ_PATH}, ${SRCS_MAIN:.c=.o}) \
 
-OBJS_BONUS		=	$(addprefix ${OBJ_PATH}, ${SRCS_BONUS:.c=.o}) \
-					$(addprefix ${OBJ_PATH}, ${SRCS_DRAW:.c=.o}) \
-					$(addprefix ${OBJ_PATH}, ${SRCS_RAYCASTING:.c=.o}) \
-					$(addprefix ${OBJ_PATH}, ${SRCS_CAM_MOVE:.c=.o}) \
-					$(addprefix ${OBJ_PATH}, ${SRCS_PARSING:.c=.o}) \
+OBJS_BONUS		=	$(addprefix ${OBJ_PATH}, ${SRCS_MAIN_BONUS:.c=.o}) \
+					$(addprefix ${OBJ_PATH}, ${SRCS_DRAW_BONUS:.c=.o}) \
+					$(addprefix ${OBJ_PATH}, ${SRCS_RAYCASTING_BONUS:.c=.o}) \
+					$(addprefix ${OBJ_PATH}, ${SRCS_CAM_MOVE_BONUS:.c=.o}) \
+					$(addprefix ${OBJ_PATH}, ${SRCS_PARSING_BONUS:.c=.o}) \
 
 
 
