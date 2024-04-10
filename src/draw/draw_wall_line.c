@@ -50,13 +50,9 @@ static t_img	get_good_txt(t_data_exec *data)
 	{
 		return (*data->file->texture[hit_dir(data)]->img);
 	}
-	else if (data->hit_type == OPEN_DOOR)
-	{
-		return (data->door_txt[5]);
-	}
 	else
 	{
-		return (data->door_txt[0]);
+		return (data->door_txt[data->hit_type - 50]);
 	}
 }
 

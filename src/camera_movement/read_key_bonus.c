@@ -70,4 +70,3 @@ int	read_key(int keysym, t_data_exec *data)
 	draw_pov(data);
 	return (SUCCESS);
 }
-

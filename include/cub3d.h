@@ -20,7 +20,6 @@
 # include "get_next_line.h"
 # include <math.h>
 # include "mlx.h"
-# include <time.h>
 # include "X11/keysym.h"
 # include "X11/keysymdef.h"
 # include <unistd.h>

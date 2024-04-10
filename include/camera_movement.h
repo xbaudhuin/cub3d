@@ -24,8 +24,8 @@
 
 # define VOID 48
 # define WALL 49
-# define OPEN_DOOR 50
-# define CLOSE_DOOR 51
+# define OPEN_DOOR 55
+# define CLOSE_DOOR 50
 
 # define M_PI   3.14159265358979323846
 # define M_PI_2   1.57079632679489661923
