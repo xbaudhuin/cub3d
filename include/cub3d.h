@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 15:03:50 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/08 17:21:34 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/10 16:11:37 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@
 # include "camera_movement.h"
 # include "raycasting.h"
 # include "parsing.h"
+# include "minimap.h"
 
-# define RESET  "\x1B[0m"
+# define RESET "\x1B[0m"
 # define RED "\x1B[31m"
 # define GRN  "\x1B[32m"
 # define YEL  "\x1B[33m"

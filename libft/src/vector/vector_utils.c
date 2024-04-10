@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 16:35:30 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/01 14:42:22 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/10 18:23:05 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_vector	*vector_init(void)
 		return (NULL);
 	vector->current_size = 0;
 	vector->size_max = 4;
-	vector->array = ft_calloc(sizeof(char *), vector->size_max);
+	vector->array = ft_calloc(sizeof(char *), vector->size_max + 1);
 	if (vector->array == NULL)
 	{
 		free(vector);
@@ -57,7 +57,9 @@ void	free_vector(t_vector *vector)
 	size_t	i;
 
 	i = 0;
-	while (i < vector->current_size)
+	if (vector == NULL)
+		return ;
+	while (vector->array[i] != NULL && i < vector->current_size)
 	{
 		free(vector->array[i]);
 		vector->array[i] = NULL;

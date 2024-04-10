@@ -6,7 +6,7 @@
 /*   By: ldoyen-- <ldoyen--@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:49:30 by ldoyen--          #+#    #+#             */
-/*   Updated: 2024/04/05 15:00:21 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/10 15:08:54 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	draw_pov(t_data_exec *data)
 {
 	t_img	img;
 	int		x;
+	t_img	minimap;
 
 	img = get_new_img(data->mlx, WIDTH, HEIGHT);
 	if (img.mlx_img == NULL || img.address == NULL)
@@ -58,5 +59,11 @@ void	draw_pov(t_data_exec *data)
 		++x;
 	}
 	mlx_put_image_to_window(data->mlx, data->win, img.mlx_img, 0, 0);
+	minimap = get_minimap(data);
+	mlx_put_image_to_window(data->mlx, data->win, minimap.mlx_img, 0, 0);
 	mlx_destroy_image(data->mlx, img.mlx_img);
+	mlx_destroy_image(data->mlx, minimap.mlx_img);
+
+	//end_process(data);
+
 }

@@ -6,7 +6,7 @@
 #    By: ldoyen-- <ldoyen--@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/04 17:32:25 by ldoyen--          #+#    #+#              #
-#    Updated: 2024/04/08 17:20:19 by xabaudhu         ###   ########.fr        #
+#    Updated: 2024/04/09 17:22:26 by xabaudhu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,6 +90,7 @@ SRCS_DRAW		=	draw/put_pixel_on_img.c \
 					draw/draw_floor.c \
 					draw/draw_pov.c \
 					draw/draw_wall_line.c \
+					minimap/minimap.c \
 
 SRCS_RAYCASTING	=	raycasting/do_dda.c \
 					raycasting/calculate_delta.c \
@@ -134,7 +135,7 @@ bonus:			${BONUS}
 
 ${NAME}:		${MLX} ${LIBFT} ${OBJS} ${TXT} ${HEADER_FILES}
 		@${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${HEADER} ${MATH_FLAG} ${MLX_FLAG} ${LIBFT} ${MLX}
-		@printf "${NEW}${YELLOW}${NAME}${RESET}${GREEN}${BOLD} Compiled\n${RESET}${GREEN}compiled with:${RESET} ${CC} ${CFLAGS}\n"
+		@printf "${NEW}${YELLOW}${NAME}${RESET}${GREEN}${BOLD} Compiled\n${RESET}${GREEN}compiled with:${RESET} ${CC} ${CFLAGS} ${MATH_FLAG} ${MLX_FLAG}\n"
 
 ${BONUS}:		${MLX} ${LIBFT} ${OBJS} ${TXT} ${HEADER_FILES}
 		@${CC} ${CFLAGS} -o ${BONUS} ${OBJS} ${HEADER} ${MATH_FLAG} ${MLX_FLAG} ${LIBFT} ${MLX}
@@ -156,7 +157,7 @@ ${MLX}:
 		git clone https://github.com/42Paris/minilibx-linux
 		@make -C ${MLX_PATH} --no-print-directory
 		@cp ${MLX_PATH}${MLX} .
-		@echo "$(COLOUR_GREEN)MLX compiled${COLOUR_END}"
+		@echo "$(GREEN)MLX compiled${COLOUR_END}"
 
 ${TXT}:
 		@echo "-Ilibft/include\n-Iinclude/\n-Iminilibx-linux/\n-Wall -Werror -Wextra" > compile_flags.txt

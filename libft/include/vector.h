@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 14:10:41 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/03/29 17:57:14 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/10 16:29:38 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct s_vector
 
 t_vector	*vector_init(void);
 int			vector_current_size(t_vector *vector);
-void		vector_add(t_vector *vector, char *str);
+t_vector	*vector_add(t_vector *vector, char *str);
 void		vector_set(t_vector *vector, size_t index, char *str);
 char		*vector_get(t_vector *vector, size_t index);
 void		vector_del_one(t_vector *vector, size_t index);
