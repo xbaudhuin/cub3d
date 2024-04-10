@@ -57,6 +57,9 @@ static t_data_exec	get_init_data(char *path)
 	data.pos_x = start.x + 0.5;
 	data.pos_y = start.y + 0.5;
 	starting_rotate(&data, start.direction);
+	data.door_txt = get_door_txt(&data);
+	if (data.door_txt == NULL)
+		end_process(&data);
 	return (data);
 }
 

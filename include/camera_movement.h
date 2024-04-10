@@ -20,6 +20,7 @@
 # define D_KEY 100
 # define LEFT_ARROW 65361
 # define RIGTH_ARROW 65363
+# define SPACE 32
 
 # define VOID 48
 # define WALL 49

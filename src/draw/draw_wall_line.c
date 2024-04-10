@@ -44,17 +44,35 @@ static int	get_draw_end(int line_height)
 	return (draw_end);
 }
 
+static t_img	get_good_txt(t_data_exec *data)
+{
+	if (data->hit_type == WALL)
+	{
+		return (*data->file->texture[hit_dir(data)]->img);
+	}
+	else if (data->hit_type == OPEN_DOOR)
+	{
+		return (data->door_txt[5]);
+	}
+	else
+	{
+		return (data->door_txt[0]);
+	}
+}
+
 void	draw_wall_line(t_img img, int x, double perp_wall_dist,
 			t_data_exec *data)
 {
 	t_draw_line		line;
 	t_draw_texture	txt;
 	int				y;
+	t_img			txt_img;
 
+	txt_img = get_good_txt(data);
 	line.height = get_line_height(perp_wall_dist);
 	line.start = get_draw_start(line.height);
 	line.end = get_draw_end(line.height);
-	txt.height = data->file->texture[hit_dir(data)]->img->height;
+	txt.height = txt_img.height;
 	txt.x = get_texture_x(data);
 	txt.step = 1.0 * txt.height / line.height;
 	txt.pos = (line.start - HEIGHT / 2 + line.height / 2) * txt.step;
@@ -63,8 +81,7 @@ void	draw_wall_line(t_img img, int x, double perp_wall_dist,
 	{
 		txt.y = (int)txt.pos & (txt.height - 1);
 		txt.pos += txt.step;
-		line.color = data->file->texture[hit_dir(data)]
-			->img->address[txt.height * txt.y + txt.x];
+		line.color = txt_img.address[txt.height * txt.y + txt.x];
 		put_pixel_on_img(img, x, y, line.color);
 		++y;
 	}

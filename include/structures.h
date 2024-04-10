@@ -87,6 +87,8 @@ typedef struct s_data_exec
 	int		side;
 	double	hit_pos;
 	int		old_mouse_x;
+	int		hit_type;
+	t_img	*door_txt;
 }				t_data_exec;
 
 #endif

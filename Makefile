@@ -140,7 +140,7 @@ LIBFT_D			=	$(addprefix ${LIBFT_PATH}, ${LIBFT})
 SRCS_MAIN_BONUS			=	debug.c \
 							cub3d_bonus.c \
 							img/get_new_img.c \
-							end_process.c \
+							end_process_bonus.c \
 
 SRCS_DRAW_BONUS			=	draw/put_pixel_on_img.c \
 							draw/draw_ceiling.c \
@@ -156,12 +156,13 @@ SRCS_RAYCASTING_BONUS	=	raycasting/do_dda.c \
 							raycasting/hit_dir.c \
 							raycasting/get_texture_x.c \
 
-SRCS_CAM_MOVE_BONUS		=	camera_movement/read_key.c \
+SRCS_CAM_MOVE_BONUS		=	camera_movement/read_key_bonus.c \
 							camera_movement/move.c \
 							camera_movement/rotate.c \
 							camera_movement/starting_rotate.c \
 							camera_movement/mouse_rotate_bonus.c \
 							camera_movement/is_walkable.c \
+							camera_movement/check_door_bonus.c \
 
 SRCS_PARSING_BONUS		=	parsing/parse_map.c \
 							parsing/texture_parsing.c \
@@ -174,6 +175,7 @@ SRCS_PARSING_BONUS		=	parsing/parse_map.c \
 							parsing/parsing_get_color.c \
 							parsing/parsing_utils.c \
 							xpm/get_texture.c \
+							xpm/get_door_txt_bonus.c \
 
 OBJS_BONUS		=	$(addprefix ${OBJ_PATH}, ${SRCS_MAIN_BONUS:.c=.o}) \
 					$(addprefix ${OBJ_PATH}, ${SRCS_DRAW_BONUS:.c=.o}) \
