@@ -55,6 +55,7 @@ MLX_PATH		=	minilibx-linux/
 HEADER			=	-I./include -I./libft/include -I./${MLX_PATH}
 
 HEADER_FILES	=	include/cub3d.h \
+					include/cub3d_bonus.h \
 					include/camera_movement.h \
 					include/draw.h \
 					include/raycasting.h \
