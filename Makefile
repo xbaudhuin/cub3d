@@ -10,6 +10,10 @@
 #                                                                              #
 # **************************************************************************** #
 
+################################################################################
+#                                 CONFIGURATION                                #
+################################################################################
+
 NAME			=	cub3d
 
 BONUS			=	cub3d_bonus
@@ -80,6 +84,10 @@ RM				=	rm -f -r
 
 AR				=	ar rcs
 
+################################################################################
+#                                    SOURCES                                   #
+################################################################################
+
 SRCS_MAIN		=		debug.c \
 						cub3d.c \
 						img/get_new_img.c \
@@ -103,6 +111,7 @@ SRCS_CAM_MOVE	=		camera_movement/read_key.c \
 						camera_movement/move.c \
 						camera_movement/rotate.c \
 						camera_movement/starting_rotate.c \
+						camera_movement/is_walkable.c \
 
 SRCS_PARSING	=		parsing/parse_map.c \
 						parsing/texture_parsing.c \
@@ -115,6 +124,18 @@ SRCS_PARSING	=		parsing/parse_map.c \
 						parsing/parsing_get_color.c \
 						parsing/parsing_utils.c \
 						xpm/get_texture.c \
+
+OBJS			=	$(addprefix ${OBJ_PATH}, ${SRCS_DRAW:.c=.o}) \
+						$(addprefix ${OBJ_PATH}, ${SRCS_RAYCASTING:.c=.o}) \
+						$(addprefix ${OBJ_PATH}, ${SRCS_CAM_MOVE:.c=.o}) \
+						$(addprefix ${OBJ_PATH}, ${SRCS_PARSING:.c=.o}) \
+						$(addprefix ${OBJ_PATH}, ${SRCS_MAIN:.c=.o}) \
+
+LIBFT_D			=	$(addprefix ${LIBFT_PATH}, ${LIBFT})
+
+################################################################################
+#                                 BONUS SOURCES                                #
+################################################################################
 
 SRCS_MAIN_BONUS			=	debug.c \
 							cub3d_bonus.c \
@@ -140,6 +161,7 @@ SRCS_CAM_MOVE_BONUS		=	camera_movement/read_key.c \
 							camera_movement/rotate.c \
 							camera_movement/starting_rotate.c \
 							camera_movement/mouse_rotate_bonus.c \
+							camera_movement/is_walkable.c \
 
 SRCS_PARSING_BONUS		=	parsing/parse_map.c \
 							parsing/texture_parsing.c \
@@ -147,27 +169,17 @@ SRCS_PARSING_BONUS		=	parsing/parse_map.c \
 							parsing/check_map.c \
 							parsing/error.c \
 							parsing/free_parsing.c \
-							parsing/is_char.c \
+							parsing/is_char_bonus.c \
 							parsing/start_coord.c \
 							parsing/parsing_get_color.c \
 							parsing/parsing_utils.c \
 							xpm/get_texture.c \
-
-OBJS			=	$(addprefix ${OBJ_PATH}, ${SRCS_DRAW:.c=.o}) \
-						$(addprefix ${OBJ_PATH}, ${SRCS_RAYCASTING:.c=.o}) \
-						$(addprefix ${OBJ_PATH}, ${SRCS_CAM_MOVE:.c=.o}) \
-						$(addprefix ${OBJ_PATH}, ${SRCS_PARSING:.c=.o}) \
-						$(addprefix ${OBJ_PATH}, ${SRCS_MAIN:.c=.o}) \
 
 OBJS_BONUS		=	$(addprefix ${OBJ_PATH}, ${SRCS_MAIN_BONUS:.c=.o}) \
 					$(addprefix ${OBJ_PATH}, ${SRCS_DRAW_BONUS:.c=.o}) \
 					$(addprefix ${OBJ_PATH}, ${SRCS_RAYCASTING_BONUS:.c=.o}) \
 					$(addprefix ${OBJ_PATH}, ${SRCS_CAM_MOVE_BONUS:.c=.o}) \
 					$(addprefix ${OBJ_PATH}, ${SRCS_PARSING_BONUS:.c=.o}) \
-
-
-
-LIBFT_D			=	$(addprefix ${LIBFT_PATH}, ${LIBFT})
 
 ################################################################################
 #                                 RULES                                        #

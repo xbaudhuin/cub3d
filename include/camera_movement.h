@@ -21,6 +21,11 @@
 # define LEFT_ARROW 65361
 # define RIGTH_ARROW 65363
 
+# define VOID 48
+# define WALL 49
+# define OPEN_DOOR 50
+# define CLOSE_DOOR 51
+
 # define M_PI   3.14159265358979323846
 # define M_PI_2   1.57079632679489661923
 # define M_PI_4   0.78539816339744830962
@@ -32,5 +37,6 @@ void	move(int keysim, t_data_exec *data);
 int		read_key(int keysym, t_data_exec *data);
 void	rotate(int keysim, t_data_exec *data);
 void	starting_rotate(t_data_exec *data, int orientation);
+int		is_walkable(char c);
 
 #endif
