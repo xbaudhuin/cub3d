@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 18:12:49 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/10 19:06:52 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/11 14:28:16 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	get_color_for_block(const char c)
 		return (0x921e12);
 	if (c == '0')
 		return (0xbbbbbd);
-	if (c == '2')
+	if (c >= '2' && c < '7')
 		return (0x144803);
 	if (c == '7')
 		return (0x35bd07);
@@ -41,34 +41,12 @@ void	fill_block(t_img *img, const char c, int line_img, int row_img)
 	color = get_color_for_block(c);
 	x_img = line_img * 10;
 	y_img = row_img * 10;
+	printf("x_img = %d, y_img = %d\n", x_img, y_img);
 	while (x_img < line_img * 10 + 10)
 	{
 		y_img = row_img * 10;
 		while (y_img < row_img * 10 + 10)
 		{
-			//printf("x_img = %d, y_img = %d\n", x_img, y_img);
-			put_pixel_on_img(*img, y_img, x_img, color);
-			y_img++;
-		}
-		x_img++;
-	}
-}
-
-void	fill_outside_bloc(t_img *img, int line_img, int row_img)
-{
-	int	x_img;
-	int	y_img;
-	int	color;
-	
-	x_img = line_img * 10;
-	y_img = row_img * 10;
-	color = get_color_for_block(0);
-	while (x_img < line_img * 10 + 10)
-	{
-		y_img = row_img * 10;
-		while (y_img < row_img * 10 + 10)
-		{
-			//printf("x_img = %d, y_img = %d\n", x_img, y_img);
 			put_pixel_on_img(*img, y_img, x_img, color);
 			y_img++;
 		}
@@ -78,23 +56,13 @@ void	fill_outside_bloc(t_img *img, int line_img, int row_img)
 
 void	fill_line_null(t_img *img, int line_img)
 {
-	int	x_img;
-	int	y_img;
-	int	color;
+	int	offset;
 
-	color = get_color_for_block(0);
-	x_img = line_img * 10;
-	y_img = 0;
-	while (x_img < line_img * 10 + 10)
+	offset = -8;
+	while (offset < 8)
 	{
-		y_img = 0;
-		while (y_img < 10)
-		{
-			//printf("x_img = %d, y_img = %d\n", x_img, y_img);
-			put_pixel_on_img(*img, y_img, x_img, color);
-			y_img++;
-		}
-		x_img++;
+		fill_block(img, 0, line_img, offset + 9);
+		offset++;
 	}
 }
 
@@ -119,7 +87,7 @@ void	fill_line(t_data_exec *data, t_img *img, int x, int line_img)
 	while (offset < 8)
 	{
 		if (y >= len_line || y < 0)
-			fill_outside_bloc(img, line_img, offset + 9);
+			fill_block(img, 0, line_img, offset + 9);
 		else
 		{
 			if (is_player(data, x, y) == TRUE)
@@ -132,7 +100,60 @@ void	fill_line(t_data_exec *data, t_img *img, int x, int line_img)
 	}
 }
 
-void	fill_minimap(t_data_exec *data, t_img *img)
+void	line_highlight(t_img *img, int line)
+{
+	int	color;
+	int	row;
+	int	limit;
+
+	color = 0x000000;
+	row = 8;
+	limit = line + 3;
+	while (line < limit)
+	{
+		row = 8;
+		while (row < 172)
+		{
+			put_pixel_on_img(*img, row, line, color);
+			row++;
+		}
+		line++;
+	}
+}
+
+void	row_hightlight(t_img *img, int row)
+{
+	int	color;
+	int	line;
+	int	limit;
+
+	color = 0x000000;
+	line = 8;
+	limit = row + 3;
+	while (row < limit)
+	{
+		line = 8;
+		while (line < 92)
+		{
+			put_pixel_on_img(*img, row, line, color);
+			line++;
+		}
+		row++;
+	}
+}
+
+void	hightlight_minimap(t_img *img)
+{
+	int	line;
+
+	line = 8;
+	line_highlight(img, 7);
+	line_highlight(img, 90);
+	row_hightlight(img, 7);
+	row_hightlight(img, 170);
+}
+
+void	get_minimap(t_data_exec *data, t_img *img)
 {
 	int	x_player;
 	int	x;
@@ -141,6 +162,7 @@ void	fill_minimap(t_data_exec *data, t_img *img)
 	x_player = (int)data->pos_x;
 	x = x_player - 4;
 	offset = -4;
+	hightlight_minimap(img);
 	while (offset < 4)
 	{
 		if (x < 0 || data->file->map[x] == NULL)
@@ -152,18 +174,4 @@ void	fill_minimap(t_data_exec *data, t_img *img)
 		x++;
 		offset++;
 	}
-}
-
-t_img	get_minimap(t_data_exec *data)
-{
-	t_img	minimap;
-
-	minimap = get_new_img(data->mlx, WIDTH / 10, HEIGHT / 10);
-	if (minimap.mlx_img == NULL || minimap.address == NULL)
-	{
-		mlx_destroy_image(data->mlx, minimap.mlx_img);
-		return (minimap);
-	}
-	fill_minimap(data, &minimap);
-	return (minimap);
 }

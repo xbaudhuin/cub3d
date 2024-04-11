@@ -6,13 +6,13 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 17:16:57 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/09 17:20:57 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/11 13:52:33 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIMAP_H
 # define MINIMAP_H
 
-t_img	get_minimap(t_data_exec *data);
+void	get_minimap(t_data_exec *data, t_img *img);
 
 #endif
