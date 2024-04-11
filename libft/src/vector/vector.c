@@ -6,21 +6,22 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 14:09:11 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/09 14:52:11 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/11 19:00:51 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
 #include "libft.h"
+#include <stdio.h>
 
 static char	**ft_realloc(t_vector *vector, size_t new_size)
 {
 	char	**new_array;
 	size_t	i;
 
-	new_array = ft_calloc(sizeof(*new_array), new_size);
+	new_array = ft_calloc(sizeof(*new_array), new_size + 1);
 	if (new_array == NULL)
-		return (free_vector(vector), NULL);
+		return (NULL);
 	i = 0;
 	while (i < vector->current_size)
 	{
@@ -32,27 +33,30 @@ static char	**ft_realloc(t_vector *vector, size_t new_size)
 	return (new_array);
 }
 
-static void	vector_resize(t_vector *vector, int size)
+static t_vector *vector_resize(t_vector *vector, int size)
 {
 	char	**new_array;
 
 	new_array = ft_realloc(vector, sizeof(char *) * size);
-	vector->array = new_array;
-	if (vector->array == NULL)
+	if (new_array == NULL)
 	{
-		vector->current_size = 0;
-		vector->size_max = 0;
+		return (free_vector(vector), NULL);
 	}
 	else
 		vector->size_max = size;
+	vector->array = new_array;
+	return (vector);
 }
 
-void	vector_add(t_vector *vector, char *str)
+t_vector	*vector_add(t_vector *vector, char *str)
 {
-	if (vector->current_size == vector->size_max - 1)
-		vector_resize(vector, vector->size_max * 2);
+	if (vector->current_size == vector->size_max)
+		vector = vector_resize(vector, vector->size_max * 2);
+	if (vector == NULL)
+		return (NULL);
 	vector->array[vector->current_size] = str;
 	vector->current_size += 1;
+	return (vector);
 }
 
 void	vector_del_one(t_vector *vector, size_t index)

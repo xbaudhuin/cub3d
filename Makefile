@@ -6,7 +6,11 @@
 #    By: ldoyen-- <ldoyen--@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/04 17:32:25 by ldoyen--          #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2024/04/09 14:18:57 by xabaudhu         ###   ########.fr        #
+=======
+#    Updated: 2024/04/09 17:22:26 by xabaudhu         ###   ########.fr        #
+>>>>>>> minimap
 #                                                                              #
 # **************************************************************************** #
 
@@ -146,7 +150,7 @@ SRCS_MAIN_BONUS			=	debug.c \
 SRCS_DRAW_BONUS			=	draw/put_pixel_on_img.c \
 							draw/draw_ceiling.c \
 							draw/draw_floor.c \
-							draw/draw_pov.c \
+							draw/draw_pov_bonus.c \
 							draw/draw_wall_line.c \
 
 SRCS_RAYCASTING_BONUS	=	raycasting/do_dda.c \
@@ -164,6 +168,10 @@ SRCS_CAM_MOVE_BONUS		=	camera_movement/read_key_bonus.c \
 							camera_movement/mouse_rotate_bonus.c \
 							camera_movement/is_walkable.c \
 							camera_movement/check_door_bonus.c \
+
+SRCS_MINIMAP			=	minimap/minimap.c \
+							minimap/highlight.c \
+							minimap/minimap_utils.c \
 
 SRCS_PARSING_BONUS		=	parsing/parse_map.c \
 							parsing/texture_parsing.c \
@@ -183,6 +191,7 @@ OBJS_BONUS		=	$(addprefix ${OBJ_PATH}, ${SRCS_MAIN_BONUS:.c=.o}) \
 					$(addprefix ${OBJ_PATH}, ${SRCS_RAYCASTING_BONUS:.c=.o}) \
 					$(addprefix ${OBJ_PATH}, ${SRCS_CAM_MOVE_BONUS:.c=.o}) \
 					$(addprefix ${OBJ_PATH}, ${SRCS_PARSING_BONUS:.c=.o}) \
+					$(addprefix ${OBJ_PATH}, ${SRCS_MINIMAP:.c=.o}) \
 
 ################################################################################
 #                                 RULES                                        #
@@ -194,7 +203,7 @@ bonus:			${BONUS}
 
 ${NAME}:		${MLX} ${LIBFT} ${OBJS} ${TXT} ${HEADER_FILES}
 		@${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${HEADER} ${MATH_FLAG} ${MLX_FLAG} ${LIBFT} ${MLX}
-		@printf "${NEW}${YELLOW}${NAME}${RESET}${GREEN}${BOLD} Compiled\n${RESET}${GREEN}compiled with:${RESET} ${CC} ${CFLAGS}\n"
+		@printf "${NEW}${YELLOW}${NAME}${RESET}${GREEN}${BOLD} Compiled\n${RESET}${GREEN}compiled with:${RESET} ${CC} ${CFLAGS} ${MATH_FLAG} ${MLX_FLAG}\n"
 
 ${BONUS}:		${MLX} ${LIBFT} ${OBJS_BONUS} ${TXT} ${HEADER_FILES}
 		@${CC} ${CFLAGS} -o ${BONUS} ${OBJS_BONUS} ${HEADER} ${MATH_FLAG} ${MLX_FLAG} ${LIBFT} ${MLX}
@@ -222,7 +231,7 @@ ${MLX}:
 		git clone https://github.com/42Paris/minilibx-linux
 		@make -C ${MLX_PATH} --no-print-directory
 		@cp ${MLX_PATH}${MLX} .
-		@echo "$(COLOUR_GREEN)MLX compiled${COLOUR_END}"
+		@echo "$(GREEN)MLX compiled${COLOUR_END}"
 
 ${TXT}:
 		@echo "-Ilibft/include\n-Iinclude/\n-Iminilibx-linux/\n-Wall -Werror -Wextra" > compile_flags.txt

@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 18:28:32 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/02 18:33:55 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/10 18:28:31 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,16 @@
 #include "vector.h"
 #include <unistd.h>
 
-static void	fill_vector(t_vector *vector, char *line, int fd)
+static t_vector *fill_vector(t_vector *vector, char *line, int fd)
 {
 	while (line)
 	{
-		vector_add(vector, line);
+		vector = vector_add(vector, line);
+		if (vector == NULL)
+			return (free(line), NULL);
 		line = get_next_line(fd);
 	}
+	return (vector);
 }
 
 char	**parse_map(int fd)
@@ -44,7 +47,9 @@ char	**parse_map(int fd)
 		perror(RED"Error\n"RESET"Fail vector initialization");
 		return (NULL);
 	}
-	fill_vector(vector, line, fd);
+	vector = fill_vector(vector, line, fd);
+	if (vector == NULL)
+		return (NULL);
 	if (check_map(vector) == FAILURE)
 		return (free_vector(vector), NULL);
 	array = vector->array;

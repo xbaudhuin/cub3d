@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_pov.c                                         :+:      :+:    :+:   */
+/*   draw_pov_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldoyen-- <ldoyen--@student.42.fr>          +#+  +:+       +#+        */
+/*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/02 15:49:30 by ldoyen--          #+#    #+#             */
-/*   Updated: 2024/04/11 19:14:30 by xabaudhu         ###   ########.fr       */
+/*   Created: 2024/04/11 19:14:49 by xabaudhu          #+#    #+#             */
+/*   Updated: 2024/04/11 19:14:50 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	draw_pov(t_data_exec *data)
 		draw_x_line(data, x, img);
 		++x;
 	}
+	get_minimap(data, &img);
 	mlx_put_image_to_window(data->mlx, data->win, img.mlx_img, 0, 0);
 	mlx_destroy_image(data->mlx, img.mlx_img);
 }
