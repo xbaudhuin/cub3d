@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 18:28:32 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/10 18:28:31 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/11 19:18:11 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "vector.h"
 #include <unistd.h>
 
-static t_vector *fill_vector(t_vector *vector, char *line, int fd)
+static t_vector	*fill_vector(t_vector *vector, char *line, int fd)
 {
 	while (line)
 	{
