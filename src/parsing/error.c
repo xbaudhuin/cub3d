@@ -6,11 +6,13 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 18:31:43 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/08 17:29:24 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/12 20:40:20 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "ft_printf.h"
+#include <unistd.h>
 
 void	ft_parse_map_error(int error)
 {
@@ -32,4 +34,11 @@ int	print_error(const char *line)
 	ft_fprintf(STDERR_FILENO, RED"Error\n"RESET
 		"Invalid RGB color: %s", line);
 	return (TRUE);
+}
+
+int	print_texture_error(void)
+{
+	ft_fprintf(STDERR_FILENO, RED"Error\n"RESET);
+	ft_fprintf(STDERR_FILENO, "Invalid elements\n");
+	return (FALSE);
 }

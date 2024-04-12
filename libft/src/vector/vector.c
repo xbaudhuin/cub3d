@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 14:09:11 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/11 19:00:51 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/12 20:43:20 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static char	**ft_realloc(t_vector *vector, size_t new_size)
 	return (new_array);
 }
 
-static t_vector *vector_resize(t_vector *vector, int size)
+static t_vector	*vector_resize(t_vector *vector, int size)
 {
 	char	**new_array;
 

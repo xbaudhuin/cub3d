@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 18:25:03 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/12 16:27:01 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/12 20:41:08 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,7 @@ int	check_current_line(const char *line,
 		return (TRUE);
 	else
 	{
-		ft_fprintf(STDERR_FILENO, RED"Error\n"RESET"invalid line: %s", line);
-		return (FALSE);
+		return (print_texture_error());
 	}
 	if (error == TRUE)
 		return (FALSE);

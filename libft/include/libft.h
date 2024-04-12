@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 15:35:44 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/10 16:11:32 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/12 20:42:56 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define MAG  "\x1B[35m"
 # define CYN  "\x1B[36m"
 # define WHT  "\x1B[37m"
+
 typedef struct s_list
 {
 	void			*content;
