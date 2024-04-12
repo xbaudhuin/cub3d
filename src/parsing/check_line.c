@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 18:25:03 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/05 14:23:36 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:27:01 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char	*ft_strdup_texture(const char *line, int *error)
 {
-	char			*dup;
+	char	*dup;
 
 	dup = ft_strtrim(line, " \n");
 	if (dup == NULL)

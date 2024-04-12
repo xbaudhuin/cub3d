@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 18:00:49 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/08 16:26:39 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:30:36 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	free_texture(t_texture **texture, void *mlx_ptr)
 	i = 0;
 	if (texture == NULL)
 		return ;
-	while (i < NB_TEXTURE)
+	while (i < NB_TEXTURE && texture[i] != NULL)
 	{
 		if (mlx_ptr != NULL && texture[i]->img->mlx_img != NULL)
 			mlx_destroy_image(mlx_ptr, texture[i]->img->mlx_img);
