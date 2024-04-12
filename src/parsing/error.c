@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <unistd.h>
 
 void	ft_parse_map_error(int error)
 {

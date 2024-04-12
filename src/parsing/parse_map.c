@@ -11,11 +11,6 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "ft_printf.h"
-#include "get_next_line.h"
-#include "libft.h"
-#include "vector.h"
-#include <unistd.h>
 
 static t_vector	*fill_vector(t_vector *vector, char *line, int fd)
 {

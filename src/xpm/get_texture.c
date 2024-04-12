@@ -11,10 +11,6 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "ft_printf.h"
-#include "libft.h"
-#include "mlx.h"
-#include "structures.h"
 
 t_texture	**get_texture_img_from_xpm(t_texture **tex, void *mlx_ptr)
 {

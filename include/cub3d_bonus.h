@@ -14,7 +14,6 @@
 # define CUB3D_BONUS_H
 
 # include "cub3d.h"
-# include <unistd.h>
 
 # define MOUSE_LIMIT 10
 

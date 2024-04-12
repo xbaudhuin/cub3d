@@ -11,12 +11,6 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "ft_printf.h"
-#include "libft.h"
-#include "structures.h"
-#include "vector.h"
-#include <stdio.h>
-#include <unistd.h>
 
 static int	check_filename(const char *str, const char *filename)
 {
