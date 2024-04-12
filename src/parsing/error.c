@@ -22,9 +22,9 @@ void	ft_parse_map_error(int error)
 	if (error == INVALID_COLOR)
 		ft_fprintf(STDERR_FILENO, "Incorrect color\n");
 	if (error == UNCLOSED_MAP)
-		ft_fprintf(STDERR_FILENO, "Invalide map\n");
+		ft_fprintf(STDERR_FILENO, "Invalid map\n");
 	if (error == INVALID_CHAR)
-		ft_fprintf(STDERR_FILENO, "Invalide map\n");
+		ft_fprintf(STDERR_FILENO, "Invalid map\n");
 }
 
 int	print_error(const char *line)

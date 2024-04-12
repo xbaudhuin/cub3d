@@ -55,7 +55,7 @@ static void	get_texture(int fd, t_data **data)
 	(*data)->texture = init_texture();
 	if ((*data)->texture == NULL)
 	{
-		perror(RED"In init_texture"RESET);
+		perror(RED"Error\nIn init_texture"RESET);
 		return ;
 	}
 	while (1)
@@ -82,11 +82,11 @@ t_data	*open_map(char *filename, void *mlx_ptr)
 
 	data = ft_calloc(sizeof(*data), 1);
 	if (data == NULL)
-		return (perror(RED"In open_map"RESET), NULL);
+		return (perror(RED"Error\nIn open_map"RESET), NULL);
 	if (filename == NULL
 		|| check_filename(ft_strrchr(filename, '.'), filename) == FALSE)
 		return (ft_fprintf(STDERR_FILENO, RED"Error\n"RESET
-				"invalid map extension: %s\n", filename), free(data), NULL);
+				"Invalid map extension: %s\n", filename), free(data), NULL);
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		return (perror(RED"open_map"RESET), close(fd), free(data), NULL);
