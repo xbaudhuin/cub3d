@@ -14,9 +14,9 @@
 #                                 CONFIGURATION                                #
 ################################################################################
 
-NAME			=	cub3d
+NAME			=	cub3D
 
-BONUS			=	cub3d_bonus
+BONUS			=	cub3D_bonus
 
 CFLAGS			=	-Wall -Werror -Wextra
 
