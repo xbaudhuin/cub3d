@@ -35,6 +35,24 @@ static void	init_value(t_data_exec *data)
 	}
 }
 
+static void	check_txt_size(t_data_exec *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < NB_TEXTURE)
+	{
+		if (data->file->texture[i]->img->height != TXT_SIZE
+			|| data->file->texture[i]->img->width != TXT_SIZE)
+		{
+			ft_fprintf(2, "cub3d: error: wrong texture size (handle %d)\n",
+				TXT_SIZE);
+			end_process(data);
+		}
+		++i;
+	}
+}
+
 static t_data_exec	get_init_data(char *path)
 {
 	t_data_exec		data;
@@ -50,6 +68,7 @@ static t_data_exec	get_init_data(char *path)
 	data.file = open_map(path, data.mlx);
 	if (data.file == NULL)
 		end_process(&data);
+	check_txt_size(&data);
 	start = get_start_coord(data.file->map);
 	data.pos_x = start.x + 0.5;
 	data.pos_y = start.y + 0.5;
