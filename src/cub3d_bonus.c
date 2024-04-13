@@ -16,7 +16,7 @@ static void	check_nb_arg(int ac)
 {
 	if (ac != 2)
 	{
-		ft_fprintf(2, "cub3d: error: need one argument\n");
+		ft_fprintf(STDERR_FILENO, RED"Error\n"RESET"Need one argument\n");
 		exit (1);
 	}
 }
@@ -46,8 +46,7 @@ static void	check_txt_size(t_data_exec *data)
 		if (data->file->texture[i]->img->height != TXT_SIZE
 			|| data->file->texture[i]->img->width != TXT_SIZE)
 		{
-			ft_fprintf(2, "cub3d: error: wrong texture size (handle %d)\n",
-				TXT_SIZE);
+			ft_fprintf(STDERR_FILENO, "Error\nWrong texture size\n");
 			end_process(data);
 		}
 		++i;
@@ -58,13 +57,11 @@ static void	check_txt_size(t_data_exec *data)
 		if (data->door_txt[i].height != TXT_SIZE
 			|| data->door_txt[i].width != TXT_SIZE)
 		{
-			ft_fprintf(2, "cub3d: error: wrong texture size (handle %d)\n",
-				TXT_SIZE);
+			ft_fprintf(STDERR_FILENO, "Error\nWrong texture size\n");
 			end_process(data);
 		}
 		++i;
 	}
-	
 }
 
 static t_data_exec	get_init_data(char *path)
