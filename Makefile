@@ -38,11 +38,11 @@ ifeq ($(DEBUG), 4)
 	CFLAGS += -g3 -fsanitize=address
 endif
 
-LIBFT			=	libft.a
+LIBFT			=	libft/libft.a
 
 LIBFT_PATH		=	libft/
 
-MLX				=	libmlx_Linux.a
+MLX				=	minilibx-linux/libmlx.a
 
 MLX_FLAG 		=	-Lmlx -Lminilibx-linux -L/usr/lib/X11 -lXext -lX11
 
@@ -203,7 +203,7 @@ ${NAME}:		${MLX} ${LIBFT} ${OBJS} ${TXT} ${HEADER_FILES}
 
 ${BONUS}:		${MLX} ${LIBFT} ${OBJS_BONUS} ${TXT} ${HEADER_FILES}
 		@${CC} ${CFLAGS} -o ${BONUS} ${OBJS_BONUS} ${HEADER} ${MATH_FLAG} ${MLX_FLAG} ${LIBFT} ${MLX}
-		@echo "${COLOUR_GREEN}${BONUS} Compiled${COLOUR_END}"
+		@printf "${NEW}${YELLOW}${BONUS}${RESET}${GREEN}${BOLD} Compiled\n${RESET}${GREEN}compiled with:${RESET} ${CC} ${CFLAGS} ${MATH_FLAG} ${MLX_FLAG}\n"
 
 ${OBJ_PATH}%.o:	${SRC_PATH}%.c ${HEADER_FILES}
 		@mkdir -p $(dir $@)
@@ -218,15 +218,17 @@ mlx_clone:
 compile:	mlx_clone ${LIBFT} ${OBJS}
 		@printf "\n"
 
+mlx_clean:
+		${RM} ${MLX_PATH}
+
 ${LIBFT}:
 		@make -C ${LIBFT_PATH} DEBUG=$(DEBUG) --no-print-directory
-		@cp ${LIBFT_PATH}${LIBFT} .
 
-${MLX}:
-		${RM} ${MLX_PATH}
+${MLX_PATH}:
 		git clone https://github.com/42Paris/minilibx-linux
+
+${MLX}: 		${MLX_PATH}
 		@make -C ${MLX_PATH} --no-print-directory
-		@cp ${MLX_PATH}${MLX} .
 		@echo "$(GREEN)MLX compiled${COLOUR_END}"
 
 ${TXT}:
@@ -235,13 +237,14 @@ ${TXT}:
 
 clean:	
 		@make -C ${LIBFT_PATH} clean --no-print-directory
-		${RM} ${MLX_PATH}
+		@make -C ${MLX_PATH} clean --no-print-directory
 		${RM}  ${OBJ_PATH}
 
 fclean:		clean
 		@make -C ${LIBFT_PATH} fclean --no-print-directory
+		@make -C ${MLX_PATH} clean --no-print-directory
 		${RM} ${NAME} ${NAME_TEST} ${BONUS} ${LIBFT} ${MLX} ${SRC_PATH}${TXT} ${SRC_PATH}bonus/${TXT} ${TXT}
 
 re:			fclean all
 
-.PHONY:		all fclean clean re libft txt compile bonus
+.PHONY:		all fclean clean re libft txt compile bonus mlx_clean mlx_clone
