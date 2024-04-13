@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 18:25:03 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/12 20:41:08 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/13 13:50:56 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int	check_current_line(const char *line,
 		return (TRUE);
 	else
 	{
-		return (print_texture_error());
+		return (print_texture_error(i, line));
 	}
 	if (error == TRUE)
 		return (FALSE);

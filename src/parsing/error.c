@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 18:31:43 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/12 20:40:20 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/13 13:53:16 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,40 @@ int	print_error(const char *line)
 	return (TRUE);
 }
 
-int	print_texture_error(void)
+static int	error_line_map(const char *line, int *player_flag)
 {
+	unsigned int	i;
+
+	i = 0;
+	while (line[i] != '\n' && line[i] != '\0')
+	{
+		if (line[i] == ' ' || line[i] == '1')
+			i++;
+		else if (is_map_char(line[i]) == TRUE)
+		{
+			if (is_player_char(line[i]) == TRUE)
+			{
+				*player_flag += 1;
+				if (*player_flag > 1)
+					return (INVALID_PLAYER);
+			}
+			i++;
+		}
+		else
+			return (INVALID_CHAR);
+	}
+	return (SUCCESS);
+}
+
+int	print_texture_error(unsigned int *mask, const char *line)
+{
+	int	player_flag;
+
+	player_flag = 0;
 	ft_fprintf(STDERR_FILENO, RED"Error\n"RESET);
-	ft_fprintf(STDERR_FILENO, "Invalid elements\n");
+	if (error_line_map(line, &player_flag) == SUCCESS && *mask != 63)
+		ft_fprintf(STDERR_FILENO, "Missing elements\n");
+	else
+		ft_fprintf(STDERR_FILENO, "Invalid line: %s\n", line);
 	return (FALSE);
 }

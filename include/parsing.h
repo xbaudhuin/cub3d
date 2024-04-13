@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:14:29 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/12 20:40:42 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/13 13:50:27 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ unsigned int	skip_spaces(const char *line);
 unsigned int	skip_space_digit(const char *line);
 int				atoi_color(const char *line, int *error);
 int				print_error(const char *line);
-int				print_texture_error(void);
+int				print_texture_error(unsigned int *mask, const char *line);
 void			ft_parse_map_error(int error);
 char			*skip_empty_line(int fd);
 t_start_coord	get_start_coord(char **map);
