@@ -13,6 +13,8 @@
 #ifndef DRAW_H
 # define DRAW_H
 
+# define TXT_SIZE 64
+
 void	draw_ceiling(t_img img, int color);
 void	draw_floor(t_img img, int color);
 void	put_pixel_on_img(t_img img, int x, int y, int color);
