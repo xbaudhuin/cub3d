@@ -2,12 +2,13 @@ NO          ./textures/BRICK_6D.xpm
 SO    ./textures/BRICK_2B.xpm
 WE ./textures/BRICK_3B.xpm
 
+F 220,111   , 25 
 
+F 220,111   , 25 
 
 EA ./textures/BRICK_3D.xpm
 
-C 225,111 , 
-F 220,111   ,  
+C 225,111 , 25
 C 225,111, 001
 
 

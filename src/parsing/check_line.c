@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 18:25:03 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/13 13:50:56 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/15 17:22:18 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,10 @@ int	check_current_line(const char *line,
 
 	error = FALSE;
 	if (ft_strncmp(line, "F ", 2) == 0 || ft_strncmp(line, "C ", 2) == 0)
-		check_line_color(line, i, data, &error);
+	{
+		if (check_line_color(line, i, data, &error) == FALSE)
+			error = TRUE;
+	}
 	else if (ft_strncmp(line, "NO ", 3) == 0 || ft_strncmp(line, "SO ", 3) == 0
 		|| ft_strncmp(line, "WE ", 3) == 0 || ft_strncmp(line, "EA ", 3) == 0)
 	{
