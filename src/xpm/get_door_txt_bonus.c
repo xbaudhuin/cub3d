@@ -54,6 +54,7 @@ static void	get_addr_img(t_img **door_txt, t_data_exec *data)
 	{
 		if ((*door_txt)[i].mlx_img == NULL)
 		{
+			ft_fprintf(2, "cub3d: get door textures: error\n");
 			free_door(door_txt, data);
 			return ;
 		}
@@ -63,6 +64,7 @@ static void	get_addr_img(t_img **door_txt, t_data_exec *data)
 				&(*door_txt)[i].endiant);
 		if ((*door_txt)[i].address == NULL)
 		{
+			ft_fprintf(2, "cub3d: get door textures: error\n");
 			free_door(door_txt, data);
 			return ;
 		}
