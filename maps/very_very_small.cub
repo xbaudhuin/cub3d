@@ -5,8 +5,11 @@ WE ./textures/BRICK_3B.xpm
 
 
 EA ./textures/BRICK_3D.xpm
-F 220,111   ,  200
+
 C 225,111 , 
+F 220,111   ,  
+C 225,111, 001
+
 
     111111  
     1010001
