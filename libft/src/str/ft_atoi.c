@@ -81,5 +81,10 @@ int	ft_atoi(const char *nptr, int *error)
 	i = trim_white_space(nptr);
 	if (if_sign(nptr[i], &sign) == TRUE)
 		i++;
+	if (ft_isdigit(nptr[i]) == 0)
+	{
+		*error = TRUE;
+		return (0);
+	}
 	return (get_res(&nptr[i], error) * sign);
 }

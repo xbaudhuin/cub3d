@@ -96,7 +96,10 @@ int	check_current_line(const char *line,
 		check_line_color(line, i, data, &error);
 	else if (ft_strncmp(line, "NO ", 3) == 0 || ft_strncmp(line, "SO ", 3) == 0
 		|| ft_strncmp(line, "WE ", 3) == 0 || ft_strncmp(line, "EA ", 3) == 0)
-		check_line_texture(line, i, (*data)->texture, &error);
+	{
+		if (check_line_texture(line, i, (*data)->texture, &error) == FALSE)
+		error = TRUE;
+	}
 	else if (ft_strncmp(line, "\n", 2) == 0)
 		return (TRUE);
 	else
