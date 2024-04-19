@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:12:32 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/19 15:17:21 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:18:49 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static t_texture	**init_texture(void)
 	return (texture);
 }
 
-static void error_in_get_texture(char *msg, char *line, t_data **data)
+static void	error_in_get_texture(char *msg, char *line, t_data **data)
 {
 	if (msg != NULL)
 		ft_fprintf(STDERR_FILENO, RED"Error\n"RESET"%s\n", msg);
