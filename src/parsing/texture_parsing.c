@@ -6,12 +6,14 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:12:32 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/12 16:30:04 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:17:21 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "parsing.h"
+#include <time.h>
+#include <unistd.h>
 
 static int	check_filename(const char *str, const char *filename)
 {
@@ -46,6 +48,15 @@ static t_texture	**init_texture(void)
 	return (texture);
 }
 
+static void error_in_get_texture(char *msg, char *line, t_data **data)
+{
+	if (msg != NULL)
+		ft_fprintf(STDERR_FILENO, RED"Error\n"RESET"%s\n", msg);
+	free_texture((*data)->texture, NULL);
+	(*data)->texture = NULL;
+	return (free(line));
+}
+
 static void	get_texture(int fd, t_data **data)
 {
 	char			*line;
@@ -61,18 +72,18 @@ static void	get_texture(int fd, t_data **data)
 	while (1)
 	{
 		line = get_next_line(fd);
+		free(line);
+		line = NULL;
 		if (line == NULL)
 			break ;
 		if (check_current_line(line, &i, data) == FALSE)
-		{
-			free_texture((*data)->texture, NULL);
-			(*data)->texture = NULL;
-			return (free(line));
-		}
+			return (error_in_get_texture(NULL, line, data));
 		free(line);
 		if (i == 63)
 			break ;
 	}
+	if (i != 63)
+		return (error_in_get_texture("Missing texture", NULL, data));
 }
 
 t_data	*open_map(char *filename, void *mlx_ptr)
@@ -89,7 +100,7 @@ t_data	*open_map(char *filename, void *mlx_ptr)
 				"Invalid map extension: %s\n", filename), free(data), NULL);
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		return (perror(RED"open_map"RESET), close(fd), free(data), NULL);
+		return (perror(RED"Error\nopen_map:"RESET), free(data), NULL);
 	get_texture(fd, &data);
 	if (data->texture == NULL)
 		return (close(fd), free_data(data, mlx_ptr), NULL);
