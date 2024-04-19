@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:12:32 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/19 15:18:49 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:25:33 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,6 @@ static void	get_texture(int fd, t_data **data)
 	while (1)
 	{
 		line = get_next_line(fd);
-		free(line);
-		line = NULL;
 		if (line == NULL)
 			break ;
 		if (check_current_line(line, &i, data) == FALSE)
