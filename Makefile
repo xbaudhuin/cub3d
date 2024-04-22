@@ -6,7 +6,7 @@
 #    By: ldoyen-- <ldoyen--@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/04 17:32:25 by ldoyen--          #+#    #+#              #
-#    Updated: 2024/04/11 19:15:46 by xabaudhu         ###   ########.fr        #
+#    Updated: 2024/04/22 12:07:16 by xabaudhu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -235,7 +235,7 @@ ${TXT}:
 		@echo "-Ilibft/include\n-Iinclude/\n-Iminilibx-linux/\n-Wall -Werror -Wextra" > compile_flags.txt
 		@echo "-I../libft/include\n-I../include/\n-I../minilibx-linux/\n-Wall -Werror -Wextra" > src/compile_flags.txt
 
-clean:	
+clean: ${MLX}	
 		@make -C ${LIBFT_PATH} clean --no-print-directory
 		@make -C ${MLX_PATH} clean --no-print-directory
 		${RM}  ${OBJ_PATH}

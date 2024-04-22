@@ -6,7 +6,7 @@
 /*   By: xabaudhu <xabaudhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 18:31:43 by xabaudhu          #+#    #+#             */
-/*   Updated: 2024/04/13 13:53:16 by xabaudhu         ###   ########.fr       */
+/*   Updated: 2024/04/22 12:25:16 by xabaudhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,22 @@ int	print_error(const char *line)
 	return (TRUE);
 }
 
-static int	error_line_map(const char *line, int *player_flag)
+static int	is_invalid_first_char(const char *line)
+{
+	if (ft_strncmp(line, "C ", 2) != 0 && ft_strncmp(line, "F ", 2) != 0
+		&& ft_strncmp(line, "NO ", 3) != 0 && ft_strncmp(line, "WE ", 3) != 0
+		&& ft_strncmp(line, "EA ", 3) != 0 && ft_strncmp(line, "SO ", 3) != 0)
+		return (TRUE);
+	return (FALSE);
+}
+
+static int	error_line_texture(const char *line, int *player_flag)
 {
 	unsigned int	i;
 
 	i = 0;
+	if (is_invalid_first_char(line) == TRUE)
+		return (INVALID_CHAR);
 	while (line[i] != '\n' && line[i] != '\0')
 	{
 		if (line[i] == ' ' || line[i] == '1')
@@ -67,7 +78,7 @@ int	print_texture_error(unsigned int *mask, const char *line)
 
 	player_flag = 0;
 	ft_fprintf(STDERR_FILENO, RED"Error\n"RESET);
-	if (error_line_map(line, &player_flag) == SUCCESS && *mask != 63)
+	if (error_line_texture(line, &player_flag) == SUCCESS && *mask != 63)
 		ft_fprintf(STDERR_FILENO, "Missing elements\n");
 	else
 		ft_fprintf(STDERR_FILENO, "Invalid line: %s\n", line);
