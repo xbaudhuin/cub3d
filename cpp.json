@@ -1,0 +1,40 @@
+{
+  "class_cpp": {
+    "prefix": ["classc", "classcpp"],
+    "body": [
+      "#include \"${TM_FILENAME_BASE}.hpp\"",
+      "",
+      "${TM_FILENAME_BASE}::${TM_FILENAME_BASE} (void){return ;}\n\n",
+      "${TM_FILENAME_BASE}::~${TM_FILENAME_BASE} (void) {return ;}\n\n",
+      "${TM_FILENAME_BASE}::${TM_FILENAME_BASE}(${TM_FILENAME_BASE} const & copy){\n\tif (*this != &copy)\n\t\tthis = copy;\n\treturn;\n}\n\n",
+      "${TM_FILENAME_BASE} &${TM_FILENAME_BASE}::operator=(${TM_FILENAME_BASE} const &rhs){\n\tif (this != &rhs)\n\t\tthis-> = rhs. ;\n\treturn(*this);\n}"
+    ],
+    "description": "starter cpp class 42"
+  },
+  "class_hpp": {
+    "prefix": ["classh", "class_hpp"],
+    "body": [
+      "#ifndef ${TM_FILENAME/([^\\.]*)(\\.)*/${1:/upcase}${2:+_}/g}",
+      "#define ${TM_FILENAME/([^\\.]*)(\\.)*/${1:/upcase}${2:+_}/g}",
+      "",
+      "class ${TM_FILENAME_BASE} {",
+      "public:",
+      "//Constructor",
+      "\t${TM_FILENAME_BASE}(void);",
+      "\t${TM_FILENAME_BASE}(${TM_FILENAME_BASE} const & copy);",
+      "\n//Destructor",
+      "\t~${TM_FILENAME_BASE}(void);",
+      "\n//operator",
+      "${TM_FILENAME_BASE}\t&operator=(${TM_FILENAME_BASE} const & rhs);",
+      "",
+      "protected:",
+      "",
+      "private:",
+      "",
+      "};",
+      "",
+      "#endif //!${TM_FILENAME/([^\\.]*)(\\.)*/${1:/upcase}${2:+_}/g}"
+    ],
+    "description": "class.hpp"
+  }
+}
